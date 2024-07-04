@@ -400,7 +400,5 @@
     </div>
   </section>
   
-  @foreach ($product as $item)
-      {{ $item }}
-  @endforeach
+  
 @endsection
