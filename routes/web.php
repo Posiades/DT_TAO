@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homeControllers;
-
+use App\Http\Controllers\adminController;
 // ========================= Route SITE ================================
 
 Route::get('/', [homeControllers::class, 'index']);
@@ -23,4 +23,16 @@ Route::get('/thanh-toan', [homeControllers::class, 'checkout']);
 // post-1 sau này thay thế thành tên bài viết
 Route::get('/post-1', [homeControllers::class, 'single_post']);
 
+
+
+
+// ============== ROUTE ADMIN =================
+
+    Route::get('/admin/index', [adminController::class, 'index']);
+    Route::get('/admin/category', [adminController::class, 'category'])->name('category');
+    Route::get('/admin/product', [adminController::class, 'product'])->name('product');
+    Route::get('/admin/user', [adminController::class, 'user'])->name('user');
+    Route::get('/admin/voucher', [adminController::class, 'voucher'])->name('voucher');
+    Route::get('/admin/order', [adminController::class, 'order'])->name('order');
+    
 ?>
