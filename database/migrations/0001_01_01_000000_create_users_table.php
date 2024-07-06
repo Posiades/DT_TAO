@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('full_name', 255);
             $table->text('address');
             $table->string('phone', 20);
+            $table->integer('role')->default(0);
             $table->timestamp('registration_date')->useCurrent();
         });
 

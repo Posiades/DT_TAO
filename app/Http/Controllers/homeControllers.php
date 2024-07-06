@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\product;
 
 class homeControllers extends Controller
 {
     function index(){
-        return view('user/index');
+        $product_iphone = product::where('category_id', 1)->limit(4)->get();
+        return view('user/index', compact('product_iphone'));
     }
 
     function about(){
