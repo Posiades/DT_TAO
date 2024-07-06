@@ -35,4 +35,8 @@ Route::get('/post-1', [homeControllers::class, 'single_post']);
     Route::get('/admin/voucher', [adminController::class, 'voucher'])->name('voucher');
     Route::get('/admin/order', [adminController::class, 'order'])->name('order');
     
+    // Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+    //     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    //     // Thêm các route khác cho admin ở đây
+    // });
 ?>
