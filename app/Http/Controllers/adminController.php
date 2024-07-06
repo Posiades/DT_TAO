@@ -29,4 +29,8 @@ class adminController extends Controller
     function order(){
         return view('admin/order');
     }
+
+    function add_product(){
+        return view('admin/add_product');   
+    }
 }
