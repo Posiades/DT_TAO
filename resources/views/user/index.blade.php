@@ -121,8 +121,9 @@
 
         
         <div class="swiper product-swiper">
-          @foreach ($product_iphone as $iphone)
+          
           <div class="swiper-wrapper">
+            @foreach ($product_iphone as $iphone)
             <div class="swiper-slide">
               <div class="product-card position-relative">
                 <div class="image-holder">
@@ -140,7 +141,7 @@
                   <span class="item-price text-primary">{{$iphone->price_difference . 'VNĐ'}}</span>
                 </div>
               </div>
-              @endforeach
+              
 
        
 
@@ -224,6 +225,7 @@
               </div>
             </div> --}}
           </div>
+          @endforeach
         </div>
       </div>
     </div>
