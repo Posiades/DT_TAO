@@ -7,16 +7,15 @@
         <div class="pull-left">
             <h2>Add New Product</h2>
         </div>
-        <div class="pull-right">
+        {{-- <div class="pull-right">
             <a class="btn btn-primary" href=""> Back</a>
-        </div>
+        </div> --}}
     </div>
 </div>
 <div class="card mx-auto" style="width: 1000px">
     <div class="card-body">
       <form action="" method="POST" enctype="multipart/form-data">
 
-  
         <div class="row">
            <div class="col-xs-12 col-sm-12 col-md-12">
                <div class="form-group">
@@ -38,7 +37,6 @@
                  <div class="input-group">
                    <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="gia">
                    <span class="input-group-text">VNĐ</span>
-             
                  </div>
                </div>
            </div>
@@ -57,5 +55,6 @@
    </form>
 
     </div>
-  </div>
+</div>
+
 @endsection
