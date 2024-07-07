@@ -1,6 +1,9 @@
 @extends('user/layout')
-@section('title', 'san-pham')
+@section('title', 'Sản Phẩm')
 @section('content')
+@foreach ($product as $product)
+  
+@endforeach
 <section class="hero-section position-relative bg-light-blue padding-medium">
     <div class="hero-content">
       <div class="container">
@@ -39,6 +42,7 @@
             </div>
           </div>
           <div class="product-content product-store d-flex justify-content-between flex-wrap">
+            
             <div class="col-lg-4 col-md-6">
               <div class="product-card position-relative pe-3 pb-3">
                 <div class="image-holder">

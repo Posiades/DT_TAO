@@ -1,18 +1,19 @@
 @extends('user/layout')
 @section('title', 'CHI TIẾT SẢN PHẨM')
 @section('content')
+ @foreach ($product as $product)
 <section id="selling-product" class="single-product padding-xlarge">
   <div class="container">
     <div class="row mt-5">
       <div class="col-lg-6">
         <div class="product-preview mb-3">
-          <img src="images/singel-product-item.jpg" alt="single-product" class="img-fluid">
+          <img src="{{asset($product->image_url)}}" alt="single-product" class="img-fluid">
         </div>
       </div>
       <div class="col-lg-6">
         <div class="product-info">
           <div class="element-header">
-            <h3 itemprop="name" class="display-7 text-uppercase">Pink Watch</h3>
+            <h3 itemprop="name" class="display-7 text-uppercase">{{$product->name}}</h3>
             <div class="rating-container d-flex align-items-center">
               <div class="rating" data-rating="1" onclick=rate(1)>
                 <svg class="star star-fill">
@@ -23,7 +24,7 @@
             </div>
           </div>
           <div class="product-price pt-3 pb-3">
-            <strong class="text-primary display-6 fw-bold">$870.00</strong>
+            <strong class="text-primary display-6 fw-bold">{{number_format($product->price_difference, 0, ',', '.'). ' VNĐ'}}</strong>
           </div>
           <p>Với sự tinh tế, đồng hồ màu hồng mang lại phong cách thanh lịch và nổi bật. Được thiết kế tỉ mỉ với chất liệu cao cấp, đồng hồ này không chỉ là phụ kiện thời trang mà còn là biểu tượng của sự sang trọng và hiện đại. Khả năng chống nước và độ bền cao, đồng hồ màu hồng là lựa chọn hoàn hảo cho những ai yêu thích sự tinh tế và cá tính.</p>
           <div class="cart-wrap padding-small">
@@ -136,7 +137,7 @@
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active border-top border-bottom padding-small" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <p>Mô tả Sản phẩm</p>
-            <p>Với sự tinh tế, đồng hồ màu hồng mang lại phong cách thanh lịch và nổi bật. Được thiết kế tỉ mỉ với chất liệu cao cấp, đồng hồ này không chỉ là phụ kiện thời trang mà còn là biểu tượng của sự sang trọng và hiện đại. Khả năng chống nước và độ bền cao, đồng hồ màu hồng là lựa chọn hoàn hảo cho những ai yêu thích sự tinh tế và cá tính.</p>
+            <p>{{$product->description }}</p>
             <ul style="list-style-type:disc;" class="list-unstyled ps-4">
               <li>Donec nec justo eget felis facilisis fermentum.</li>
               <li>Suspendisse urna viverra non, semper suscipit pede.</li>
@@ -224,6 +225,7 @@
       </div>
     </div>
   </div>
+  
 </section>
 <section id="related-products" class="product-store position-relative padding-large">
   <div class="container">
@@ -357,4 +359,6 @@
   </div>
   <div class="swiper-pagination position-absolute text-center"></div>
 </section>
+          
+ @endforeach
 @endsection
