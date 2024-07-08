@@ -108,7 +108,7 @@ class homeControllers extends Controller
             $cart[$id] = [
                 "name" => $product->name,
                 "quantity" => 1,
-                "price" => $product->price,
+                "price" => $product->price_difference,
                 "image_url" => $product->image_url // Đảm bảo bạn có thuộc tính 'image_url' trong model Product của bạn
             ];
         }
@@ -130,17 +130,20 @@ class homeControllers extends Controller
         return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng thành công!');
     }
 
-    // public function removeFromCart($id)
-    // {
-    //     $cart = Session::get('cart');
+    public function updateCart(Request $request)
+    {
+        $cart = Session::get('cart', []);
 
-    //     if (isset($cart[$id])) {
-    //         unset($cart[$id]);
-    //         Session::put('cart', $cart);
-    //     }
+        foreach ($request->input('quantity') as $id => $quantity) {
+            if (isset($cart[$id])) {
+                $cart[$id]['quantity'] = $quantity;
+            }
+        }
 
-    //     return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng thành công!');
-    // }
+        Session::put('cart', $cart);
+
+        return redirect()->back()->with('success', 'Giỏ hàng đã được cập nhật thành công!');
+    }
 }
 
 

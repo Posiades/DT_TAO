@@ -232,7 +232,7 @@
                     <div class="qty-field">
                       <div class="qty-number d-flex">
                         <div class="quntity-button incriment-button">+</div>
-                        <input class="spin-number-output bg-light no-margin" type="text" readonly="" value="{{ $details['quantity'] }}">
+                        <input class="spin-number-output bg-light no-margin"  type="text" readonly="" value="{{ $details['quantity'] }}">
                         <div class="quntity-button decriment-button">-</div>
                       </div>
                       <div class="regular-price"></div>
