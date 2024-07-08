@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\product;
+use Illuminate\Support\Facades\Mail;
 
 class homeControllers extends Controller
 {
@@ -64,6 +65,10 @@ class homeControllers extends Controller
 
     function register(){
         return view('user/register');
+    }
+
+    function forgot(){
+        return view('user/forgotpass');
     }
 
     

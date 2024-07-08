@@ -1,20 +1,6 @@
 @extends('user/layout')
 @section('title', 'Đăng Nhập')
 @section('content')
-{{-- ============= Session thông báo ============== --}}
-@if(session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
-
-@if(session('warning'))
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        {{ session('warning') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
 
 @if(session('info'))
     <div class="alert alert-info alert-dismissible fade show" role="alert">
@@ -22,6 +8,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif
+
+
 {{-- ================ End Session THông Báo =================--}}
 
 <section class="hero-section position-relative bg-light-blue padding-medium">
@@ -41,6 +29,24 @@
     </div>
   </div>
 </section>
+
+{{-- ============= Session thông báo ============== --}}
+@if(session('login_fail'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('login_fail') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+
+{{-- =================================== SIDE ================================ --}}
 
 <div class="container p-5">
   <div class="text-center mb-4">
@@ -76,7 +82,7 @@
 
     <div class="row justify-content-center">
       <div class="col-auto">
-        <a href="{{url('/dang-ky')}}" class="btn btn-outline-secondary">
+        <a href="{{url('/dang-ky')}}" class="btn btn btn-primary">
           <i class="bi bi-person-plus-fill"></i> Đăng Ký
         </a>
       </div>

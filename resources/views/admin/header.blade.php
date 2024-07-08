@@ -20,7 +20,7 @@
             <div class="user-avatar">
               <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="MY ADMIN" class="rounded-full">
             </div>
-            <div class="is-user-name"><span>MY ADMIN</span></div>
+            <div class="is-user-name"><span>HI {{Auth::user()->full_name}}</span></div>
             <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
           </a>
           <div class="navbar-dropdown">
@@ -37,7 +37,7 @@
               <span>Tin Nhắn</span>
             </a>
             <hr class="navbar-divider">
-            <a class="navbar-item">
+            <a href="{{url('/dang-xuat')}}" class="navbar-item">
               <span class="icon"><i class="mdi mdi-logout"></i></span>
               <span>Đăng Xuất</span>
             </a>
