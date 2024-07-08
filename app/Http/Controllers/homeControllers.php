@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\product;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class homeControllers extends Controller
 {
@@ -90,4 +91,56 @@ class homeControllers extends Controller
     function checkout(){
         return view('user/checkout');
     }
+
+    public function addToCart($id)
+    {
+        $product = Product::find($id);
+    
+        if (!$product) {
+            return redirect()->back()->with('error', 'Sản phẩm không tồn tại.');
+        }
+    
+        $cart = Session::get('cart', []);
+    
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "name" => $product->name,
+                "quantity" => 1,
+                "price" => $product->price,
+                "image_url" => $product->image_url // Đảm bảo bạn có thuộc tính 'image_url' trong model Product của bạn
+            ];
+        }
+    
+        Session::put('cart', $cart);
+    
+        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng thành công!');
+    }
+    
+    public function removeFromCart($id)
+    {
+        $cart = Session::get('cart');
+    
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            Session::put('cart', $cart);
+        }
+    
+        return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng thành công!');
+    }
+
+    // public function removeFromCart($id)
+    // {
+    //     $cart = Session::get('cart');
+
+    //     if (isset($cart[$id])) {
+    //         unset($cart[$id]);
+    //         Session::put('cart', $cart);
+    //     }
+
+    //     return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng thành công!');
+    // }
 }
+
+

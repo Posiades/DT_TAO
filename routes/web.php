@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminMiddleware;
-use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\userControllers;
 // ========================= Route SITE ================================
 
@@ -49,4 +49,8 @@ Route::prefix('admin')->middleware([AdminMiddleware::class])->group(function () 
         Route::get('/addproduct', [adminController::class, 'add_product'])->name('add_product');
         
     });
+
+    Route::get('shop/{type}', [homeControllers::class, 'shop'])->name('shop');
+    Route::get('cart/add/{id}', [homeControllers::class, 'addToCart'])->name('cart.add');
+    Route::get('cart/remove/{id}', [homeControllers::class, 'removeFromCart'])->name('cart.remove');
 ?>
