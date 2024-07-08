@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('comment_id');
-            $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('guest_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable(false);
+            $table->unsignedInteger('guest_id')->nullable(false);
             $table->unsignedInteger('product_id');
             $table->text('comment_text');
             $table->timestamp('comment_date')->useCurrent();

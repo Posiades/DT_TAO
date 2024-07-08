@@ -1,6 +1,29 @@
 @extends('user/layout')
 @section('title', 'Đăng Nhập')
 @section('content')
+{{-- ============= Session thông báo ============== --}}
+@if(session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if(session('warning'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ session('warning') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if(session('info'))
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        {{ session('info') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+{{-- ================ End Session THông Báo =================--}}
+
 <section class="hero-section position-relative bg-light-blue padding-medium">
   <div class="hero-content">
     <div class="container">
@@ -25,13 +48,14 @@
     <p>Đăng nhập tài khoản và mật khẩu để truy cập vào DT Táo</p>
   </div>
 
-  <form>
+  <form method="POST" action="{{url('/post_login')}}">
+    @csrf
     <div class="mb-3">
       <div class="input-group">
         <span class="input-group-text">
           <i class="bi bi-person-fill"></i>
         </span>
-        <input type="text" class="form-control custom-input" id="inputUsername" placeholder="Nhập tài khoản">
+        <input name="email" type="text" class="form-control custom-input" id="inputUsername" placeholder="Nhập Email">
       </div>
     </div>
 
@@ -40,7 +64,7 @@
         <span class="input-group-text">
           <i class="bi bi-shield-lock-fill"></i>
         </span>
-        <input type="password" class="form-control custom-input" id="inputPassword" placeholder="Nhập mật khẩu">
+        <input name="password" type="password" class="form-control custom-input" id="inputPassword" placeholder="Nhập mật khẩu">
       </div>
     </div>
 

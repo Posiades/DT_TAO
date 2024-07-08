@@ -25,36 +25,63 @@
     <p>Đăng ký tài khoản và mật khẩu để đăng nhập vào DT Táo</p>
   </div>
 
-  <form>
+  <form method="POST" action="{{url('/post_register')}}">
+    @csrf
+    <div class="mb-3">
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-envelope-fill"></i>
+        </span>
+        <input name="email" class="form-control form-control-lg" type="email" placeholder="Email" aria-label=".form-control-lg example" required>
+      </div>
+    </div>
+    
     <div class="mb-3">
       <div class="input-group">
         <span class="input-group-text">
           <i class="bi bi-person-fill"></i>
         </span>
-        <input class="form-control form-control-lg" type="text" placeholder="Tài khoản" aria-label=".form-control-lg example">
+        <input name="fullname" class="form-control form-control-lg" type="text" placeholder="Họ và tên" aria-label=".form-control-lg example" required>
       </div>
     </div>
-
+    
+    <div class="mb-3">
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-house-fill"></i>
+        </span>
+        <input name="address" class="form-control form-control-lg" type="text" placeholder="Địa chỉ" aria-label=".form-control-lg example" required>
+      </div>
+    </div>
+    
+    <div class="mb-3">
+      <div class="input-group">
+        <span class="input-group-text">
+          <i class="bi bi-phone-fill"></i>
+        </span>
+        <input name="phone" class="form-control form-control-lg" type="tel" placeholder="Điện thoại" aria-label=".form-control-lg example" required>
+      </div>
+    </div>
     <div class="mb-3">
       <div class="input-group">
         <span class="input-group-text">
           <i class="bi bi-shield-lock-fill"></i>
         </span>
-        <input class="form-control form-control-lg" type="password" placeholder="Mật khẩu" aria-label=".form-control-lg example">
+        <input name="pass" class="form-control form-control-lg" type="password" placeholder="Mật khẩu" aria-label=".form-control-lg example" required>
       </div>
     </div>
-
+    
     <div class="mb-3">
       <div class="input-group">
         <span class="input-group-text">
           <i class="bi bi-shield-lock-fill"></i>
         </span>
-        <input class="form-control form-control-lg" type="password" placeholder="Nhập lại mật khẩu" aria-label=".form-control-lg example">
+        <input name="re_pass" class="form-control form-control-lg" type="password" placeholder="Nhập lại mật khẩu" aria-label=".form-control-lg example" required>
       </div>
     </div>
 
     <div class="text-center mb-3">
-      <button type="button" class="btn btn-primary">Đăng Ký</button>
+      <button type="submit" class="btn btn-primary">Đăng Ký</button>
     </div>
   </form>
 </div>
