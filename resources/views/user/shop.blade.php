@@ -41,12 +41,15 @@
               </select>
             </div>
           </div>
+          //product
           <div class="product-content product-store d-flex justify-content-between flex-wrap">
-            
+            @foreach ($product as $product)
+  
+
             <div class="col-lg-4 col-md-6">
               <div class="product-card position-relative pe-3 pb-3">
                 <div class="image-holder">
-                  <img src="images/product-item1.jpg" alt="product-item" class="img-fluid">
+                  <img src="" alt="product-item" class="img-fluid">
                 </div>
                 <div class="cart-concern position-absolute">
                   <div class="cart-button d-flex">
@@ -66,7 +69,8 @@
                 </div>
               </div>                  
             </div>
-            <div class="col-lg-4 col-md-6">
+            @endforeach
+            {{-- <div class="col-lg-4 col-md-6">
               <div class="product-card position-relative pe-3 pb-3">
                 <div class="image-holder">
                   <img src="images/product-item2.jpg" alt="product-item" class="img-fluid">
@@ -249,8 +253,9 @@
                   <span class="item-price text-primary">$1300</span>
                 </div>
               </div>                  
-            </div>
+            </div> --}}
           </div>
+          //product
           <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
             <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
               <a href="#">
