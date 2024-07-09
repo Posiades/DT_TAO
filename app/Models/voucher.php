@@ -5,10 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class product extends Model
+class voucher extends Model
 {
-    protected $table = 'product';
-    protected $primaryKey = 'product_id';
+    protected $table = 'voucher';
     use HasFactory;
-    
 }

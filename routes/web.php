@@ -37,10 +37,10 @@ Route::post('/post_login', [userControllers::class, 'login']);
 Route::post('/xac-thuc-tai-khoan', [userControllers::class, 'confirm']);
 Route::get('/mat-khau-moi/{email}/{token}', [userControllers::class, 'reset_pass'])->name('reset_pass');
 Route::get('/dang-xuat', [userControllers::class, 'logout']);
-
+Route::post('/post_createpass', [userControllers::class, 'createpass']);
 
 // ============== ROUTE ADMIN =================
-Route::prefix('admin')->middleware([AdminMiddleware::class])->group(function () {
+Route::prefix('admin')->middleware('is_admin')->group(function () {
         Route::get('/index', [adminController::class, 'index'])->name('dashboard');
         Route::get('/category', [adminController::class, 'category'])->name('category');
         Route::get('/product', [adminController::class, 'product'])->name('product');

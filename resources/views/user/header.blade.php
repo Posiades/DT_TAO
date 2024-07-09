@@ -1,6 +1,4 @@
-@php
-    use Illuminate\Support\Facades\Auth;
-@endphp
+
 <header id="header" class="site-header header-scrolled position-fixed text-black bg-light">
     <nav id="header-nav" class="navbar navbar-expand-lg px-3 mb-3">
       <div class="container-fluid">
@@ -25,19 +23,19 @@
                 <a class="nav-link me-4 active" href="{{url('/')}}">Trang Chủ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/iphone')}}">IPHONE</a>
+                <a class="nav-link me-4" href="{{url('/san-pham/iphone')}}">IPHONE</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/ipad')}}">ipad</a>
+                <a class="nav-link me-4" href="{{url('/san-pham/ipad')}}">ipad</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/macbook')}}">MACBOOK</a>
+                <a class="nav-link me-4" href="{{url('/san-pham/mac')}}">MACBOOK</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/watch')}}">Watch</a>
+                <a class="nav-link me-4" href="{{url('/san-pham/watch')}}">Watch</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/airpods')}}">AIRPODS</a>
+                <a class="nav-link me-4" href="{{url('/san-pham/airpods')}}">AIRPODS</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link me-4" href="{{url('/khuyen-mai')}}">Khuyến mãi</a>
@@ -78,29 +76,63 @@
                         </svg>
                       </a>
                     </li>
-                    
-                    @if (Auth::check())  
-                    <li class="nav-item dropdown">
-                      <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{Auth::user()->full_name }}</a>
-                      <ul class="dropdown-menu">
-                          <li>
-                              <a href="{{ url('/') }}" class="dropdown-item">Thông Tin Tài Khoản</a>
-                          </li>
-                          <li>
-                              <a href="{{ url('/dang-xuat') }}" class="dropdown-item">Đăng Xuất</a>
-                          </li>
-                      </ul>
-                  </li>
-                  @else
-                  <li class="pe-3">
-                    <a href="{{ asset('/dang-nhap') }}">
-                        <svg class="user">
-                            <use xlink:href="#user"></use>
-                        </svg>
-                    </a>
-                </li>
-                  @endif
 
+                    {{-- @php
+                        use Illuminate\Support\Facades\Auth;
+                    @endphp
+
+                    @if (Auth::check() && Auth::user())
+    <li class="nav-item dropdown">
+        <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{Auth::user()->full_name }}</a>
+        <ul class="dropdown-menu">
+            <li>
+                <a href="{{ url('/') }}" class="dropdown-item">Thông Tin Tài Khoản</a>
+            </li>
+            <li>
+                <a href="{{ url('/dang-xuat') }}" class="dropdown-item">Đăng Xuất</a>
+            </li>
+        </ul>
+    </li>
+@else
+    <li class="pe-3">
+      <a href="{{ asset('/dang-nhap') }}">
+          <svg class="user">
+              <use xlink:href="#user"></use>
+          </svg>
+      </a>
+  </li>
+@endif
+
+@if (Auth::check())
+    {{Auth::user()->full_name}}
+@else
+    <h5>Không có</h5>
+@endif --}}
+
+
+       @auth
+          <li class="nav-item dropdown">
+            <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{Auth::user()->full_name }}</a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="{{ url('/') }}" class="dropdown-item">Thông Tin Tài Khoản</a>
+                </li>
+                <li>
+                    <a href="{{ url('/dang-xuat') }}" class="dropdown-item">Đăng Xuất</a>
+                </li>
+            </ul>
+        </li>
+      @endauth
+
+      @guest
+        <li class="pe-3">
+          <a href="{{ asset('/dang-nhap') }}">
+              <svg class="user">
+                  <use xlink:href="#user"></use>
+              </svg>
+          </a>
+        </li>
+      @endguest 
 
 
                     <li>

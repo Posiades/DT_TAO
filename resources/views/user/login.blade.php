@@ -17,12 +17,12 @@
     <div class="container">
       <div class="row">
         <div class="text-center padding-large no-padding-bottom">
-          <h1 class="display-2 text-uppercase text-dark">LOGIN</h1>
+          <h1 class="display-2 text-uppercase text-dark">ĐĂNG NHẬP</h1>
           <div class="breadcrumbs">
             <span class="item">
               <a href="index.html">Home ></a>
             </span>
-            <span class="item">Login</span>
+            <span class="item">ĐĂNG NHẬP</span>
           </div>
         </div>
       </div>
@@ -41,6 +41,13 @@
 @if(session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+@if(session('success_resetpass'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success_resetpass') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 @endif

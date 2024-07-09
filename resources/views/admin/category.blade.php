@@ -1,7 +1,8 @@
 @extends('admin/layout')
 @section('title', 'Danh Mục')
 @section('content')
-<section class="is-title-bar">
+<div class="container mt-5">
+  <section class="is-title-bar">
     <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
       <ul>
         <li>Admin</li>
@@ -36,22 +37,17 @@
           <div class="card-content">
             <table>
               <thead>
-              <tr>
-                <th>Hình</th>           
+              <tr>           
                 <th>Số thứ tự</th>
                 <th>Tên danh mục</th>
                 <th></th>
               </tr>
               </thead>
               <tbody>
+                @foreach ($categories as $item)
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">1</td>
-                <td data-label="Company">IPHONE</td>
+                <td data-label="Name">{{$item->category_id}}</td>
+                <td data-label="Company">{{$item->name}}</td>
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
@@ -63,86 +59,12 @@
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">2</td>
-                <td data-label="Company">MAC</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">3</td>
-                <td data-label="Company">IPAD</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">4</td>
-                <td data-label="Company">AIRPODS</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">5</td>
-                <td data-label="Company">WATCHS</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
+              @endforeach
               </tbody>
             </table>
           </div>
         </div>
       
     </section>
+</div>
 @endsection

@@ -46,8 +46,8 @@ class homeControllers extends Controller
             return view('user/shop', compact('product'));
         }else if ($type == "watch"){
             $product = $product_watch;
-            return view('use/shop', compact('product'));
-        }else if($type == "airpod"){
+            return view('user/shop', compact('product'));
+        }else if($type == "airpods"){
             $product = $product_airpod;
             return view('user/shop', compact('product'));
         }
