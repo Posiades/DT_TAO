@@ -82,4 +82,8 @@ class adminController extends Controller
         $product = product::findOrFail($id);
         return view('admin/edit_product', compact('product'));
     }
+
+    function post_edit_product(Request $req){
+            
+    }
 }
