@@ -54,8 +54,4 @@ Route::prefix('admin')->middleware('is_admin')->group(function () {
         Route::get('/addproduct', [adminController::class, 'add_product'])->name('add_product');
         
     });
-
-    
-
-    
 ?>
