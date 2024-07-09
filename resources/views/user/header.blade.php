@@ -26,10 +26,10 @@
                 <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 1]) }}">IPHONE</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 2]) }}">ipad</a>
+                <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 3]) }}">ipad</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 3]) }}">MACBOOK</a>
+                <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 2]) }}">MACBOOK</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 4]) }}">Watch</a>

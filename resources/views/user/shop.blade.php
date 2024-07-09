@@ -254,7 +254,7 @@
               </div>                  
             </div> --}}
         </div>
-        //product
+
         <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
           <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
             <a href="#">
