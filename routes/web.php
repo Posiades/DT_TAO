@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminMiddleware;
-use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\userControllers;
 // ========================= Route SITE ================================
 
@@ -11,7 +11,8 @@ Route::get('/', [homeControllers::class, 'index'])->name('index');
 Route::get('/ve-chung-toi', [homeControllers::class, 'about']);
 Route::get('/lien-he', [homeControllers::class, 'contract']);
 Route::get('/tin-tuc', [homeControllers::class, 'blog']);
-Route::get('/san-pham/{type}', [homeControllers::class, 'shop']);
+Route::get('/san-pham', [homeControllers::class, 'allProducts'])->name('products.all');
+Route::get('/san-pham/filter', [homeControllers::class, 'filterProducts'])->name('products.filter');
 Route::get('/tim-kiem', [homeControllers::class, 'search']);
 Route::get('/dang-nhap', [homeControllers::class, 'login']);
 Route::get('/dang-ky', [homeControllers::class, 'register']);
@@ -49,4 +50,10 @@ Route::prefix('admin')->middleware('is_admin')->group(function () {
         Route::get('/addproduct', [adminController::class, 'add_product'])->name('add_product');
         
     });
+
+    Route::get('shop/{type}', [homeControllers::class, 'shop'])->name('shop');
+    Route::get('cart/add/{id}', [homeControllers::class, 'addToCart'])->name('cart.add');
+    Route::get('cart/remove/{id}', [homeControllers::class, 'removeFromCart'])->name('cart.remove');
+
+    
 ?>

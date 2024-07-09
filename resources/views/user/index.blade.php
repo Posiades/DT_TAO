@@ -128,7 +128,7 @@
                 </div>
                 <div class="cart-concern position-absolute">
                   <div class="cart-button d-flex">
-                    <a href="#" class="btn btn-medium btn-black">Thêm vào giỏ hàng<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    <a href="{{ route('cart.add', $iphone->product_id) }}" class="btn btn-medium btn-black">Thêm vào giỏ hàng<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
                   </div>
                 </div>
                 <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
@@ -166,7 +166,7 @@
                 </div>
                 <div class="cart-concern position-absolute">
                   <div class="cart-button d-flex">
-                    <a href="#" class="btn btn-medium btn-black">Thêm vào giỏ hàng<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
+                    <a href="{{ route('cart.add', $watch->product_id) }}" class="btn btn-medium btn-black">Thêm vào giỏ hàng<svg class="cart-outline"><use xlink:href="#cart-outline"></use></svg></a>
                   </div>
                 </div>
                 <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
