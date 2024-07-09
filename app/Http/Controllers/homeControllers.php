@@ -181,6 +181,30 @@ class homeControllers extends Controller
             }
         }
 
+        //lọc tên sp
+        if ($request->has('keyword') && $request->keyword != '') {
+            $query->where('name', 'like', '%' . $request->keyword . '%');
+        }
+        //phân loại sp
+        if ($request->has('sort') && $request->sort != '') {
+            switch ($request->sort) {
+                case 'name_asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'name_desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+                case 'price_asc':
+                    $query->orderBy('price_difference', 'asc');
+                    break;
+                case 'price_desc':
+                    $query->orderBy('price_difference', 'desc');
+                    break;
+
+            }
+        }
+    
+
         $products = $query->get();
 
         return view('user/shop', compact('products'));

@@ -28,18 +28,18 @@
               <p>Hiển thị 1–9 trên 55 kết quả </p>
             </div>
             <div class="sort-by">
-              <select id="input-sort" class="form-control" data-filter-sort="" data-filter-order="">
-                <option value="">Phân Loại</option>
-                <option value="">Tên (A - Z)</option>
-                <option value="">Tên (Z - A)</option>
-                <option value="">Giá (Thấp-Cao)</option>
-                <option value="">Giá (Cao-Thấp)</option>
+              <select id="input-sort" class="form-control" onchange="location = this.value;" data-filter-sort="" data-filter-order="">
+                <option value="{{ route('products.filter', request()->except('sort')) }}">Phân Loại</option>
+                <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => 'name_asc'])) }}">Tên (A - Z)</option>
+                <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => 'name_desc'])) }}">Tên (Z - A)</option>
+                <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => 'price_asc'])) }}">Giá (Thấp-Cao)</option>
+                <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => 'price_desc'])) }}">Giá (Cao-Thấp)</option>
                 <option value="">Bán chạy (Cao Nhất)</option>
                 <option value="">Bán chạy (Thấp Nhất)</option>  
               </select>
             </div>
           </div>
-          //product
+
           <div class="product-content product-store d-flex justify-content-between flex-wrap">
             @foreach ($products as $product)
   
@@ -254,7 +254,7 @@
               </div>                  
             </div> --}}
           </div>
-          //product
+          
           <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
             <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
               <a href="#">
@@ -279,9 +279,9 @@
           <div class="sidebar">
             <div class="widget-menu">
               <div class="widget-search-bar">
-                <form role="search" method="get" class="d-flex">
-                  <input class="search-field" placeholder="Search" type="search">
-                  <div class="search-icon bg-dark">
+                <form role="search" method="get" action="{{ route('products.filter') }}" class="d-flex">
+                  <input class="search-field" placeholder="Search" type="search" name="keyword">
+                  <button type="submit" class="btn btn-dark">
                     <a href="#">
                       <svg class="search text-light">
                         <use xlink:href="#search"></use>
