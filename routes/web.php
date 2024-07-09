@@ -18,12 +18,16 @@ Route::get('/dang-nhap', [homeControllers::class, 'login']);
 Route::get('/dang-ky', [homeControllers::class, 'register']);
 Route::get('/quen-mat-khau', [homeControllers::class, 'forgot']);
 
+Route::get('shop/{type}', [homeControllers::class, 'shop'])->name('shop');
+Route::get('cart/add/{id}', [homeControllers::class, 'addToCart'])->name('cart.add');
+Route::get('cart/remove/{id}', [homeControllers::class, 'removeFromCart'])->name('cart.remove');
+
 
 
 //  có thông số chờ chuyền vào
 Route::get('/chi-tiet/{slug}', [homeControllers::class, 'detail']);
 Route::get('/gio-hang', [homeControllers::class, 'cart']);
-Route::get('/thanh-toan', [homeControllers::class, 'checkout']);
+Route::get('/thanh-toan', [homeControllers::class, 'checkout'])->name('checkout');
 
 
 // post-1 sau này thay thế thành tên bài viết
@@ -51,9 +55,7 @@ Route::prefix('admin')->middleware('is_admin')->group(function () {
         
     });
 
-    Route::get('shop/{type}', [homeControllers::class, 'shop'])->name('shop');
-    Route::get('cart/add/{id}', [homeControllers::class, 'addToCart'])->name('cart.add');
-    Route::get('cart/remove/{id}', [homeControllers::class, 'removeFromCart'])->name('cart.remove');
+    
 
     
 ?>

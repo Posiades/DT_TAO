@@ -292,7 +292,7 @@
           <div class="button-wrap">
             <button class="btn btn-black btn-medium text-uppercase me-2 mb-3 btn-rounded-none">Cập Nhập Giỏ Hàng</button>
             <button class="btn btn-black btn-medium text-uppercase me-2 mb-3 btn-rounded-none">Tiếp Tục Mua Sắm</button>
-            <button class="btn btn-black btn-medium text-uppercase mb-3 btn-rounded-none">Thanh Toán</button>
+            <button  class="btn btn-black btn-medium text-uppercase mb-3 btn-rounded-none"><a href="{{route('checkout')}}">Thanh Toán</a></button>
           </div>
         </div>
         @else
