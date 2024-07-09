@@ -11,7 +11,7 @@ Route::get('/', [homeControllers::class, 'index'])->name('index');
 Route::get('/ve-chung-toi', [homeControllers::class, 'about']);
 Route::get('/lien-he', [homeControllers::class, 'contract']);
 Route::get('/tin-tuc', [homeControllers::class, 'blog']);
-Route::get('/san-pham/{type}', [homeControllers::class, 'shop']);
+Route::get('/san-pham/{type}', [homeControllers::class, 'allProducts'])->name('products.all');
 Route::get('/tim-kiem', [homeControllers::class, 'search']);
 Route::get('/dang-nhap', [homeControllers::class, 'login']);
 Route::get('/dang-ky', [homeControllers::class, 'register']);
@@ -53,4 +53,6 @@ Route::prefix('admin')->middleware([AdminMiddleware::class])->group(function () 
     Route::get('shop/{type}', [homeControllers::class, 'shop'])->name('shop');
     Route::get('cart/add/{id}', [homeControllers::class, 'addToCart'])->name('cart.add');
     Route::get('cart/remove/{id}', [homeControllers::class, 'removeFromCart'])->name('cart.remove');
+
+    
 ?>

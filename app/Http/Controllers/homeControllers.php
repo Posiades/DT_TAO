@@ -33,6 +33,7 @@ class homeControllers extends Controller
         $product_ipad = product::where('category_id', 3)->get();
         $product_watch = product::where('category_id', 4)->get();
         $product_airpod = product::where('category_id', 5)->get();
+        
         $product = null;
         if($type == "iphone"){
             $product = $product_iphone;
@@ -143,6 +144,12 @@ class homeControllers extends Controller
         Session::put('cart', $cart);
 
         return redirect()->back()->with('success', 'Giỏ hàng đã được cập nhật thành công!');
+    }
+
+    public function allProducts()
+    {
+        $products = Product::all();
+        return view('user/shop', compact('products'));
     }
 }
 
