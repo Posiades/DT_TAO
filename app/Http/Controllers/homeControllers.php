@@ -93,6 +93,7 @@ class homeControllers extends Controller
         return view('user/checkout');
     }
 
+    //--------------------------------------------------CART--------------------------------------------------------------
     public function addToCart($id)
     {
         $product = Product::find($id);
@@ -145,10 +146,43 @@ class homeControllers extends Controller
 
         return redirect()->back()->with('success', 'Giỏ hàng đã được cập nhật thành công!');
     }
-
+//--------------------------------------------PRODUCT--------------------------------------------------------------
     public function allProducts()
     {
         $products = Product::all();
+        return view('user/shop', compact('products'));
+    }
+
+    //----------------------------------------LOC SP---------------------------------------------------------------
+    public function filterProducts(Request $request)
+    {
+        $query = Product::query();
+
+        // Lọc theo danh mục
+        if ($request->has('category_id') && $request->category_id != '') {
+            $query->where('category_id', $request->category_id);
+        }
+
+        // Lọc theo khoảng giá
+        if ($request->has('price_range') && $request->price_range != '') {
+            switch ($request->price_range) {
+                case 'less_than_5000000':
+                    $query->where('price_difference', '<', 5000000);
+                    break;
+                case 'less_than_10000000':
+                    $query->where('price_difference', '<', 10000000);
+                    break;
+                case 'less_than_20000000':
+                    $query->where('price_difference', '<', 20000000);
+                    break;
+                case 'less_than_30000000':
+                    $query->where('price_difference', '<', 30000000);
+                    break;
+            }
+        }
+
+        $products = $query->get();
+
         return view('user/shop', compact('products'));
     }
 }

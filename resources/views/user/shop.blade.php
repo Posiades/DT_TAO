@@ -295,22 +295,22 @@
               <h5 class="widget-title text-decoration-underline text-uppercase">Lọc Theo Sản Phẩm</h5>
               <ul class="product-categories sidebar-list list-unstyled">
                 <li class="cat-item">
-                  <a href="/collections/categories">Tất cả</a>
+                  <a href="{{ route('products.filter', ['category_id' => '']) }}">Tất cả</a>
                 </li>
                 <li class="cat-item">
-                  <a href="">iPhone</a>
+                  <a href="{{ route('products.filter', ['category_id' => 1]) }}">iPhone</a>
                 </li>
                 <li class="cat-item">
-                  <a href="">Mac</a>
+                  <a href="{{ route('products.filter', ['category_id' => 2]) }}">Mac</a>
                 </li>
                 <li class="cat-item">
-                  <a href="">iPad</a>
+                  <a href="{{ route('products.filter', ['category_id' => 3]) }}">iPad</a>
                 </li>
                 <li class="cat-item">
-                  <a href="">Watch</a>
+                  <a href="{{ route('products.filter', ['category_id' => 4]) }}">Watch</a>
                 </li>
                 <li class="cat-iteM">
-                  <a href="">AirPods</a>
+                  <a href="{{ route('products.filter', ['category_id' => 5]) }}">AirPods</a>
                 </li>
               </ul>
             </div>
@@ -318,16 +318,16 @@
               <h5 class="widget-titlewidget-title text-decoration-underline text-uppercase">Lọc Theo Giá</h5>
               <ul class="product-tags sidebar-list list-unstyled">
                 <li class="tags-item">
-                  <a href="">Ít hơn 5.000.000</a>
+                  <a href="{{ route('products.filter', ['price_range' => 'less_than_5000000']) }}">Ít hơn 5.000.000</a>
                 </li>
                 <li class="tags-item">
-                  <a href="">Ít hơn 10.000.000</a>
+                  <a href="{{ route('products.filter', ['price_range' => 'less_than_10000000']) }}">Ít hơn 10.000.000</a>
                 </li>
                 <li class="tags-item">
-                  <a href="">Ít hơn 20.000.000</a>
+                  <a href="{{ route('products.filter', ['price_range' => 'less_than_20000000']) }}">Ít hơn 20.000.000</a>
                 </li>
                 <li class="tags-item">
-                  <a href="">Ít hơn 30.000.000</a>
+                  <a href="{{ route('products.filter', ['price_range' => 'less_than_30000000']) }}">Ít hơn 30.000.000</a>
                 </li>
               </ul>
             </div>
