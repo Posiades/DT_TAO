@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class userControllers extends Controller
 {
@@ -37,7 +38,7 @@ class userControllers extends Controller
     function login(Request $req){
         if(Auth::attempt($req->only('email', 'password'))){
             if (Auth::user()->role === 1) {
-                return view('admin/index');
+                return redirect()->route('dashboard');
             } else {
                 return redirect()->route('index');
             }
@@ -82,5 +83,21 @@ class userControllers extends Controller
         return redirect()->route('index');
     }
 
+    function createpass(Request $req){
+        $email = $req -> email;
+        $pass = $req -> pass;
+        $re_pass = $req -> re_pass;
+        if($pass == $re_pass){
+            DB::table('users')
+            ->where('email', $email)
+            ->update([
+                'password' =>  Hash::make($pass)
+            ]);
+        }else{
+            Session::flash('change_fail', 'Lỗi không thể thay đổi Password');
+        }
+        Session::flash('success_resetpass', "Đã Thay Đổi Mật Khẩu Thành Công");
+        return view('user/login');
+    }
 
 }

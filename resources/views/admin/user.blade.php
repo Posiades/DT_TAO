@@ -1,7 +1,8 @@
 @extends('admin/layout')
 @section('title', 'Người Dùng')
 @section('content')
-<section class="is-title-bar">
+<div class="container mt-5">
+  <section class="is-title-bar">
     <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
       <ul>
         <li>Admin</li>
@@ -37,8 +38,6 @@
             <table>
               <thead>
               <tr>
-                <th>Hình</th>
-                
                 <th>Tên</th>
                 <th>Số điện thoại</th>
                 <th>Email</th>
@@ -48,17 +47,19 @@
               </tr>
               </thead>
               <tbody>
+                @foreach ($user as $item)
               <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
+                <td data-label="Name">{{$item->full_name}}</td>
+                <td data-label="Company">{{$item->phone}}</td>
+                <td data-label="Email">{{$item->email}}</td>
+                <td data-label="progress">{{$item->password}}</td>
+                <td data-label="Created">
+                  @if ($item->role == 1)
+                      <span>Quản Trị</span>
+                  @else
+                      <span>Khách Hàng</span>
+                  @endif
                 </td>
-                <td data-label="Name">Võ Thành Nhân</td>
-                <td data-label="Company">0336745555</td>
-                <td data-label="Email">tnv240803@gmail.com</td>
-                <td data-label="progress">tnv240803</td>
-                <td data-label="Created">Khách hàng</td>
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
@@ -70,133 +71,9 @@
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">Võ Thành Nhân</td>
-                <td data-label="Company">0336745555</td>
-                <td data-label="Email">tnv240803@gmail.com</td>
-                <td data-label="progress">tnv240803</td>
-                <td data-label="Created">Khách hàng</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>          <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">Võ Thành Nhân</td>
-                <td data-label="Company">0336745555</td>
-                <td data-label="Email">tnv240803@gmail.com</td>
-                <td data-label="progress">tnv240803</td>
-                <td data-label="Created">Khách hàng</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>          <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">Võ Thành Nhân</td>
-                <td data-label="Company">0336745555</td>
-                <td data-label="Email">tnv240803@gmail.com</td>
-                <td data-label="progress">tnv240803</td>
-                <td data-label="Created">Khách hàng</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>          <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">Võ Thành Nhân</td>
-                <td data-label="Company">0336745555</td>
-                <td data-label="Email">tnv240803@gmail.com</td>
-                <td data-label="progress">tnv240803</td>
-                <td data-label="Created">Khách hàng</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>          <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">Võ Thành Nhân</td>
-                <td data-label="Company">0336745555</td>
-                <td data-label="Email">tnv240803@gmail.com</td>
-                <td data-label="progress">tnv240803</td>
-                <td data-label="Created">Khách hàng</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>          <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">Võ Thành Nhân</td>
-                <td data-label="Company">0336745555</td>
-                <td data-label="Email">tnv240803@gmail.com</td>
-                <td data-label="progress">tnv240803</td>
-                <td data-label="Created">Khách hàng</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
+                                  
+              @endforeach
+
               </tbody>
             </table>
             <div class="table-pagination">
@@ -213,4 +90,5 @@
         </div>
       
     </section>
+</div>
 @endsection

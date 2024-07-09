@@ -1,7 +1,8 @@
 @extends('admin/layout');
 @section('title', 'Sản Phẩm')
 @section('content')
-<section class="is-title-bar">
+<div class="container mt-5">
+  <section class="is-title-bar">
     <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
       <ul>
         <li>Admin</li>
@@ -47,17 +48,21 @@
               </tr>
               </thead>
               <tbody>
+                @foreach ($product as $item)
+                    
               <tr>
                 <td class="image-cell">
                   <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
+                    <img src="{{asset($item->image_url)}}" class="rounded-full">
                   </div>
                 </td>
-                <td data-label="Name">iPhone 15 pro max</td>
-                <td data-label="Company">iPhone</td>
-                <td data-label="progress">iPhone 15 pro max</td>
-                <td data-label="Created">iPhone 15 pro max</td>
-                <td data-label="progress">28,990,000đ</td>
+                <td data-label="Name">{{$item->name}}</td>
+                <td data-label="Company">{{$item->category_name}}</td>
+                <td data-label="progress">{{$item->name}}</td>
+                <td data-label="Created">
+                  {{ \Illuminate\Support\Str::limit($item->description, 50) }}
+                </td>
+                <td data-label="progress">{{number_format($item->price_difference, 0, ',', '.'). 'VNĐ'}}</td>
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
@@ -69,116 +74,8 @@
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">iPhone 15 pro max</td>
-                <td data-label="Company">iPhone</td>
-                <td data-label="progress">iPhone 15 pro max</td>
-                <td data-label="Created">iPhone 15 pro max</td>
-                <td data-label="progress">28,990,000đ</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">iPhone 15 pro max</td>
-                <td data-label="Company">iPhone</td>
-                <td data-label="progress">iPhone 15 pro max</td>
-                <td data-label="Created">iPhone 15 pro max</td>
-                <td data-label="progress">28,990,000đ</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">iPhone 15 pro max</td>
-                <td data-label="Company">iPhone</td>
-                <td data-label="progress">iPhone 15 pro max</td>
-                <td data-label="Created">iPhone 15 pro max</td>
-                <td data-label="progress">28,990,000đ</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">iPhone 15 pro max</td>
-                <td data-label="Company">iPhone</td>
-                <td data-label="progress">iPhone 15 pro max</td>
-                <td data-label="Created">iPhone 15 pro max</td>
-                <td data-label="progress">28,990,000đ</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td class="image-cell">
-                  <div class="image">
-                    <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                  </div>
-                </td>
-                <td data-label="Name">iPhone 15 pro max</td>
-                <td data-label="Company">iPhone</td>
-                <td data-label="progress">iPhone 15 pro max</td>
-                <td data-label="Created">iPhone 15 pro max</td>
-                <td data-label="progress">28,990,000đ</td>
-                <td class="actions-cell">
-                  <div class="buttons right nowrap">
-                    <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    </button>
-                    <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                    </button>
-                  </div>
-                </td>
-              </tr>
+              @endforeach
+             
               </tbody>
             </table>
             <div class="table-pagination">
@@ -195,4 +92,5 @@
         </div>
       
     </section>
+</div>
 @endsection

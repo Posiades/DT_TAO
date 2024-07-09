@@ -153,7 +153,7 @@
         <div class="display-header d-flex justify-content-between pb-3">
           <h2 class="display-7 text-dark text-uppercase">Apple Watch</h2>
           <div class="btn-right">
-            <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Tới sản phẩm</a>
+            <a href="{{url('/san-pham/watch')}}" class="btn btn-medium btn-normal text-uppercase">Tới sản phẩm</a>
           </div>
         </div>
         <div class="swiper product-watch-swiper">
