@@ -23,19 +23,19 @@
                 <a class="nav-link me-4 active" href="{{url('/')}}">Trang Chủ</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/san-pham/iphone')}}">IPHONE</a>
+                <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 1]) }}">IPHONE</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/san-pham/ipad')}}">ipad</a>
+                <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 3]) }}">ipad</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/san-pham/mac')}}">MACBOOK</a>
+                <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 2]) }}">MACBOOK</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/san-pham/watch')}}">Watch</a>
+                <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 4]) }}">Watch</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/san-pham/airpods')}}">AIRPODS</a>
+                <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 5]) }}">AIRPODS</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link me-4" href="{{url('/khuyen-mai')}}">Khuyến mãi</a>
