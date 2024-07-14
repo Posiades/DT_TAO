@@ -13,6 +13,7 @@
                 <a href="index.html">Trang chủ ></a>
               </span>
               <span class="item">Sản phẩm</span>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
             </div>
           </div>
@@ -40,6 +41,9 @@
               </select>
 =======
 >>>>>>> d86746bdab4e022bf81a0d7f2660f33a212b8bf9
+=======
+
+>>>>>>> Stashed changes
             </div>
           </div>
         </div>
@@ -363,9 +367,17 @@
         </div>
       </div>
     </div>
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   </div>
 @endsection
 =======
   @endsection
 >>>>>>> d86746bdab4e022bf81a0d7f2660f33a212b8bf9
+=======
+
+  </div>
+
+  @endsection
+
+>>>>>>> Stashed changes

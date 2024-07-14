@@ -14,7 +14,11 @@
     </div>
     <div class="card mx-auto" style="width: 1000px">
         <div class="card-body">
+<<<<<<< Updated upstream
           <form  method="POST" action="{{url('/admin/post_edit_product')}}" enctype="multipart/form-data">
+=======
+          <form  method="POST" action="{{url('/admin/post_add_sp')}}" enctype="multipart/form-data">
+>>>>>>> Stashed changes
             @csrf
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12">
