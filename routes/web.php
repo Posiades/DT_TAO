@@ -52,6 +52,7 @@ Route::prefix('admin')->middleware('is_admin')->group(function () {
         Route::get('/voucher', [adminController::class, 'voucher'])->name('voucher');
         Route::get('/order', [adminController::class, 'order'])->name('order');
         Route::get('/addproduct', [adminController::class, 'add_product'])->name('add_product');
-        
+        Route::post('/post_add_sp', [adminController::class, 'post_add_product']);
+        Route::get('/edit_sp/{id}', [adminController::class, 'edit_product'])->name('edit_product');
     });
 ?>

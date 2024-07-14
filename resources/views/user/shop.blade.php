@@ -13,6 +13,33 @@
                 <a href="index.html">Trang chủ ></a>
               </span>
               <span class="item">Sản phẩm</span>
+<<<<<<< HEAD
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="shopify-grid padding-large">
+    <div class="container">
+      <div class="row">
+        <main class="col-md-9">
+          <div class="filter-shop d-flex justify-content-between">
+            <div class="showing-product">
+              <p>Hiển thị 1–9 trên 55 kết quả </p>
+            </div>
+            <div class="sort-by">
+              <select id="input-sort" class="form-control" data-filter-sort="" data-filter-order="">
+                <option value="">Phân Loại</option>
+                <option value="">Tên (A - Z)</option>
+                <option value="">Tên (Z - A)</option>
+                <option value="">Giá (Thấp-Cao)</option>
+                <option value="">Giá (Cao-Thấp)</option>
+                <option value="">Bán chạy (Cao Nhất)</option>
+                <option value="">Bán chạy (Thấp Nhất)</option>  
+              </select>
+=======
+>>>>>>> d86746bdab4e022bf81a0d7f2660f33a212b8bf9
             </div>
           </div>
         </div>
@@ -336,4 +363,9 @@
         </div>
       </div>
     </div>
+<<<<<<< HEAD
+  </div>
+@endsection
+=======
   @endsection
+>>>>>>> d86746bdab4e022bf81a0d7f2660f33a212b8bf9

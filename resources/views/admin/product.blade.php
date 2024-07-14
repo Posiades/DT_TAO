@@ -8,7 +8,7 @@
         <li>Admin</li>
         <li>Sản Phẩm</li>
       </ul>
-      <a href="https://justboil.me/" onclick="alert('Coming soon'); return false" target="_blank" class="button blue">
+      <a href="{{route('add_product')}}">
         <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
         <span>Thêm Sản Phẩm</span>
       </a>
@@ -34,6 +34,14 @@
               <span class="icon"><i class="mdi mdi-reload"></i></span>
             </a>
           </header>
+
+          @if(session('add_product'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('add_product') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+      @endif
+
           <div class="card-content">
             <table>
               <thead>
@@ -49,7 +57,6 @@
               </thead>
               <tbody>
                 @foreach ($product as $item)
-                    
               <tr>
                 <td class="image-cell">
                   <div class="image">
@@ -66,7 +73,7 @@
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <span class="icon"><i class="mdi mdi-eye"></i></span>
+                     <a  href="{{route('edit_product', ['id'=>$item->product_id])}}"> <span class="icon"><i class="mdi mdi-eye"></i></span></a>
                     </button>
                     <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                       <span class="icon"><i class="mdi mdi-trash-can"></i></span>
