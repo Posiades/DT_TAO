@@ -73,11 +73,8 @@
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-<<<<<<< Updated upstream
+
                      <a  href="{{route('edit_product', ['id'=>$item->product_id])}}"> <span class="icon"><i class="mdi mdi-eye"></i></span></a>
-=======
-                     <a  href="{{route('edit_product', ['id'=>$item->product])}}"> <span class="icon"><i class="mdi mdi-eye"></i></span></a>
->>>>>>> Stashed changes
                     </button>
                     <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                       <span class="icon"><i class="mdi mdi-trash-can"></i></span>
