@@ -1,6 +1,8 @@
 @extends('admin/layout')
 @section('title', 'Sửa Sản Phẩm')
 @section('content')
+
+
  <div class="container mt-5">
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -14,20 +16,11 @@
     </div>
     <div class="card mx-auto" style="width: 1000px">
         <div class="card-body">
-<<<<<<< Updated upstream
-          <form  method="POST" action="{{url('/admin/post_edit_product')}}" enctype="multipart/form-data">
-=======
-          <form  method="POST" action="{{url('/admin/post_add_sp')}}" enctype="multipart/form-data">
->>>>>>> Stashed changes
+          <form  method="POST" action="{{route('post_edit_product', ['id'=>$product->product_id])}}" enctype="multipart/form-data">
             @csrf
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Loại:</strong>
-                        <input type="hidden" name="type" class="form-control" placeholder="Nhập Tên Sản Phẩm" value="{{$product->category_id}}">
-                    </div>
-                </div>
 
+            <input type="hidden" name="type" value="{{$product->category_id}}">
+            <input type="hidden" name="id" value="{{$product->product_id}}">
             <div class="row">
                <div class="col-xs-12 col-sm-12 col-md-12">
                    <div class="form-group">

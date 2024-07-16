@@ -7,6 +7,7 @@ use App\Models\categories;
 use App\Models\product;
 use App\Models\User;
 use App\Models\voucher;
+use Database\Seeders\product_image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -60,7 +61,7 @@ class adminController extends Controller
             $image->move(public_path('new_file_img'), $imageName);
             $img = '/new_file_img/' . $imageName;
         } else {
-            $img = '/default_image.jpg'; // Ảnh mặc định nếu không có ảnh được upload
+            $img = '/default_image.jpg'; 
         }
         $quantity = $req -> quantity;
 
@@ -75,18 +76,65 @@ class adminController extends Controller
         $product->save();
 
         Session::flash('add_product', "Thêm sản phẩm $name thành công");
-        return redirect()->route('add_product');   
+        return redirect()->route('product');   
     }
 
     function edit_product($id){
         $product = product::findOrFail($id);
         return view('admin/edit_product', compact('product'));
     }
-//<<<<<<< Updated upstream
+
 
     function post_edit_product(Request $req){
-            
+        $id = $req -> id;
+        $type = $req -> type;
+        $name = $req -> name;
+        $slug = str_replace(' ', '-', $name);
+        $price = $req -> price;
+        $mota = $req -> mota;
+        $img = $req -> image_url;
+        if ($req->hasFile('image_url')) {
+            $image = $req->file('image_url');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('new_file_img'), $imageName);
+            $img = '/new_file_img/' . $imageName;
+        } else {
+            $img = '/default_image.jpg'; 
+        }
+        $quantity = $req -> quantity;
+        DB::table('product')
+        ->where('product_id', $id)
+        ->update([
+            'category_id' => $type,
+            'name' => $name,
+            'description' => $mota,
+            'image_url' => $img,
+            'price_difference' => $price,
+            'slug' => $slug,
+            'quantity' => $quantity
+        ]);
+
+        Session::flash('edit_sp', "Đã thêm thành công sản phẩm $name thành công");
+        return redirect()->route('product');
     }
 
-//>>>>>>> Stashed changes
+    function del_confirm($id, $type){
+        $result = null;
+        if($type == "product"){
+            $result = product::findOrFail($id);
+            return view('admin.del_confirm', compact('result'));
+        }else{
+            $result = user::findOrFail($id);
+            return view('admin.del_confirm', compact('result')); 
+        }
+    }
+
+    function del_execute($id){
+        DB::table('product')
+        ->where('product_id', $id)
+        ->delete();
+        Session::flash('del_sp', "Đã xóa sản phẩm thành công");
+        return redirect()->route('product');
+    }
+
 }
