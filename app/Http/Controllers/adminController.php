@@ -10,6 +10,7 @@ use App\Models\voucher;
 use Database\Seeders\product_image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 
 class adminController extends Controller
@@ -125,10 +126,14 @@ class adminController extends Controller
             $result = product::findOrFail($id);
             $type = "product";
             return view('admin.del_confirm', compact('result', 'type'));
-        }else{
+        }else if($type == "user"){
             $result = User::where('user_id', $id)->firstOrFail();
             $type = "user"; 
             return view('admin.del_confirm', compact('result', 'type')); 
+        }else{
+            $result = voucher::findOrFail($id);
+            $type = "voucher";
+            return view('admin.del_confirm', compact('result', 'type'));
         }
     }
 
@@ -145,6 +150,12 @@ class adminController extends Controller
             ->delete();
             Session::flash('del_user', "Đã xóa người dùng thành công");
             return redirect()->route('user');
+        }else if($type == "voucher"){
+            DB::table('voucher')
+            ->where('voucher_id', $id)
+            ->delete();
+            Session::flash('del_voucher', "Đã xóa voucher thành công");
+            return redirect()->route('voucher');
         }
     }
 
@@ -196,5 +207,54 @@ class adminController extends Controller
         return redirect()->route('user');
     }
 
+    function add_voucher(){
+       return view('admin/add_voucher');
+    }
 
+    function post_add_voucher(Request $req){
+        $code = $req -> code;
+        $money = $req -> value;
+        $create = $req -> create;
+        $end = $req -> end;
+        $quantity = $req -> quantity;
+
+        $voucher = new voucher;
+        $voucher -> code = $code;
+        $voucher -> discount_amount = $money;
+        $voucher -> create_date = $create;
+        $voucher -> expiry_date = $end;
+        $voucher -> quantity = $quantity;
+        $voucher->save();
+
+        Session::flash('add_voucher', "Đã thêm voucher $code thành công");
+        return redirect()->route('voucher');
+    }
+
+    function edit_voucher($id){
+        $voucher = voucher::where('voucher_id', $id)->firstOrFail();
+        return view('admin.edit_voucher', compact('voucher'));
+    }
+
+    function post_edit_voucher(Request $req){
+        $id = $req->id;
+        $code = $req -> code;
+        $money = $req -> money;
+        $create = $req -> create;
+        $end = $req -> end;
+        $quantity = $req -> quantity;
+
+        DB::table('voucher')
+        ->where('voucher_id', $id)
+        ->update([
+            'code' => $code,
+            'discount_amount' => $money,
+            'create_date' => $create,
+            'expiry_date' => $end,
+            'quantity' => $quantity
+        ]);
+        Session::flash('edit_voucher', "Đã cập nhật voucher $code thành công");
+        return redirect()->route('voucher');
+    }
+
+    
 }

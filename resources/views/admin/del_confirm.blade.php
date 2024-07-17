@@ -13,7 +13,7 @@
     </div>
 
 
-
+{{-- ================== Product =============== --}}
    @if ($type == "product")
    <div class="card mx-auto" style="width: 1000px">
     <div class="card-body">
@@ -38,7 +38,8 @@
     </div>
 </div>
 </div>
-   @else
+{{-- ==================================== User =========================== --}}
+   @elseif ($type == "user")
    <div class="card mx-auto" style="width: 1000px">
     <div class="card-body">
       <form  method="POST" action="{{route('del_execute', ['id'=>$result->user_id, 'type'=>"user"])}}" enctype="multipart/form-data">
@@ -61,6 +62,33 @@
     </div>
 </div>
 </div>
+
+{{-- ================================= VOucher ============================ --}}
+@else
+<div class="card mx-auto" style="width: 1000px">
+  <div class="card-body">
+    <form  method="POST" action="{{route('del_execute', ['id'=>$result->voucher_id, 'type'=>"voucher"])}}" enctype="multipart/form-data">
+      @csrf
+
+      <input type="hidden" name="id" value="{{$result->voucher_id}}">
+      
+      <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+            <h1><strong>Bạn chắc chắn muốn xóa {{$result->code}}</strong></h1>
+             
+          </div>
+      </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 text-center pt-3">
+                 <button type="submit" class="btn btn-danger">Submit</button>
+         </div>
+     </div>
+ </form>
+  </div>
+</div>
+</div>
+
+
    @endif
     
 

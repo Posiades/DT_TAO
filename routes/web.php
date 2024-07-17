@@ -61,5 +61,9 @@ Route::prefix('admin')->middleware('is_admin')->group(function () {
         Route::post('/post_add_user', [adminController::class, 'post_add_user'])->name('post_add_user');
         Route::get('/edit_user/{id}', [adminController::class, 'edit_user'])->name('edit_user');
         Route::post('/post_edit_user', [adminController::class, 'post_edit_user'])->name('post_edit_user');
+        Route::get('/add_voucher', [adminController::class, 'add_voucher'])->name('add_voucher');
+        Route::post('/post_add_voucher', [adminController::class, 'post_add_voucher'])->name('post_add_voucher');
+        Route::get('/edit_voucher/{id}', [adminController::class, 'edit_voucher'])->name('edit_voucher');
+        Route::post('/post_edit_voucher', [adminController::class, 'post_edit_voucher'])->name('post_edit_voucher');
     });
 ?>

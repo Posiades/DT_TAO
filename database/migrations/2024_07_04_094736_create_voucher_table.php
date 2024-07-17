@@ -15,8 +15,10 @@ return new class extends Migration
             $table->increments('voucher_id');
             $table->string('code', 50);
             $table->decimal('discount_amount', 10, 2);
+            $table->date('create_date');
             $table->date('expiry_date');
-            $table->string('status', 50);
+            $table->integer('quantity');
+            $table->timestamps();
         });
     }
 

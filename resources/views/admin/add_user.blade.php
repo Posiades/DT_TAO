@@ -9,7 +9,7 @@
                     <h2 class="pull-left">Add New User</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post_edit_user', ['id'=>$user->user_id]) }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('post_add_user') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
