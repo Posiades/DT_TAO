@@ -7,9 +7,6 @@
             <div class="pull-left">
                 <h2>Add New Product</h2>
             </div>
-            {{-- <div class="pull-right">
-                <a class="btn btn-primary" href=""> Back</a>
-            </div> --}}
         </div>
     </div>
     <div class="card mx-auto" style="width: 1000px">

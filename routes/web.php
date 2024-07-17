@@ -56,6 +56,10 @@ Route::prefix('admin')->middleware('is_admin')->group(function () {
         Route::get('/edit_sp/{id}', [adminController::class, 'edit_product'])->name('edit_product');
         Route::post('/post_edit_sp/{id}', [adminController::class, 'post_edit_product'])->name('post_edit_product');
         Route::get('/del_confirm/{id}/{type}', [adminController::class, 'del_confirm'])->name('del_confirm');
-        Route::post('/post_del_exeute/{id}', [adminController::class, 'del_execute'])->name('del_execute');
+        Route::post('/post_del_exeute/{id}/{type}', [adminController::class, 'del_execute'])->name('del_execute');
+        Route::get('/adduser', [adminController::class, 'add_user'])->name('add_user');
+        Route::post('/post_add_user', [adminController::class, 'post_add_user'])->name('post_add_user');
+        Route::get('/edit_user/{id}', [adminController::class, 'edit_user'])->name('edit_user');
+        Route::post('/post_edit_user', [adminController::class, 'post_edit_user'])->name('post_edit_user');
     });
 ?>

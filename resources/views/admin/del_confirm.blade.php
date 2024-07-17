@@ -14,29 +14,54 @@
 
 
 
-    {{-- ================== Product ============== --}}
-    <div class="card mx-auto" style="width: 1000px">
-        <div class="card-body">
-          <form  method="POST" action="{{route('del_execute', ['id'=>$result->product_id])}}" enctype="multipart/form-data">
-            @csrf
+   @if ($type == "product")
+   <div class="card mx-auto" style="width: 1000px">
+    <div class="card-body">
+      <form  method="POST" action="{{route('del_execute', ['id'=>$result->product_id, 'type'=>"product"])}}" enctype="multipart/form-data">
+        @csrf
 
-            <input type="hidden" name="type" value="{{$result->category_id}}">
-            <input type="hidden" name="id" value="{{$result->product_id}}">
-            
-            <div class="row">
-               <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                  <h1><strong>Bạn chắc chắn muốn xóa {{$result->name}}</strong></h1>
-                   
-                </div>
+        <input type="hidden" name="type" value="{{$result->category_id}}">
+        <input type="hidden" name="id" value="{{$result->product_id}}">
+        
+        <div class="row">
+           <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+              <h1><strong>Bạn chắc chắn muốn xóa {{$result->name}}</strong></h1>
+               
             </div>
-               <div class="col-xs-12 col-sm-12 col-md-12 text-center pt-3">
-                       <button type="submit" class="btn btn-danger">Submit</button>
-               </div>
-           </div>
-       </form>
         </div>
+           <div class="col-xs-12 col-sm-12 col-md-12 text-center pt-3">
+                   <button type="submit" class="btn btn-danger">Submit</button>
+           </div>
+       </div>
+   </form>
     </div>
- </div>
+</div>
+</div>
+   @else
+   <div class="card mx-auto" style="width: 1000px">
+    <div class="card-body">
+      <form  method="POST" action="{{route('del_execute', ['id'=>$result->user_id, 'type'=>"user"])}}" enctype="multipart/form-data">
+        @csrf
+
+        <input type="hidden" name="id" value="{{$result->user_id}}">
+        
+        <div class="row">
+           <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+              <h1><strong>Bạn chắc chắn muốn xóa {{$result->email}}</strong></h1>
+               
+            </div>
+        </div>
+           <div class="col-xs-12 col-sm-12 col-md-12 text-center pt-3">
+                   <button type="submit" class="btn btn-danger">Submit</button>
+           </div>
+       </div>
+   </form>
+    </div>
+</div>
+</div>
+   @endif
+    
 
 @endsection

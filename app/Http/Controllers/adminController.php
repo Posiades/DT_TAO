@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\voucher;
 use Database\Seeders\product_image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class adminController extends Controller
@@ -122,19 +123,78 @@ class adminController extends Controller
         $result = null;
         if($type == "product"){
             $result = product::findOrFail($id);
-            return view('admin.del_confirm', compact('result'));
+            $type = "product";
+            return view('admin.del_confirm', compact('result', 'type'));
         }else{
-            $result = user::findOrFail($id);
-            return view('admin.del_confirm', compact('result')); 
+            $result = User::where('user_id', $id)->firstOrFail();
+            $type = "user"; 
+            return view('admin.del_confirm', compact('result', 'type')); 
         }
     }
 
-    function del_execute($id){
-        DB::table('product')
+    function del_execute(Request $req, $id, $type){
+        if($type == "product"){
+            DB::table('product')
         ->where('product_id', $id)
         ->delete();
         Session::flash('del_sp', "Đã xóa sản phẩm thành công");
         return redirect()->route('product');
+        }else if($type == "user"){
+            DB::table('users')
+            -> where('user_id', $id)
+            ->delete();
+            Session::flash('del_user', "Đã xóa người dùng thành công");
+            return redirect()->route('user');
+        }
     }
+
+    function add_user(){
+        return view('admin.add_user');
+    }
+
+    function post_add_user(Request $req){
+        $name = $req -> name;
+        $email = $req -> email;
+        $phone = $req -> phone;
+        $pass = $req -> password;
+        $role = $req -> role;
+        $address =  $req -> address;
+        $user = new user;
+        $user ->  email = $email;
+        $user -> password = Hash::make($pass);
+        $user -> full_name = $name;
+        $user -> address = $address;
+        $user -> phone = $phone;
+        $user -> save();
+        Session::flash('add_user', "Đã thêm user $name thành công");
+        return redirect()->route('user');
+    }
+
+    function edit_user($id){
+        $user = User::where('user_id', $id)->firstOrFail();
+        return view('admin.edit_user', compact('user'));
+    }
+
+    function post_edit_user(Request $req){
+        $name = $req -> name;
+        $phone = $req -> phone;
+        $email = $req -> email;
+        $pass = $req -> password;
+        $address = $req -> address;
+        $role = $req -> role;
+        DB::table('users')
+        ->where('email', $email)
+        ->update([
+            'email' => $email,
+            'password' => Hash::make($pass),
+            'full_name' => $name,
+            'address' => $address,
+            'phone' => $phone,
+            'role' => $role
+        ]);
+        Session::flash('edit_user', "Đã cập nhật tài khoản $name thành công");
+        return redirect()->route('user');
+    }
+
 
 }
