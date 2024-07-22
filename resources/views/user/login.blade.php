@@ -61,7 +61,7 @@
     <p>Đăng nhập tài khoản và mật khẩu để truy cập vào DT Táo</p>
   </div>
 
-  <form method="POST" action="{{url('/post_login')}}">
+  <form method="POST" action="{{ route('login') }}">
     @csrf
     <div class="mb-3">
       <div class="input-group">

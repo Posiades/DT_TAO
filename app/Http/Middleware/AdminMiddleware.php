@@ -17,12 +17,15 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        // if (Auth::check() && Auth::user()->role == 1) {
+        // if (Auth::check() && Auth::user()->role === 1) {
+        //     return $next($request);
+        // }else{
+        //     // return redirect()->route('index')->with('error', 'Bạn không có quyền truy cập.');
+        //     dd('1');
         // }
-        return $next($request);
 
-        
-        // return redirect()->route('index')->with('error', 'Bạn không có quyền truy cập.');
-        
+        dd(Auth::check());
+       
+                
     }
 }

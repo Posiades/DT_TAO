@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\fogotPassWord;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -14,7 +15,6 @@ use Illuminate\Support\Facades\DB;
 class userControllers extends Controller
 {
     function register(Request $req){
-        
         $email = $req -> email;
         $full_name = $req -> fullname;
         $address = $req -> address;
@@ -38,15 +38,18 @@ class userControllers extends Controller
     function login(Request $req){
         if(Auth::attempt($req->only('email', 'password'))){
             if (Auth::user()->role === 1) {
-                return redirect()->route('dashboard');
+                return view('admin.index');
             } else {
-                return redirect()->route('index');
+                $product_iphone = product::where('category_id', 1)->limit(4)->get();
+                $product_watch = product::where('category_id', 4)->limit(4)->get();
+                return view('user/index', compact('product_iphone', 'product_watch'));
             }
         }else {
             Session::flash('login_fail', 'Sai tên email hoặc mật khẩu');
             return view('user/login');
         }
     }
+
 
     function confirm(Request $req){
         $token = openssl_random_pseudo_bytes(32);

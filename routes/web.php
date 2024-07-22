@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\userControllers;
@@ -37,15 +36,16 @@ Route::get('/post-1', [homeControllers::class, 'single_post']);
 
 // ===================== User Route ============================
 Route::post('/post_register', [userControllers::class, 'register']);
-Route::post('/post_login', [userControllers::class, 'login']);
+Route::post('/post_login', [UserControllers::class, 'login'])->name('login');
 Route::post('/xac-thuc-tai-khoan', [userControllers::class, 'confirm']);
 Route::get('/mat-khau-moi/{email}/{token}', [userControllers::class, 'reset_pass'])->name('reset_pass');
 Route::get('/dang-xuat', [userControllers::class, 'logout']);
 Route::post('/post_createpass', [userControllers::class, 'createpass']);
 
 // ============== ROUTE ADMIN =================
-Route::prefix('admin')->middleware('is_admin')->group(function () {
-        Route::get('/index', [adminController::class, 'index'])->name('dashboard');
+
+Route::prefix('admin')->middleware('admin')->group(function () {
+        Route::get('/index', [adminController::class, 'index'])->name('admin_index');
         Route::get('/category', [adminController::class, 'category'])->name('category');
         Route::get('/product', [adminController::class, 'product'])->name('product');
         Route::get('/user', [adminController::class, 'user'])->name('user');
@@ -66,4 +66,6 @@ Route::prefix('admin')->middleware('is_admin')->group(function () {
         Route::get('/edit_voucher/{id}', [adminController::class, 'edit_voucher'])->name('edit_voucher');
         Route::post('/post_edit_voucher', [adminController::class, 'post_edit_voucher'])->name('post_edit_voucher');
     });
+
+
 ?>
