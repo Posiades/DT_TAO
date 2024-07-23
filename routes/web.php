@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\userControllers;
+use App\Http\Controllers\VnpayController;
 // ========================= Route SITE ================================
 
 Route::get('/', [homeControllers::class, 'index'])->name('index');
@@ -21,7 +22,7 @@ Route::get('shop/{type}', [homeControllers::class, 'shop'])->name('shop');
 Route::get('cart/add/{id}', [homeControllers::class, 'addToCart'])->name('cart.add');
 Route::get('cart/remove/{id}', [homeControllers::class, 'removeFromCart'])->name('cart.remove');
 
-
+Route::post('/vnpay_payment', [VnpayController::class, 'vnpayPayment'])->name('vnpay.payment');
 
 //  có thông số chờ chuyền vào
 Route::get('/chi-tiet/{slug}', [homeControllers::class, 'detail']);
