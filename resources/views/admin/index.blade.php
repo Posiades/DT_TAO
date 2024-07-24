@@ -28,7 +28,7 @@
                   Người dùng
                 </h3>
                 <h1>
-                  60
+                  {{$user->count()}}
                 </h1>
               </div>
               <span class="icon widget-icon text-green-500"><i class="mdi mdi-account-multiple mdi-48px"></i></span>
@@ -79,179 +79,54 @@
           </a>
         </header>
         <div class="card-content">
+
           <table>
             <thead>
             <tr>
-              <th>Hình</th>
-              
               <th>Tên</th>
               <th>Số điện thoại</th>
               <th>Email</th>
-              <th>Mật khẩu</th>
+              <th>Địa Chỉ</th>
               <th>Vai trò</th>
               <th></th>
             </tr>
             </thead>
             <tbody>
+              @foreach ($user as $item)
             <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
+              <td data-label="Name">{{$item->full_name}}</td>
+              <td data-label="phone">{{$item->phone}}</td>
+              <td data-label="Email">{{$item->email}}</td>
+              <td data-label="address">{{$item->address}}</td>
+              <td data-label="role">
+                @if ($item->role == 1)
+                    <span>Quản Trị</span>
+                @else
+                    <span>Khách Hàng</span>
+                @endif
               </td>
-              <td data-label="Name">Võ Thành Nhân</td>
-              <td data-label="Company">0336745555</td>
-              <td data-label="Email">tnv240803@gmail.com</td>
-              <td data-label="progress">tnv240803</td>
-              <td data-label="Created">Khách hàng</td>
               <td class="actions-cell">
                 <div class="buttons right nowrap">
                   <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
+                    <a href="{{ route('edit_user', ['id'=>$item->user_id]) }}"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
                   </button>
                   <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                    <a href="{{ route('del_confirm', ['id'=>$item->user_id, 'type'=>"user"]) }}"><span class="icon"><i class="mdi mdi-trash-can"></i></span></a>
                   </button>
                 </div>
               </td>
             </tr>
-            <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">Võ Thành Nhân</td>
-              <td data-label="Company">0336745555</td>
-              <td data-label="Email">tnv240803@gmail.com</td>
-              <td data-label="progress">tnv240803</td>
-              <td data-label="Created">Khách hàng</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>          <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">Võ Thành Nhân</td>
-              <td data-label="Company">0336745555</td>
-              <td data-label="Email">tnv240803@gmail.com</td>
-              <td data-label="progress">tnv240803</td>
-              <td data-label="Created">Khách hàng</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>          <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">Võ Thành Nhân</td>
-              <td data-label="Company">0336745555</td>
-              <td data-label="Email">tnv240803@gmail.com</td>
-              <td data-label="progress">tnv240803</td>
-              <td data-label="Created">Khách hàng</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>          <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">Võ Thành Nhân</td>
-              <td data-label="Company">0336745555</td>
-              <td data-label="Email">tnv240803@gmail.com</td>
-              <td data-label="progress">tnv240803</td>
-              <td data-label="Created">Khách hàng</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>          <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">Võ Thành Nhân</td>
-              <td data-label="Company">0336745555</td>
-              <td data-label="Email">tnv240803@gmail.com</td>
-              <td data-label="progress">tnv240803</td>
-              <td data-label="Created">Khách hàng</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>          <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">Võ Thành Nhân</td>
-              <td data-label="Company">0336745555</td>
-              <td data-label="Email">tnv240803@gmail.com</td>
-              <td data-label="progress">tnv240803</td>
-              <td data-label="Created">Khách hàng</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
+                                
+            @endforeach
+
             </tbody>
           </table>
           <div class="table-pagination">
             <div class="flex items-center justify-between">
-              <div class="buttons">
-                <button type="button" class="button active">1</button>
-                <button type="button" class="button">2</button>
-                <button type="button" class="button">3</button>
-              </div>
-              <small>Trang 1 trên 3</small>
+              <div class="table-pagination">
+                {{ $user->links() }}
+            </div>
+            <small>Trang {{ $user->currentPage() }} trên {{ $user->lastPage() }}</small>
             </div>
           </div>
         </div>
@@ -280,150 +155,48 @@
             </tr>
             </thead>
             <tbody>
+              @foreach ($product as $item)
             <tr>
               <td class="image-cell">
                 <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
+                  <img src="{{asset($item->image_url)}}" class="rounded-full">
                 </div>
               </td>
-              <td data-label="Name">iPhone 15 pro max</td>
-              <td data-label="Company">iPhone</td>
-              <td data-label="progress">iPhone 15 pro max</td>
-              <td data-label="Created">iPhone 15 pro max</td>
-              <td data-label="progress">28,990,000đ</td>
+              <td data-label="Name">{{$item->name}}</td>
+              <td data-label="Company">{{$item->category_name}}</td>
+              <td data-label="progress">{{$item->name}}</td>
+              <td data-label="Created">
+                {{ \Illuminate\Support\Str::limit($item->description, 50) }}
+              </td>
+              <td data-label="progress">{{number_format($item->price_difference, 0, ',', '.'). 'VNĐ'}}</td>
               <td class="actions-cell">
                 <div class="buttons right nowrap">
                   <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
+                   <a  href="{{route('edit_product', ['id'=>$item->product_id])}}"> <span class="icon"><i class="mdi mdi-eye"></i></span></a>
+
                   </button>
                   <button class="button small red --jb-modal" data-target="sample-modal" type="button">
+                   <a href="{{route('del_confirm', ['id'=>$item->product_id, 'type'=>"product"])}}">
                     <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                   </a>
                   </button>
                 </div>
               </td>
             </tr>
-            <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">iPhone 15 pro max</td>
-              <td data-label="Company">iPhone</td>
-              <td data-label="progress">iPhone 15 pro max</td>
-              <td data-label="Created">iPhone 15 pro max</td>
-              <td data-label="progress">28,990,000đ</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">iPhone 15 pro max</td>
-              <td data-label="Company">iPhone</td>
-              <td data-label="progress">iPhone 15 pro max</td>
-              <td data-label="Created">iPhone 15 pro max</td>
-              <td data-label="progress">28,990,000đ</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">iPhone 15 pro max</td>
-              <td data-label="Company">iPhone</td>
-              <td data-label="progress">iPhone 15 pro max</td>
-              <td data-label="Created">iPhone 15 pro max</td>
-              <td data-label="progress">28,990,000đ</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">iPhone 15 pro max</td>
-              <td data-label="Company">iPhone</td>
-              <td data-label="progress">iPhone 15 pro max</td>
-              <td data-label="Created">iPhone 15 pro max</td>
-              <td data-label="progress">28,990,000đ</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="image-cell">
-                <div class="image">
-                  <img src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg" class="rounded-full">
-                </div>
-              </td>
-              <td data-label="Name">iPhone 15 pro max</td>
-              <td data-label="Company">iPhone</td>
-              <td data-label="progress">iPhone 15 pro max</td>
-              <td data-label="Created">iPhone 15 pro max</td>
-              <td data-label="progress">28,990,000đ</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
+            @endforeach
+           
             </tbody>
           </table>
+
           <div class="table-pagination">
             <div class="flex items-center justify-between">
-              <div class="buttons">
-                <button type="button" class="button active">1</button>
-                <button type="button" class="button">2</button>
-                <button type="button" class="button">3</button>
-              </div>
-              <small>Trang 1 trên 3</small>
+              <div class="table-pagination">
+                {{ $product->links() }}
+            </div>
+            <small>Trang {{ $product->currentPage() }} trên {{ $product->lastPage() }}</small>
             </div>
           </div>
+          
         </div>
       </div>
       <div class="card has-table">
@@ -569,124 +342,34 @@
             </tr>
             </thead>
             <tbody>
+              @foreach ($voucher as $item)
             <tr>
-              <td data-label="Name">VOUCHER240803</td>
-              <td data-label="Company">50</td>
+              <td>{{$item->code}}</td>
+              <td>{{{$item->quantity}}}</td>
   
-              <td data-label="progress">100,000đ</td>
-              <td data-label="Created">10 tháng 5 năm 2024</td>
-              <td data-label="Created">24 tháng 8 năm 2024</td>
-              <td class="actions-cell">
+              <td>{{$item->discount_amount	}}</td>
+              <td>{{$item->create_date}}</td>
+              <td>{{$item->expiry_date}}</td>
+              <td>
                 <div class="buttons right nowrap">
                   <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
+                    <a href="{{route('edit_voucher', ['id'=>$item->voucher_id])}}"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
                   </button>
                   <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                    <a href="{{route('del_confirm', ['id'=>$item->voucher_id, 'type'=>"voucher"])}}"><span class="icon"><i class="mdi mdi-trash-can"></i></span></a>
                   </button>
                 </div>
               </td>
             </tr>
-            <tr>
-              <td data-label="Name">VOUCHER240803</td>
-              <td data-label="Company">50</td>
-  
-              <td data-label="progress">100,000đ</td>
-              <td data-label="Created">10 tháng 5 năm 2024</td>
-              <td data-label="Created">24 tháng 8 năm 2024</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Name">VOUCHER240803</td>
-              <td data-label="Company">50</td>
-  
-              <td data-label="progress">100,000đ</td>
-              <td data-label="Created">10 tháng 5 năm 2024</td>
-              <td data-label="Created">24 tháng 8 năm 2024</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Name">VOUCHER240803</td>
-              <td data-label="Company">50</td>
-  
-              <td data-label="progress">100,000đ</td>
-              <td data-label="Created">10 tháng 5 năm 2024</td>
-              <td data-label="Created">24 tháng 8 năm 2024</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Name">VOUCHER240803</td>
-              <td data-label="Company">50</td>
-  
-              <td data-label="progress">100,000đ</td>
-              <td data-label="Created">10 tháng 5 năm 2024</td>
-              <td data-label="Created">24 tháng 8 năm 2024</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-                      <tr>
-              <td data-label="Name">VOUCHER240803</td>
-              <td data-label="Company">50</td>
-  
-              <td data-label="progress">100,000đ</td>
-              <td data-label="Created">10 tháng 5 năm 2024</td>
-              <td data-label="Created">24 tháng 8 năm 2024</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
+            @endforeach
             </tbody>
           </table>
           <div class="table-pagination">
             <div class="flex items-center justify-between">
-              <div class="buttons">
-                <button type="button" class="button active">1</button>
-                <button type="button" class="button">2</button>
-                <button type="button" class="button">3</button>
-              </div>
-              <small>Trang 1 trên 3</small>
+              <div class="table-pagination">
+                {{ $voucher->links() }}
+            </div>
+            <small>Trang {{ $voucher->currentPage() }} trên {{ $voucher->lastPage() }}</small>
             </div>
           </div>
         </div>

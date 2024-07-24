@@ -20,7 +20,7 @@
             <div class="user-avatar">
               <img src="https://avatars.dicebear.com/v2/initials/john-doe.svg" alt="MY ADMIN" class="rounded-full">
             </div>
-            <div class="is-user-name"><span>HI {{ Session::get('user')->full_name }}</span></div>
+            <div class="is-user-name"><span><strong>{{ Session::get('user')->full_name }}</strong> </span></div>
             <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
           </a>
           <div class="navbar-dropdown">
@@ -43,11 +43,6 @@
             </a>
           </div>
         </div>
-
-        <a title="Log out" class="navbar-item desktop-icon-only">
-          <span class="icon"><i class="mdi mdi-logout"></i></span>
-          <span>Log out</span>
-        </a>
       </div>
     </div>
   </nav>

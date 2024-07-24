@@ -16,7 +16,15 @@ use Illuminate\Support\Facades\Session;
 class adminController extends Controller
 {
     function index(){
-        return view('admin/index');
+        $quantity_show = 5;
+        $categories = categories::paginate($quantity_show);
+        $product = DB::table('product')
+        ->join('categories', 'product.category_id', '=', 'categories.category_id')
+        ->select('product.*', 'categories.name as category_name')
+        ->paginate($quantity_show);
+        $user = user::paginate($quantity_show);
+        $voucher = voucher::paginate($quantity_show);
+        return view('admin/index', compact('categories', 'product', 'user', 'voucher'));
     }
 
     function category(){
@@ -25,20 +33,23 @@ class adminController extends Controller
     }
 
     function product(){
+        $quantity_show = 10;
         $product = DB::table('product')
         ->join('categories', 'product.category_id', '=', 'categories.category_id')
         ->select('product.*', 'categories.name as category_name')
-        ->get();
+        ->paginate($quantity_show);
         return view('admin/product', compact('product'));
     }
 
     function user(){
-        $user = user::all();
+        $quantity_show = 10;
+        $user = user::paginate($quantity_show);
         return view('admin/user', compact('user'));
     }
 
     function voucher(){
-        $voucher = voucher::all();
+        $quantity_show = 10;
+        $voucher = voucher::paginate($quantity_show);
         return view('admin/voucher', compact('voucher'));
     }
 

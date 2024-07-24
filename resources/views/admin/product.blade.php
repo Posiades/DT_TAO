@@ -73,7 +73,7 @@
   @endif
      
 
-          <div class="card-content">
+           <div class="card-content">
             <table>
               <thead>
               <tr>
@@ -119,18 +119,19 @@
              
               </tbody>
             </table>
+            
             <div class="table-pagination">
               <div class="flex items-center justify-between">
-                <div class="buttons">
-                  <button type="button" class="button active">1</button>
-                  <button type="button" class="button">2</button>
-                  <button type="button" class="button">3</button>
-                </div>
-                <small>Trang 1 trên 3</small>
+                <div class="table-pagination">
+                  {{ $product->links() }}
+              </div>
+              <small>Trang {{ $product->currentPage() }} trên {{ $product->lastPage() }}</small>
               </div>
             </div>
           </div>
         </div>
+        
+      
       
     </section>
 </div>

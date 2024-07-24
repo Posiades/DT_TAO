@@ -91,12 +91,10 @@
 
             <div class="table-pagination">
               <div class="flex items-center justify-between">
-                <div class="buttons">
-                  <button type="button" class="button active">1</button>
-                  <button type="button" class="button">2</button>
-                  <button type="button" class="button">3</button>
-                </div>
-                <small>Trang 1 trên 3</small>
+                <div class="table-pagination">
+                  {{ $voucher->links() }}
+              </div>
+              <small>Trang {{ $voucher->currentPage() }} trên {{ $voucher->lastPage() }}</small>
               </div>
             </div>
           </div>
