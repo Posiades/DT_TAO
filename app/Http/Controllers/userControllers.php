@@ -38,11 +38,13 @@ class userControllers extends Controller
     function login(Request $req){
         if(Auth::attempt($req->only('email', 'password'))){
             if (Auth::user()->role === 1) {
-                return view('admin.index');
+                $user = Auth::user();
+                session::put('user', $user, 60 * 8);
+                return redirect()->route('admin_index');
             } else {
-                $product_iphone = product::where('category_id', 1)->limit(4)->get();
-                $product_watch = product::where('category_id', 4)->limit(4)->get();
-                return view('user/index', compact('product_iphone', 'product_watch'));
+                $user = Auth::user();
+                session::put('user', $user, 60 * 8);
+                return redirect()->route('index');
             }
         }else {
             Session::flash('login_fail', 'Sai tên email hoặc mật khẩu');
@@ -59,7 +61,7 @@ class userControllers extends Controller
         foreach($user as $user_email){
             $user_email_ = $user_email -> email;
             if($user_email_ == $email){
-                session()->put($email, $token, 60*5);
+                session::put($email, $token, 60*5);
                 Session::flash('change_pass', "Đã Gửi Thư Xác Nhận Thay Đổi Mật Khẩu Đến $email Thành Công");
                 Mail::to($email)->send(new fogotPassWord($email, $token));
                 return view('user/forgotpass');
@@ -71,7 +73,7 @@ class userControllers extends Controller
     }
 
     function reset_pass($email, $token){
-        $token_mail = session()->get($email);
+        $token_mail = Session::get($email);
         if($token = $token_mail){
             return view('user/reset_pass', compact('email'));
         }else{

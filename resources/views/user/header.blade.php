@@ -77,62 +77,28 @@
                       </a>
                     </li>
 
-                    {{-- @php
-                        use Illuminate\Support\Facades\Auth;
-                    @endphp
-
-                    @if (Auth::check() && Auth::user())
-    <li class="nav-item dropdown">
-        <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{Auth::user()->full_name }}</a>
-        <ul class="dropdown-menu">
-            <li>
-                <a href="{{ url('/') }}" class="dropdown-item">Thông Tin Tài Khoản</a>
-            </li>
-            <li>
-                <a href="{{ url('/dang-xuat') }}" class="dropdown-item">Đăng Xuất</a>
-            </li>
-        </ul>
-    </li>
-@else
-    <li class="pe-3">
-      <a href="{{ asset('/dang-nhap') }}">
-          <svg class="user">
-              <use xlink:href="#user"></use>
-          </svg>
-      </a>
-  </li>
-@endif
-
-@if (Auth::check())
-    {{Auth::user()->full_name}}
-@else
-    <h5>Không có</h5>
-@endif --}}
-
-
-       @auth
-          <li class="nav-item dropdown">
-            <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{Auth::user()->full_name }}</a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a href="{{ url('/') }}" class="dropdown-item">Thông Tin Tài Khoản</a>
-                </li>
-                <li>
-                    <a href="{{ url('/dang-xuat') }}" class="dropdown-item">Đăng Xuất</a>
-                </li>
-            </ul>
-        </li>
-      @endauth
-
-      @guest
-        <li class="pe-3">
-          <a href="{{ asset('/dang-nhap') }}">
-              <svg class="user">
-                  <use xlink:href="#user"></use>
-              </svg>
-          </a>
-        </li>
-      @endguest 
+        @if(Session::has('user'))
+            <li class="nav-item dropdown">
+              <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ Session::get('user')->full_name }}</a>
+              <ul class="dropdown-menu">
+                  <li>
+                      <a href="{{ url('/') }}" class="dropdown-item">Thông Tin Tài Khoản</a>
+                  </li>
+                  <li>
+                      <a href="{{ url('/dang-xuat') }}" class="dropdown-item">Đăng Xuất</a>
+                  </li>
+              </ul>
+          </li>
+        @else
+          <li class="pe-3">
+            <a href="{{ asset('/dang-nhap') }}">
+                <svg class="user">
+                    <use xlink:href="#user"></use>
+                </svg>
+            </a>
+          </li>
+        @endif
+        
 
 
                     <li>

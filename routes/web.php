@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\userControllers;
@@ -67,6 +68,5 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/edit_voucher/{id}', [adminController::class, 'edit_voucher'])->name('edit_voucher');
         Route::post('/post_edit_voucher', [adminController::class, 'post_edit_voucher'])->name('post_edit_voucher');
     });
-
 
 ?>

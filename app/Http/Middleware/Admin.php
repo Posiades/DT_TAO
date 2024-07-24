@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 
 class Admin
@@ -17,9 +18,12 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role==1){
+        $user = session::get('user');
+        if($user->role === 1){
             return $next($request);
-        }
-        abort(401);
+         }else{
+            Session::flash('not_admin', "Bạn phải đăng nhập bằng tài khoản Admin mới có thể đăng nhập");
+            return redirect()->route('login');
+         } 
     }
 }
