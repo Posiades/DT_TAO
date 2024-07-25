@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class VnpayController extends Controller
@@ -15,7 +15,7 @@ class VnpayController extends Controller
     $vnp_HashSecret = "WTNZURI6MSR7FZA3CQY5GYDJXY9E3YEB"; //Chuỗi bí mật
     
     //$vnp_TxnRef = $_POST['order_id']; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-    $vnp_TxnRef = "10011";
+    $vnp_TxnRef = Str::random(40);
     // $vnp_OrderInfo = $_POST['order_desc'];
     $vnp_OrderInfo = "Thanh toán hóa đơn";
     // $vnp_OrderType = $_POST['order_type'];
