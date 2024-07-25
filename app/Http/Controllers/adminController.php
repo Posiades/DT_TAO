@@ -267,5 +267,9 @@ class adminController extends Controller
         return redirect()->route('voucher');
     }
 
+    function  add_order(){
+        return view('admin.add_order');
+    
+    }
     
 }

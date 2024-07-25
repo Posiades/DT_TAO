@@ -8,7 +8,7 @@
         <li>Admin</li>
         <li>Đơn Hàng</li>
       </ul>
-      <a href="https://justboil.me/" onclick="alert('Coming soon'); return false" target="_blank" class="button blue">
+      <a href="{{ route('add_order') }}"  class="button blue">
         <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
         <span>Thêm Đơn Hàng</span>
       </a>

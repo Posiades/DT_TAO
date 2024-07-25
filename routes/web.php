@@ -6,6 +6,9 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\userControllers;
 use App\Http\Controllers\VnpayController;
+use App\Http\Controllers\clientController;
+use GuzzleHttp\Client;
+
 // ========================= Route SITE ================================
 
 Route::get('/', [homeControllers::class, 'index'])->name('index');
@@ -67,6 +70,15 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::post('/post_add_voucher', [adminController::class, 'post_add_voucher'])->name('post_add_voucher');
         Route::get('/edit_voucher/{id}', [adminController::class, 'edit_voucher'])->name('edit_voucher');
         Route::post('/post_edit_voucher', [adminController::class, 'post_edit_voucher'])->name('post_edit_voucher');
+        Route::get('/add_order', [adminController::class, 'add_order'])->name('add_order');
     });
+
+
+
+Route::prefix('client')->middleware('client')->group(function (){
+    Route::get('/info', [clientController::class, 'info'])->name('client.index');
+    Route::get('/edit-info', [clientController::class, 'edit_info'])->name('edit_info');
+    Route::post('/post_edit_info/{id}', [clientController::class, 'post_edit_info'])->name('post_edit_info');
+});
 
 ?>

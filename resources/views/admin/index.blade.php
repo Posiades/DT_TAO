@@ -5,7 +5,7 @@
     <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
       <ul>
         <li>Admin</li>
-        <li>Bảng điều khiển</li>
+        <li>Thống Kê</li>
       </ul>
     </div>
   </section>
@@ -13,7 +13,7 @@
   <section class="is-hero-bar">
     <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
       <h1 class="title">
-        Bảng điều khiển
+        Thống Kê
       </h1>
     </div>
   </section>
@@ -68,7 +68,7 @@
         </div>
       </div>
   
-      <div class="card has-table">
+      {{-- <div class="card has-table"> --}}
         <header class="card-header">
           <p class="card-header-title">
             <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
@@ -80,7 +80,7 @@
         </header>
         <div class="card-content">
 
-          <table>
+          {{-- <table>
             <thead>
             <tr>
               <th>Tên</th>
@@ -128,10 +128,8 @@
             </div>
             <small>Trang {{ $user->currentPage() }} trên {{ $user->lastPage() }}</small>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="card has-table">
+          </div> --}}
+      {{-- <div class="card has-table">
         <header class="card-header">
           <p class="card-header-title">
             <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
@@ -517,7 +515,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
       
     </section>
 @endsection

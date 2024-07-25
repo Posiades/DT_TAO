@@ -8,9 +8,9 @@
       <p class="menu-label">TỔNG QUAN</p>
       <ul class="menu-list">
         <li class="active">
-          <a href="index.html">
+          <a href="{{route('admin_index')}}">
             <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
-            <span class="menu-item-label">Bảng điều khiển</span>
+            <span class="menu-item-label">Thống Kê</span>
           </a>
         </li>
       </ul>
