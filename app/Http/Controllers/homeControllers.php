@@ -132,20 +132,25 @@ class homeControllers extends Controller
         return redirect()->back()->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng thành công!');
     }
 
-    public function updateCart(Request $request)
-    {
-        $cart = Session::get('cart', []);
-
-        foreach ($request->input('quantity') as $id => $quantity) {
-            if (isset($cart[$id])) {
-                $cart[$id]['quantity'] = $quantity;
-            }
-        }
-
-        Session::put('cart', $cart);
-
-        return redirect()->back()->with('success', 'Giỏ hàng đã được cập nhật thành công!');
+    public function updatecart(Request $request)
+{
+    if($request->id && $request->quantity) {
+        $cart = session()->get('cart');
+        $cart[$request->id]["quantity"] = $request->quantity;
+        session()->put('cart', $cart);
+        return response()->json(['success' => true, 'total' => $this->getCartTotal()]);
     }
+}
+
+private function getCartTotal()
+{
+    $total = 0;
+    $cart = session()->get('cart');
+    foreach($cart as $details) {
+        $total += $details['price'] * $details['quantity'];
+    }
+    return number_format($total);
+}
 //--------------------------------------------PRODUCT--------------------------------------------------------------
     public function allProducts()
     {
