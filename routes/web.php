@@ -22,7 +22,7 @@ Route::get('/quen-mat-khau', [homeControllers::class, 'forgot']);
 Route::get('shop/{type}', [homeControllers::class, 'shop'])->name('shop');
 Route::get('cart/add/{id}', [homeControllers::class, 'addToCart'])->name('cart.add');
 Route::get('cart/remove/{id}', [homeControllers::class, 'removeFromCart'])->name('cart.remove');
-
+Route::post('cart/update', [homeControllers::class, 'updatecart'])->name('cart.update');
 Route::post('/vnpay_payment', [VnpayController::class, 'vnpayPayment'])->name('vnpay.payment');
 
 //  có thông số chờ chuyền vào
