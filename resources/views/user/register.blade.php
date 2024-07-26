@@ -6,12 +6,12 @@
     <div class="container">
       <div class="row">
         <div class="text-center padding-large no-padding-bottom">
-          <h1 class="display-2 text-uppercase text-dark">Register</h1>
+          <h1 class="display-2 text-uppercase text-dark">Đăng ký</h1>
           <div class="breadcrumbs">
             <span class="item">
-              <a href="index.html">Home ></a>
+              <a href="index.html">Trang chủ ></a>
             </span>
-            <span class="item">Register</span>
+            <span class="item">Đăng ký</span>
           </div>
         </div>
       </div>

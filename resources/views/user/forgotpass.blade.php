@@ -6,12 +6,12 @@
       <div class="container">
         <div class="row">
           <div class="text-center padding-large no-padding-bottom">
-            <h1 class="display-2 text-uppercase text-dark">FORGOT</h1>
+            <h1 class="display-2 text-uppercase text-dark">quên mật khẩu</h1>
             <div class="breadcrumbs">
               <span class="item">
-                <a href="index.html">Home ></a>
+                <a href="index.html">Trang chủ ></a>
               </span>
-              <span class="item">Forgot</span>
+              <span class="item">Quên mật khẩu</span>
             </div>
           </div>
         </div>
