@@ -44,7 +44,7 @@ Route::post('/post_register', [userControllers::class, 'register']);
 Route::post('/post_login', [UserControllers::class, 'login'])->name('login');
 Route::post('/xac-thuc-tai-khoan', [userControllers::class, 'confirm']);
 Route::get('/mat-khau-moi/{email}/{token}', [userControllers::class, 'reset_pass'])->name('reset_pass');
-Route::get('/dang-xuat', [userControllers::class, 'logout']);
+Route::get('/dang-xuat', [userControllers::class, 'logout'])->name('logout');
 Route::post('/post_createpass', [userControllers::class, 'createpass']);
 
 // ============== ROUTE ADMIN =================
@@ -79,6 +79,7 @@ Route::prefix('client')->middleware('client')->group(function (){
     Route::get('/info', [clientController::class, 'info'])->name('client.index');
     Route::get('/edit-info', [clientController::class, 'edit_info'])->name('edit_info');
     Route::post('/post_edit_info/{id}', [clientController::class, 'post_edit_info'])->name('post_edit_info');
+    Route::get('/order', [clientController::class, 'order'])->name('order');
 });
 
 ?>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('user_id')->on('users');
             $table->foreign('guest_id')->references('guest_id')->on('guest');
             $table->timestamp('order_date')->useCurrent();
-            $table->string('status', 50);
+            $table->enum('status', ['Chưa Thanh Toán', 'Đã Thanh Toán',])->default('Chưa Thanh Toán');
         });
     }
 

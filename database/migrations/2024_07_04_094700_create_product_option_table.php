@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('option_id');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('product_id')->on('product'); // Đổi từ 'product' thành 'products'
-            $table->string('option_value', 100);
+            $table->integer('storage')->nullable();
             $table->decimal('price_difference', 10, 2);
             $table->timestamps();
         });

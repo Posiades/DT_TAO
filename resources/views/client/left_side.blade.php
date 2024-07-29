@@ -28,6 +28,15 @@
             <span class="menu-item-label">Đơn hàng</span>
           </a>
         </li>
+
+        <li class="--set-active-logout-html">
+          <a href="{{route('logout')}}">
+              <span class="icon"><i class="mdi mdi-logout"></i></span>
+              <span class="menu-item-label">Đăng Xuất</span>
+          </a>
+      </li>
+      
+
       </li>
       </ul>
     </div>
