@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('product_option', function (Blueprint $table) {
             $table->increments('option_id');
-            $table->integer('product_id')->unsigned();
+            $table->unsignedInteger('product_id');
             $table->foreign('product_id')->references('product_id')->on('product'); // Đổi từ 'product' thành 'products'
-            $table->integer('storage')->nullable();
+            $table->string('storage')->nullable();
             $table->decimal('price_difference', 10, 2);
             $table->timestamps();
         });

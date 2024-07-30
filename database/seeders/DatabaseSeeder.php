@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
         $this->call(voucher::class);
         $this->call(product::class);
         $this->call(product_option::class);
-        $this->call(product_image::class);
         $this->call(purchase_history::class);
 
     }
