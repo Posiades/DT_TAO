@@ -7,6 +7,7 @@ use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\userControllers;
 use App\Http\Controllers\VnpayController;
 use App\Http\Controllers\clientController;
+use App\Http\Middleware\Admin;
 use GuzzleHttp\Client;
 
 // ========================= Route SITE ================================
@@ -71,7 +72,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/edit_voucher/{id}', [adminController::class, 'edit_voucher'])->name('edit_voucher');
         Route::post('/post_edit_voucher', [adminController::class, 'post_edit_voucher'])->name('post_edit_voucher');
         Route::get('/add_order', [adminController::class, 'add_order'])->name('add_order');
-    });
+        Route::get('/option_product', [adminController::class, 'option_product'])->name('option_product');
+        Route::get('/edit_option/{id}', [adminController::class, 'edit_option'])->name('edit_option');
+        Route::post('/post_edit_option', [adminController::class, 'post_edit_option'])->name('post_edit_option');
+
+});
 
 
 

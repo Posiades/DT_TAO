@@ -133,7 +133,7 @@
                 </div>
                 <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                   <h3 class="card-title text-uppercase mb-0">
-                      <a href="{{url("/chi-tiet/$iphone->slug")}}" class="text-decoration-none">{{$iphone->name}}</a>
+                      <a href="{{url("/chi-tiet/$iphone->slug")}}" class="text-decoration-none">{{$iphone->name}} - {{$iphone->color}} {{$iphone->storage}}</a>
                   </h3>
               </div>
                 <h5 class="item-price text-primary">{{number_format($iphone->price_difference, 0, ',', '.'). 'VNĐ'}}</h5>

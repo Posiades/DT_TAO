@@ -140,15 +140,21 @@
             <p>Mô tả Sản phẩm</p>
             <p>{{$product->description }}</p>
             <ul style="list-style-type:disc;" class="list-unstyled ps-4">
-              <li>Donec nec justo eget felis facilisis fermentum.</li>
+              <li>Donec nec justo eget felis facilisis fermentum.</li> 
               <li>Suspendisse urna viverra non, semper suscipit pede.</li>
               <li>Aliquam porttitor mauris sit amet orci.</li>
             </ul> 
             <p>Với sự tinh tế, đồng hồ màu hồng mang lại phong cách thanh lịch và nổi bật. Được thiết kế tỉ mỉ với chất liệu cao cấp, đồng hồ này không chỉ là phụ kiện thời trang mà còn là biểu tượng của sự sang trọng và hiện đại. Khả năng chống nước và độ bền cao, đồng hồ màu hồng là lựa chọn hoàn hảo cho những ai yêu thích sự tinh tế và cá tính.</p>
           </div>
           <div class="tab-pane fade border-top border-bottom padding-small" id="nav-information" role="tabpanel" aria-labelledby="nav-information-tab">
-            <p> Thật thoải mái và tốt nhất</p>
-            <p>Với sự tinh tế, đồng hồ màu hồng mang lại phong cách thanh lịch và nổi bật. Được thiết kế tỉ mỉ với chất liệu cao cấp, đồng hồ này không chỉ là phụ kiện thời trang mà còn là biểu tượng của sự sang trọng và hiện đại. Khả năng chống nước và độ bền cao, đồng hồ màu hồng là lựa chọn hoàn hảo cho những ai yêu thích sự tinh tế và cá tính.</p>
+            <ul class="supp">
+                @php
+                       $lines = explode("\n", $product->configtion);
+                @endphp
+                @foreach($lines as $line)
+                <li><span class="bullet">&#10003; </span> {{$line}}</li>
+                @endforeach
+             </ul>
           </div>
           <div class="tab-pane fade border-top border-bottom padding-small" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
             <div class="review-box d-flex flex-wrap">

@@ -61,7 +61,7 @@
                 </div>
                 <div class="card-detail d-flex justify-content-between pt-3 pb-3">
                   <h3 class="card-title text-uppercase">
-                    <a href="#">{{ $product->name }}</a>
+                    <a href="#">{{ $product->name }} {{ $product->color }} {{ $product ->storage }}</a>
                   </h3>
                 </div>                  
                 <h5 class="item-price text-primary">{{number_format($product->price_difference, 0, ',', '.'). 'VNĐ'}}</h5>

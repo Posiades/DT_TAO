@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreign('product_id')->references('product_id')->on('product'); // Đổi từ 'product' thành 'products'
             $table->string('storage')->nullable();
             $table->decimal('price_difference', 10, 2);
+            $table->integer('quantity')->default(99);
+            $table->enum('status', ['Còn Hàng', 'Hết Hàng', 'Chờ Hàng Về'])->default('Còn Hàng');
             $table->timestamps();
         });
     }

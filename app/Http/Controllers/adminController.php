@@ -6,11 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\categories;
 use App\Models\product;
 use App\Models\User;
+use App\Models\product_option;
 use App\Models\voucher;
-use Database\Seeders\product_image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 
 class adminController extends Controller
@@ -39,6 +38,21 @@ class adminController extends Controller
         ->select('product.*', 'categories.name as category_name')
         ->paginate($quantity_show);
         return view('admin/product', compact('product'));
+    }
+
+    function option_product(){
+        $quantity_show = 10;
+        $option_product = DB::table('product_option')
+        ->join('product', 'product_option.product_id', '=', 'product.product_id')
+        ->select(
+            'product_option.*',
+            'product.name',
+            'product.image_url',
+            'product.color',
+        
+        )
+        ->paginate($quantity_show);
+        return view('admin/option_product', compact('option_product'));
     }
 
     function user(){
@@ -106,6 +120,10 @@ class adminController extends Controller
         $price = $req -> price;
         $mota = $req -> mota;
         $img = $req -> image_url;
+        $color = $req -> color;
+        $storage = $req -> storage;
+        $configtion = $req -> configtion;
+        $status = $req -> status;
         if ($req->hasFile('image_url')) {
             $image = $req->file('image_url');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
@@ -120,11 +138,15 @@ class adminController extends Controller
         ->update([
             'category_id' => $type,
             'name' => $name,
+            'configtion' => $configtion,
             'description' => $mota,
             'image_url' => $img,
+            'storage' => $storage,
+            'color' => $color,
             'price_difference' => $price,
             'slug' => $slug,
-            'quantity' => $quantity
+            'quantity' => $quantity,
+            'status' => $status
         ]);
 
         Session::flash('edit_sp', "Đã thêm thành công sản phẩm $name thành công");
@@ -141,6 +163,10 @@ class adminController extends Controller
             $result = User::where('user_id', $id)->firstOrFail();
             $type = "user"; 
             return view('admin.del_confirm', compact('result', 'type')); 
+        }else if($type == "option"){
+            $result = product_option::findOrFail($id);
+            $type = "option";
+            return view('admin.del_confirm', compact('result', 'type'));
         }else{
             $result = voucher::findOrFail($id);
             $type = "voucher";
@@ -167,6 +193,12 @@ class adminController extends Controller
             ->delete();
             Session::flash('del_voucher', "Đã xóa voucher thành công");
             return redirect()->route('voucher');
+        }else if($type == "option"){
+            DB::table('product_option')
+            ->where('option_id', $id)
+            ->delete();
+            Session::flash('del_option', "Đã Xóa Option thành công");
+            return redirect()->route('option_product');
         }
     }
 
@@ -265,6 +297,31 @@ class adminController extends Controller
         ]);
         Session::flash('edit_voucher', "Đã cập nhật voucher $code thành công");
         return redirect()->route('voucher');
+    }
+
+    function edit_option($id){
+        $option = product_option::findOrFail($id);
+        return view('admin/edit_option', compact('option'));
+    }
+
+    function post_edit_option(Request $req){
+        $id = $req -> id;
+        $id_product = $req -> product_id;
+        $storage = $req -> storage;
+        $price = $req -> price;
+        $quantity = $req -> quantity;
+        $status = $req -> status;
+        DB::table('product_option')
+        ->where('option_id', $id)
+        ->update([
+            'product_id' => $id_product,
+            'storage' => $storage,
+            'price_difference' => $price,
+            'quantity' => $quantity,
+            'status' => $status
+        ]);
+        Session::flash('edit_option', "Đã update Option thành công");
+        return redirect()->route('option_product');
     }
 
     function  add_order(){
