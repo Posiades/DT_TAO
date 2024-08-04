@@ -92,7 +92,7 @@
               <tr>
                 <td class="image-cell">
                   <div class="image">
-                    <img src="{{asset($item->image_url)}}" class="rounded-full">
+                    <img src="{{asset($item->image)}}" class="rounded-full">
                   </div>
                 </td>
                 <td>{{$item->name}}</td>
@@ -102,7 +102,7 @@
                 <td data-label="Created">
                   {{ \Illuminate\Support\Str::limit($item->description, 50) }}
                 </td>
-                <td data-label="progress">{{number_format($item->price_difference, 0, ',', '.'). 'VNĐ'}}</td>
+                <td data-label="progress">{{number_format($item->price, 0, ',', '.'). 'VNĐ'}}</td>
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">

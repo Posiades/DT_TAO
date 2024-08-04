@@ -48,7 +48,7 @@
           </a>
         </li>
         <li class="--set-active-profile-html">
-          <a href="{{route('order')}}">
+          <a href="{{route('admin_order')}}">
             <span class="icon"><i class="mdi mdi-view-list"></i></span>
             <span class="menu-item-label">Đơn hàng</span>
           </a>

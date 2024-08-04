@@ -18,7 +18,6 @@ return new class extends Migration
             $table->integer('option_id')->unsigned()->nullable(false);
             $table->foreign('order_id')->references('order_id')->on('orders');
             $table->foreign('product_id')->references('product_id')->on('product'); // Đổi từ 'product' thành 'products'
-            $table->foreign('option_id')->references('option_id')->on('product_option');
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
         });

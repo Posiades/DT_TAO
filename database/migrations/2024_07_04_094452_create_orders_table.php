@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('order_id');
-            $table->integer('user_id')->unsigned()->nullable(false);
-            $table->integer('guest_id')->unsigned()->nullable(false);
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('guest_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('user_id')->on('users');
             $table->foreign('guest_id')->references('guest_id')->on('guest');
             $table->timestamp('order_date')->useCurrent();

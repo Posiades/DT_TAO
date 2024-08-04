@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\categories;
+use App\Models\orders;
 use App\Models\product;
 use App\Models\User;
 use App\Models\product_option;
@@ -40,20 +41,7 @@ class adminController extends Controller
         return view('admin/product', compact('product'));
     }
 
-    function option_product(){
-        $quantity_show = 10;
-        $option_product = DB::table('product_option')
-        ->join('product', 'product_option.product_id', '=', 'product.product_id')
-        ->select(
-            'product_option.*',
-            'product.name',
-            'product.image_url',
-            'product.color',
-        
-        )
-        ->paginate($quantity_show);
-        return view('admin/option_product', compact('option_product'));
-    }
+   
 
     function user(){
         $quantity_show = 10;
@@ -68,7 +56,25 @@ class adminController extends Controller
     }
 
     function order(){
-        return view('admin/order');
+        $order = DB::table('orders')
+        ->join('order_detail', 'orders.order_id', '=', 'order_detail.order_id') 
+        ->join('product', 'order_detail.product_id', '=', 'product.product_id') 
+        ->join('users', 'orders.user_id', '=', 'users.user_id')
+        ->select([
+                'orders.*',
+                'order_detail.product_id',
+                'order_detail.option_id',
+                'order_detail.price',
+                'users.full_name',
+                'users.phone',
+                'users.address',
+                'product.name',
+                'product.color',
+                'product.storage'
+        ])
+        ->paginate(10);
+
+return view('admin/order', compact('order'));       
     }
 
     function add_product(){
@@ -163,10 +169,6 @@ class adminController extends Controller
             $result = User::where('user_id', $id)->firstOrFail();
             $type = "user"; 
             return view('admin.del_confirm', compact('result', 'type')); 
-        }else if($type == "option"){
-            $result = product_option::findOrFail($id);
-            $type = "option";
-            return view('admin.del_confirm', compact('result', 'type'));
         }else{
             $result = voucher::findOrFail($id);
             $type = "voucher";
@@ -193,12 +195,6 @@ class adminController extends Controller
             ->delete();
             Session::flash('del_voucher', "Đã xóa voucher thành công");
             return redirect()->route('voucher');
-        }else if($type == "option"){
-            DB::table('product_option')
-            ->where('option_id', $id)
-            ->delete();
-            Session::flash('del_option', "Đã Xóa Option thành công");
-            return redirect()->route('option_product');
         }
     }
 
@@ -299,34 +295,12 @@ class adminController extends Controller
         return redirect()->route('voucher');
     }
 
-    function edit_option($id){
-        $option = product_option::findOrFail($id);
-        return view('admin/edit_option', compact('option'));
-    }
-
-    function post_edit_option(Request $req){
-        $id = $req -> id;
-        $id_product = $req -> product_id;
-        $storage = $req -> storage;
-        $price = $req -> price;
-        $quantity = $req -> quantity;
-        $status = $req -> status;
-        DB::table('product_option')
-        ->where('option_id', $id)
-        ->update([
-            'product_id' => $id_product,
-            'storage' => $storage,
-            'price_difference' => $price,
-            'quantity' => $quantity,
-            'status' => $status
-        ]);
-        Session::flash('edit_option', "Đã update Option thành công");
-        return redirect()->route('option_product');
-    }
-
     function  add_order(){
         return view('admin.add_order');
-    
+    }
+
+    function post_add_order(Request $req){
+        
     }
     
 }

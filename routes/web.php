@@ -56,7 +56,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/product', [adminController::class, 'product'])->name('product');
         Route::get('/user', [adminController::class, 'user'])->name('user');
         Route::get('/voucher', [adminController::class, 'voucher'])->name('voucher');
-        Route::get('/order', [adminController::class, 'order'])->name('order');
+        Route::get('/order', [adminController::class, 'order'])->name('admin_order');
         Route::get('/addproduct', [adminController::class, 'add_product'])->name('add_product');
         Route::post('/post_add_sp', [adminController::class, 'post_add_product']);
         Route::get('/edit_sp/{id}', [adminController::class, 'edit_product'])->name('edit_product');
@@ -71,10 +71,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::post('/post_add_voucher', [adminController::class, 'post_add_voucher'])->name('post_add_voucher');
         Route::get('/edit_voucher/{id}', [adminController::class, 'edit_voucher'])->name('edit_voucher');
         Route::post('/post_edit_voucher', [adminController::class, 'post_edit_voucher'])->name('post_edit_voucher');
+      
         Route::get('/add_order', [adminController::class, 'add_order'])->name('add_order');
-        Route::get('/option_product', [adminController::class, 'option_product'])->name('option_product');
-        Route::get('/edit_option/{id}', [adminController::class, 'edit_option'])->name('edit_option');
-        Route::post('/post_edit_option', [adminController::class, 'post_edit_option'])->name('post_edit_option');
 
 });
 

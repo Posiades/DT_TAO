@@ -30,29 +30,31 @@
             <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
             Đơn hàng
           </p>
-          <a href="#" class="card-header-icon">
-            <span class="icon"><i class="mdi mdi-reload"></i></span>
-          </a>
         </header>
         <div class="card-content">
           <table>
             <thead>
             <tr>
-              <th>Tên đơn hàng</th>
+              <th>ID Đơn Hàng</th>
+              <th>Tên Khách Hàng</th>
               <th>Số Điện Thoại</th>
               <th>Địa chỉ</th>
-              <th>Thời gian</th>
-              <th></th>
+              <th>Sản Phẩm</th>
+              <th>Màu Sắc</th>
+              <th>Giá</th>
+              <th>Thao tác</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-  
-              <td data-label="Name">HCM240803</td>
-              <td data-label="Company">0336745555</td>
-  
-              <td data-label="progress">Quận Gò Vấp, TP. HCM</td>
-              <td data-label="Created">24 tháng 6 năm 2024</td>
+              <tr>
+              @foreach ($order as $item)
+              <td>{{$item->order_id}}</td>
+              <td>{{$item->full_name}}</td>
+              <td>{{$item->phone}}</td>
+              <td>{{$item->address}}</td>
+              <td>{{$item->name}} {{$item->storage}}</td>
+              <td>{{$item->color}}</td>
+              <td>{{$item->price}}</td>
               <td class="actions-cell">
                 <div class="buttons right nowrap">
                   <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
@@ -64,111 +66,20 @@
                 </div>
               </td>
             </tr>
-            <tr>
-  
-              <td data-label="Name">HCM240803</td>
-              <td data-label="Company">0336745555</td>
-  
-              <td data-label="progress">Quận Gò Vấp, TP. HCM</td>
-              <td data-label="Created">24 tháng 6 năm 2024</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-  
-              <td data-label="Name">HCM240803</td>
-              <td data-label="Company">0336745555</td>
-  
-              <td data-label="progress">Quận Gò Vấp, TP. HCM</td>
-              <td data-label="Created">24 tháng 6 năm 2024</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-  
-              <td data-label="Name">HCM240803</td>
-              <td data-label="Company">0336745555</td>
-  
-              <td data-label="progress">Quận Gò Vấp, TP. HCM</td>
-              <td data-label="Created">24 tháng 6 năm 2024</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-  
-              <td data-label="Name">HCM240803</td>
-              <td data-label="Company">0336745555</td>
-  
-              <td data-label="progress">Quận Gò Vấp, TP. HCM</td>
-              <td data-label="Created">24 tháng 6 năm 2024</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-  
-              <td data-label="Name">HCM240803</td>
-              <td data-label="Company">0336745555</td>
-  
-              <td data-label="progress">Quận Gò Vấp, TP. HCM</td>
-              <td data-label="Created">24 tháng 6 năm 2024</td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                  </button>
-                </div>
-              </td>
-            </tr>
+            @endforeach
             </tbody>
           </table>
           <div class="table-pagination">
             <div class="flex items-center justify-between">
-              <div class="buttons">
-                <button type="button" class="button active">1</button>
-                <button type="button" class="button">2</button>
-                <button type="button" class="button">3</button>
-              </div>
-              <small>Trang 1 trên 3</small>
+              <div class="table-pagination">
+                {{ $order->links() }}
+            </div>
+            <small>Trang {{ $order->currentPage() }} trên {{ $order->lastPage() }}</small>
             </div>
           </div>
         </div>
       </div>
-      
+      {{$order}}
     </section>
   </div>
 @endsection

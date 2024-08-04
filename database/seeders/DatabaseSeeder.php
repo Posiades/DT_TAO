@@ -23,14 +23,10 @@ class DatabaseSeeder extends Seeder
         $this->call(users::class);
         $this->call(blog::class);
         $this->call(categories::class);
-        $this->call(comments::class);
         $this->call(guest::class);
         $this->call(orders::class);
         $this->call(order_detail::class);
         $this->call(voucher::class);
         $this->call(product::class);
-        $this->call(product_option::class);
-        $this->call(purchase_history::class);
-
     }
 }
