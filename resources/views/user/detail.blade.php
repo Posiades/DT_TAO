@@ -47,7 +47,7 @@
                 </ul>
               </div>
             </div>
-            <div class="swatch product-select" data-option-index="1">
+            {{-- <div class="swatch product-select" data-option-index="1">
               <h4 class="item-title text-uppercase text-dark text-decoration-underline">Kích cỡ:</h4>
               <ul class="select-list list-unstyled d-flex">
                 <li data-value="S" class="select-item pe-3">
@@ -63,7 +63,7 @@
                   <a href="#">S</a>
                 </li>
               </ul>
-            </div>
+            </div> --}}
             <div class="product-quantity">
               <div class="stock-number text-dark">2 trong kho</div>
               <div class="stock-button-wrap pt-3">
@@ -239,7 +239,7 @@
     <div class="row">
       <div class="display-header d-flex justify-content-between pb-3">
         <h2 class="display-7 text-dark text-uppercase">Những sảm phẩm tương tự</h2>
-        <div class="btn-right">
+        {{-- <div class="btn-right">
           <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Tới Sản Phẩm</a>
         </div>
       </div>
@@ -361,7 +361,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
   </div>
   <div class="swiper-pagination position-absolute text-center"></div>
