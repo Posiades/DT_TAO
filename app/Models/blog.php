@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class categories extends Model
+class blog extends Model
 {
-    
-    protected $table = 'categories';
-    protected $primaryKey = 'categori=y_id';
+    protected $table = 'blog';
+    protected $primaryKey = 'blog_id';
     use HasFactory;
 }

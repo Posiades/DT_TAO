@@ -6,6 +6,10 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\userControllers;
 use App\Http\Controllers\VnpayController;
+use App\Http\Controllers\clientController;
+use App\Http\Middleware\Admin;
+use GuzzleHttp\Client;
+
 // ========================= Route SITE ================================
 
 Route::get('/', [homeControllers::class, 'index'])->name('index');
@@ -24,6 +28,7 @@ Route::get('cart/add/{id}', [homeControllers::class, 'addToCart'])->name('cart.a
 Route::get('cart/remove/{id}', [homeControllers::class, 'removeFromCart'])->name('cart.remove');
 Route::post('cart/update', [homeControllers::class, 'updatecart'])->name('cart.update');
 Route::post('/vnpay_payment', [VnpayController::class, 'vnpayPayment'])->name('vnpay.payment');
+Route::get('/vnpay-return', [VnpayController::class, 'vnpayReturn']);
 
 //  có thông số chờ chuyền vào
 Route::get('/chi-tiet/{slug}', [homeControllers::class, 'detail']);
@@ -41,7 +46,7 @@ Route::post('/post_register', [userControllers::class, 'register']);
 Route::post('/post_login', [UserControllers::class, 'login'])->name('login');
 Route::post('/xac-thuc-tai-khoan', [userControllers::class, 'confirm']);
 Route::get('/mat-khau-moi/{email}/{token}', [userControllers::class, 'reset_pass'])->name('reset_pass');
-Route::get('/dang-xuat', [userControllers::class, 'logout']);
+Route::get('/dang-xuat', [userControllers::class, 'logout'])->name('logout');
 Route::post('/post_createpass', [userControllers::class, 'createpass']);
 
 // ============== ROUTE ADMIN =================
@@ -52,7 +57,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/product', [adminController::class, 'product'])->name('product');
         Route::get('/user', [adminController::class, 'user'])->name('user');
         Route::get('/voucher', [adminController::class, 'voucher'])->name('voucher');
-        Route::get('/order', [adminController::class, 'order'])->name('order');
+        Route::get('/order', [adminController::class, 'order'])->name('admin_order');
         Route::get('/addproduct', [adminController::class, 'add_product'])->name('add_product');
         Route::post('/post_add_sp', [adminController::class, 'post_add_product']);
         Route::get('/edit_sp/{id}', [adminController::class, 'edit_product'])->name('edit_product');
@@ -67,6 +72,26 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::post('/post_add_voucher', [adminController::class, 'post_add_voucher'])->name('post_add_voucher');
         Route::get('/edit_voucher/{id}', [adminController::class, 'edit_voucher'])->name('edit_voucher');
         Route::post('/post_edit_voucher', [adminController::class, 'post_edit_voucher'])->name('post_edit_voucher');
-    });
+      
+        Route::get('/add_order', [adminController::class, 'add_order'])->name('add_order');
+        Route::post('/post_add_order', [adminController::class, 'post_add_order'])->name('post_add_order');
+        Route::get('/edit_order/{id}', [adminController::class, 'edit_order'])->name('edit_order');
+        Route::post('/post_edit_order', [adminController::class, 'post_edit_order'])->name('post_edit_order');
+
+        Route::get('/add_category', [adminController::class, 'add_category'])->name('add_category');
+        Route::post('/post_add_category', [adminController::class, 'post_add_category'])->name('post_add_category');
+        Route::get('/edit_category/{id}', [adminController::class, 'edit_category'])->name('edit_category');
+        Route::post('/post_edit_category', [adminController::class, 'post_edit_category'])->name('post_edit_category');
+
+});
+
+
+
+Route::prefix('client')->middleware('client')->group(function (){
+    Route::get('/info', [clientController::class, 'info'])->name('client.index');
+    Route::get('/edit-info', [clientController::class, 'edit_info'])->name('edit_info');
+    Route::post('/post_edit_info/{id}', [clientController::class, 'post_edit_info'])->name('post_edit_info');
+    Route::get('/order', [clientController::class, 'order'])->name('order');
+});
 
 ?>

@@ -108,10 +108,11 @@ class homeControllers extends Controller
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
+                "product_id"=>$product->product_id,
                 "name" => $product->name,
                 "quantity" => 1,
-                "price" => $product->price_difference,
-                "image_url" => $product->image_url // Đảm bảo bạn có thuộc tính 'image_url' trong model Product của bạn
+                "price" => $product->price,
+                "image" => $product->image // Đảm bảo bạn có thuộc tính 'image_url' trong model Product của bạn
             ];
         }
     

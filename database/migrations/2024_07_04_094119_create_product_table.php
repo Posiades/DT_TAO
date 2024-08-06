@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('product', function (Blueprint $table) {
             $table->increments('product_id');
             $table->unsignedInteger('category_id');
-            $table->string('name', 255)->index();
-            $table->text('description')->nullable();
-            $table->string('image_url', 255)->nullable();
-            $table->decimal('price_difference', 12, 2);
+            $table->string('name', 255);
+            $table->text('configtion');
+            $table->text('description');
+            $table->string('image', 255);
+            $table->string('storage')->nullable();
+            $table->string('color', 225)->nullable();
+            $table->decimal('price', 12, 2);
             $table->string('slug', 255)->unique();
             $table->integer('quantity')->default(0);
             $table->enum('status', ['Còn Hàng', 'Hết Hàng', 'Chờ Hàng Về'])->default('Còn Hàng');

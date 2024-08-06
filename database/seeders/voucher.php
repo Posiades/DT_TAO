@@ -17,7 +17,11 @@ class voucher extends Seeder
             'discount_amount' => 5000,
             'create_date'=> '2024-07-03',
             'expiry_date' => '2025-08-08',
-            'quantity' => 99
+            'quantity' => 99,
+            'product_id' => null,
+            'user_id' => null,
+            'category_id' => null
+
         ]);
     }
 }

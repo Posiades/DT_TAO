@@ -4,27 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\categories;
+use App\Models\orderdetail;
+use App\Models\orders;
 use App\Models\product;
 use App\Models\User;
 use App\Models\voucher;
-use Database\Seeders\product_image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
 
 class adminController extends Controller
 {
     function index(){
-        $quantity_show = 5;
-        $categories = categories::paginate($quantity_show);
         $product = DB::table('product')
         ->join('categories', 'product.category_id', '=', 'categories.category_id')
         ->select('product.*', 'categories.name as category_name')
-        ->paginate($quantity_show);
-        $user = user::paginate($quantity_show);
-        $voucher = voucher::paginate($quantity_show);
-        return view('admin/index', compact('categories', 'product', 'user', 'voucher'));
+        ->get();
+        $user = user::paginate(5);
+        $order = orders::paginate(5);
+        $orderdetail = orderdetail::all();
+        return view('admin/index', compact('user', 'order', 'orderdetail'));
     }
 
     function category(){
@@ -41,6 +40,8 @@ class adminController extends Controller
         return view('admin/product', compact('product'));
     }
 
+   
+
     function user(){
         $quantity_show = 10;
         $user = user::paginate($quantity_show);
@@ -54,7 +55,24 @@ class adminController extends Controller
     }
 
     function order(){
-        return view('admin/order');
+        $order = DB::table('orders')
+        ->join('order_detail', 'orders.order_id', '=', 'order_detail.order_id') 
+        ->join('product', 'order_detail.product_id', '=', 'product.product_id') 
+        ->join('users', 'orders.user_id', '=', 'users.user_id')
+        ->select([
+                'orders.*',
+                'order_detail.product_id',
+                'order_detail.price',
+                'users.full_name',
+                'users.phone',
+                'users.address',
+                'product.name',
+                'product.color',
+                'product.storage'
+        ])
+        ->paginate(10);
+
+return view('admin/order', compact('order'));       
     }
 
     function add_product(){
@@ -62,14 +80,22 @@ class adminController extends Controller
     }
 
     function post_add_product(Request $req){
+            function remove_accent($string){
+                $string = str_replace(' ', '-', $string);
+                return iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+            }
         $type_sp = $req -> option;
         $name = $req -> name;
-        $slug = str_replace(' ', '-', $name);
+        $configtion = $req -> configtion;
+        $color = $req -> color;
+        $status = $req -> status;
+        $storage = $req -> storage;
+        $slug = str_replace(' ', '-', $name).'-'.remove_accent($color).'-'.$storage;
         $price = $req -> price;
         $mota = $req -> mota;
-        $img = $req -> image_url;
-        if ($req->hasFile('image_url')) {
-            $image = $req->file('image_url');
+        $img = $req -> image;
+        if ($req->hasFile('image')) {
+            $image = $req->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('new_file_img'), $imageName);
             $img = '/new_file_img/' . $imageName;
@@ -77,15 +103,19 @@ class adminController extends Controller
             $img = '/default_image.jpg'; 
         }
         $quantity = $req -> quantity;
-
+    
         $product = new product;
         $product -> category_id = $type_sp;
         $product -> name = $name;
+        $product -> configtion = $configtion;
         $product -> description = $mota;
-        $product -> image_url = $img;
-        $product -> price_difference = $price;
+        $product -> image = $img;
+        $product -> storage = $storage;
+        $product -> color = $color;
+        $product -> price = $price;
         $product -> slug = $slug;
         $product -> quantity = $quantity;
+        $product -> status = $status;
         $product->save();
 
         Session::flash('add_product', "Thêm sản phẩm $name thành công");
@@ -105,9 +135,13 @@ class adminController extends Controller
         $slug = str_replace(' ', '-', $name);
         $price = $req -> price;
         $mota = $req -> mota;
-        $img = $req -> image_url;
-        if ($req->hasFile('image_url')) {
-            $image = $req->file('image_url');
+        $img = $req -> image;
+        $color = $req -> color;
+        $storage = $req -> storage;
+        $configtion = $req -> configtion;
+        $status = $req -> status;
+        if ($req->hasFile('image')) {
+            $image = $req->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
             $image->move(public_path('new_file_img'), $imageName);
             $img = '/new_file_img/' . $imageName;
@@ -120,14 +154,18 @@ class adminController extends Controller
         ->update([
             'category_id' => $type,
             'name' => $name,
+            'configtion' => $configtion,
             'description' => $mota,
-            'image_url' => $img,
-            'price_difference' => $price,
+            'image' => $img,
+            'storage' => $storage,
+            'color' => $color,
+            'price' => $price,
             'slug' => $slug,
-            'quantity' => $quantity
+            'quantity' => $quantity,
+            'status' => $status
         ]);
 
-        Session::flash('edit_sp', "Đã thêm thành công sản phẩm $name thành công");
+        Session::flash('edit_sp', "Đã cập nhật thành công sản phẩm $name thành công");
         return redirect()->route('product');
     }
 
@@ -141,12 +179,20 @@ class adminController extends Controller
             $result = User::where('user_id', $id)->firstOrFail();
             $type = "user"; 
             return view('admin.del_confirm', compact('result', 'type')); 
-        }else{
+        }else if($type == "order"){
+            $result = orders::findOrFail($id);
+            $type = "order";
+            return view('admin.del_confirm', compact('result', 'type'));
+        }else if($type == "category"){
+            $result = categories::where('category_id', $id)->firstOrFail();
+            $type = "category";
+            return view('admin.del_confirm', compact('result', 'type'));
+        }else
             $result = voucher::findOrFail($id);
             $type = "voucher";
             return view('admin.del_confirm', compact('result', 'type'));
-        }
     }
+    
 
     function del_execute(Request $req, $id, $type){
         if($type == "product"){
@@ -167,6 +213,21 @@ class adminController extends Controller
             ->delete();
             Session::flash('del_voucher', "Đã xóa voucher thành công");
             return redirect()->route('voucher');
+        }else if($type == "order"){
+            DB::table('order_detail')
+            ->where('order_id', $id)
+            ->delete();
+            DB::table('orders')
+            ->where('order_id', $id)
+            ->delete();
+            Session::flash('del_order', "Đã xóa đơn hàng thành công");
+            return redirect()->route('admin_order');
+        }else if($type == "category"){
+            DB::table('categories')
+            ->where('category_id', $id)
+            ->delete();
+            Session::flash('del_category', 'Đã xóa danh mục thành công');
+            return redirect()->route('category');
         }
     }
 
@@ -187,6 +248,7 @@ class adminController extends Controller
         $user -> full_name = $name;
         $user -> address = $address;
         $user -> phone = $phone;
+        $user -> role = $role;
         $user -> save();
         Session::flash('add_user', "Đã thêm user $name thành công");
         return redirect()->route('user');
@@ -224,9 +286,16 @@ class adminController extends Controller
 
     function post_add_voucher(Request $req){
         $code = $req -> code;
-        $money = $req -> value;
+        $money = $req -> money;
         $create = $req -> create;
         $end = $req -> end;
+        $id_product = $req -> id_product;
+        $id_user = $req -> id_user;
+        $id_category = $req -> id_category;
+        if($id_category == 0){
+            $id_category = null;
+        }
+
         $quantity = $req -> quantity;
 
         $voucher = new voucher;
@@ -235,6 +304,9 @@ class adminController extends Controller
         $voucher -> create_date = $create;
         $voucher -> expiry_date = $end;
         $voucher -> quantity = $quantity;
+        $voucher -> product_id = $id_product;
+        $voucher -> user_id = $id_user;
+        $voucher -> category_id = $id_category;
         $voucher->save();
 
         Session::flash('add_voucher', "Đã thêm voucher $code thành công");
@@ -252,6 +324,9 @@ class adminController extends Controller
         $money = $req -> money;
         $create = $req -> create;
         $end = $req -> end;
+        $id_product = $req -> id_product;
+        $id_user = $req -> id_user;
+        $id_category = $req -> id_category;
         $quantity = $req -> quantity;
 
         DB::table('voucher')
@@ -261,11 +336,117 @@ class adminController extends Controller
             'discount_amount' => $money,
             'create_date' => $create,
             'expiry_date' => $end,
-            'quantity' => $quantity
+            'quantity' => $quantity,
+            'product_id' => $id_product,
+            'user_id' => $id_user,
+            'category_id' => $id_category
         ]);
         Session::flash('edit_voucher', "Đã cập nhật voucher $code thành công");
         return redirect()->route('voucher');
     }
 
+    function  add_order(){
+        return view('admin.add_order');
+    }
+
+    function post_add_order(Request $req){
+        $id_user = $req -> user_id;
+        $id_product = $req -> product_id;
+        $date_create = $req -> order_date;
+        $quantity = $req -> quantity;
+        $price = $req -> price;
+        $status = $req -> status;
+            if($status == 1){
+                $status = "Chưa thanh toán";
+            }else{$status = "Đã Thanh Toán";}
+
+            $order = new orders;
+            $order -> user_id = $id_user;
+            $order -> order_date = $date_create;
+            $order -> status = $status;
+            $order -> save();
+            $order_id = Orders::where([
+                ['user_id', '=', $id_user],
+                ['order_date', '=', $date_create]
+            ])->first();
+
+            $order_detail = new orderdetail;
+            $order_detail -> order_id = $order_id->order_id;
+            $order_detail -> product_id = $id_product;
+            $order_detail -> quantity = $quantity;
+            $order_detail -> price = $price;
+            $order_detail -> save();
+            Session::flash('add_order', "Đã Thêm đơn hàng thành công");
+            return redirect()->route('admin_order');
+        
+    }
+
+    function edit_order(){
+        $order = DB::table('orders')
+        ->join('order_detail', 'orders.order_id', '=', 'order_detail.order_id') 
+        ->join('product', 'order_detail.product_id', '=', 'product.product_id') 
+        ->join('users', 'orders.user_id', '=', 'users.user_id')
+        ->select([
+                'orders.*',
+                'order_detail.order_detail_id',
+                'order_detail.product_id',
+                'order_detail.price',
+                'order_detail.quantity',
+                'users.user_id',
+        ])
+        ->first();
+        return view('admin.edit_order', compact('order'));
+    }
+
+    function post_edit_order(Request $req){
+        $id = $req -> id;
+        $detail_id = $req -> detail_id;
+        DB::table('orders')
+        ->where('order_id', $id)
+        ->update([
+            'user_id' => $req -> user_id,
+            'order_date' => $req -> order_date,
+            'status' => $req -> status
+        ]);
+        DB::table('order_detail')
+        ->where('order_detail_id', $detail_id)
+        ->update([
+            'product_id' => $req -> product_id,
+            'quantity' => $req -> quantity,
+            'price' => $req -> price
+        ]);
+        Session::flash('edit_order', "Đã cập nhật đơn hàng thành cônh");
+        return redirect()->route('admin_order');
+    }
+
+    function add_category(){
+        return view('admin.add_category');
+    }
+
+    function post_add_category(Request $req){
+        $category = new categories;
+        $category -> name = $req -> name;
+        $category -> save();
+
+        Session::flash('add_category', "Đã thêm Danh Mục $req->name thành công");
+        return redirect()->route('category');
+    }
+
+    function edit_category($id){
+        $category = categories::where('category_id', $id)->firstOrFail();
+        return view('admin.edit_category', compact('category'));
+    }
+
+    function post_edit_category(Request $req){
+        $id = $req -> id;
+        DB::table('categories')
+        ->where('category_id', $id)
+        ->update([
+            'name' => $req -> name
+        ]);
+
+        Session::flash('edit_category', "Đã cập nhật danh mục $req->name thành công");
+        return redirect()->route('category');
+    }
     
 }

@@ -51,7 +51,7 @@
                                         <option value="1" selected>Quản Trị Viên</option>
                                         <option value="0">Khách Hàng</option>
                                         @else
-                                        <option value="1" selected>Quản Trị Viên</option>
+                                        <option value="1" >Quản Trị Viên</option>
                                         <option value="0" selected>Khách Hàng</option>
                                         @endif
                                     </select>

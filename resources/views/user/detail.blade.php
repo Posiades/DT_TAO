@@ -7,7 +7,7 @@
     <div class="row mt-5">
       <div class="col-lg-6">
         <div class="product-preview mb-3">
-          <img src="{{asset($product->image_url)}}" alt="single-product" class="img-fluid">
+          <img src="{{asset($product->image)}}" alt="single-product" class="img-fluid">
         </div>
       </div>
       <div class="col-lg-6">
@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="product-price pt-3 pb-3">
-            <strong class="text-primary display-6 fw-bold">{{number_format($product->price_difference, 0, ',', '.'). ' VNĐ'}}</strong>
+            <strong class="text-primary display-6 fw-bold">{{number_format($product->price, 0, ',', '.'). ' VNĐ'}}</strong>
           </div>
           <p>Với sự tinh tế, đồng hồ màu hồng mang lại phong cách thanh lịch và nổi bật. Được thiết kế tỉ mỉ với chất liệu cao cấp, đồng hồ này không chỉ là phụ kiện thời trang mà còn là biểu tượng của sự sang trọng và hiện đại. Khả năng chống nước và độ bền cao, đồng hồ màu hồng là lựa chọn hoàn hảo cho những ai yêu thích sự tinh tế và cá tính.</p>
           <div class="cart-wrap padding-small">
@@ -47,7 +47,7 @@
                 </ul>
               </div>
             </div>
-            <div class="swatch product-select" data-option-index="1">
+            {{-- <div class="swatch product-select" data-option-index="1">
               <h4 class="item-title text-uppercase text-dark text-decoration-underline">Kích cỡ:</h4>
               <ul class="select-list list-unstyled d-flex">
                 <li data-value="S" class="select-item pe-3">
@@ -63,7 +63,7 @@
                   <a href="#">S</a>
                 </li>
               </ul>
-            </div>
+            </div> --}}
             <div class="product-quantity">
               <div class="stock-number text-dark">2 trong kho</div>
               <div class="stock-button-wrap pt-3">
@@ -140,15 +140,21 @@
             <p>Mô tả Sản phẩm</p>
             <p>{{$product->description }}</p>
             <ul style="list-style-type:disc;" class="list-unstyled ps-4">
-              <li>Donec nec justo eget felis facilisis fermentum.</li>
+              <li>Donec nec justo eget felis facilisis fermentum.</li> 
               <li>Suspendisse urna viverra non, semper suscipit pede.</li>
               <li>Aliquam porttitor mauris sit amet orci.</li>
             </ul> 
             <p>Với sự tinh tế, đồng hồ màu hồng mang lại phong cách thanh lịch và nổi bật. Được thiết kế tỉ mỉ với chất liệu cao cấp, đồng hồ này không chỉ là phụ kiện thời trang mà còn là biểu tượng của sự sang trọng và hiện đại. Khả năng chống nước và độ bền cao, đồng hồ màu hồng là lựa chọn hoàn hảo cho những ai yêu thích sự tinh tế và cá tính.</p>
           </div>
           <div class="tab-pane fade border-top border-bottom padding-small" id="nav-information" role="tabpanel" aria-labelledby="nav-information-tab">
-            <p> Thật thoải mái và tốt nhất</p>
-            <p>Với sự tinh tế, đồng hồ màu hồng mang lại phong cách thanh lịch và nổi bật. Được thiết kế tỉ mỉ với chất liệu cao cấp, đồng hồ này không chỉ là phụ kiện thời trang mà còn là biểu tượng của sự sang trọng và hiện đại. Khả năng chống nước và độ bền cao, đồng hồ màu hồng là lựa chọn hoàn hảo cho những ai yêu thích sự tinh tế và cá tính.</p>
+            <ul class="supp">
+                @php
+                       $lines = explode(",", $product->configtion);
+                @endphp
+                @foreach($lines as $line)
+                <li><span class="bullet">&#10003; </span> {{$line}}</li>
+                @endforeach
+             </ul>
           </div>
           <div class="tab-pane fade border-top border-bottom padding-small" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
             <div class="review-box d-flex flex-wrap">
@@ -233,7 +239,7 @@
     <div class="row">
       <div class="display-header d-flex justify-content-between pb-3">
         <h2 class="display-7 text-dark text-uppercase">Những sảm phẩm tương tự</h2>
-        <div class="btn-right">
+        {{-- <div class="btn-right">
           <a href="shop.html" class="btn btn-medium btn-normal text-uppercase">Tới Sản Phẩm</a>
         </div>
       </div>
@@ -355,7 +361,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
   </div>
   <div class="swiper-pagination position-absolute text-center"></div>

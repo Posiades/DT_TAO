@@ -124,7 +124,7 @@
             <div class="swiper-slide">
               <div class="product-card position-relative">
                 <div class="image-holder">
-                  <img src="{{asset($iphone->image_url)}}" alt="product-item" class="img-fluid">
+                  <img src="{{asset($iphone->image)}}" alt="product-item" class="img-fluid">
                 </div>
                 <div class="cart-concern position-absolute">
                   <div class="cart-button d-flex">
@@ -133,10 +133,10 @@
                 </div>
                 <div class="card-detail d-flex justify-content-between align-items-baseline pt-3">
                   <h3 class="card-title text-uppercase mb-0">
-                      <a href="{{url("/chi-tiet/$iphone->slug")}}" class="text-decoration-none">{{$iphone->name}}</a>
+                      <a href="{{url("/chi-tiet/$iphone->slug")}}" class="text-decoration-none">{{$iphone->name}} - {{$iphone->color}} {{$iphone->storage}}</a>
                   </h3>
               </div>
-                <h5 class="item-price text-primary">{{number_format($iphone->price_difference, 0, ',', '.'). 'VNĐ'}}</h5>
+                <h5 class="item-price text-primary">{{number_format($iphone->price, 0, ',', '.'). 'VNĐ'}}</h5>
               </div>
           </div>
           @endforeach
@@ -162,7 +162,7 @@
             <div class="swiper-slide">
               <div class="product-card position-relative">
                 <div class="image-holder">
-                  <img src="{{asset($watch->image_url)}}" alt="product-item" class="img-fluid">
+                  <img src="{{asset($watch->image)}}" alt="product-item" class="img-fluid">
                 </div>
                 <div class="cart-concern position-absolute">
                   <div class="cart-button d-flex">
@@ -174,7 +174,7 @@
                     <a href="{{url("/chi-tiet/$watch->slug")}}">{{$watch->name}}</a>
                   </h3>
                 </div>
-                <h5 class="item-price text-primary">{{number_format($watch->price_difference, 0, ',', '.'). 'VNĐ'}}</h5>
+                <h5 class="item-price text-primary">{{number_format($watch->price, 0, ',', '.'). 'VNĐ'}}</h5>
               </div>
             </div>
             @endforeach

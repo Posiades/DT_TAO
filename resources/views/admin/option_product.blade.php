@@ -1,7 +1,7 @@
-@extends('admin/layout');
-@section('title', 'Sản Phẩm')
+@extends('admin/layout')
+@section('title', 'Tùy Chọn Sản Phẩm')
 @section('content')
-<div class="container mt-5">
+    <div class="container mt-5">
   <section class="is-title-bar">
     <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
       <ul>
@@ -15,22 +15,6 @@
     </div>
   </section>
   
-
-
-  @if(session('update_product'))
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{ session('update_product') }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-  @endif
-
-  @if(session('add_product'))
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{ session('add_product') }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
-@endif
-
 
   <section class="is-hero-bar">
     <div class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0">
@@ -52,22 +36,22 @@
             </a>
           </header>
 
-          @if(session('edit_sp'))
+          @if(session('edit_option'))
           <div class="alert alert-success alert-dismissible fade show" role="alert">
               {{ session('edit_sp') }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
       @endif
 
-      @if(session(' add_product'))
+      @if(session('add_option'))
       <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ session(' add_product') }}
+          {{ session(' add_option') }}
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
   @endif
-  @if(session(' del_sp'))
+  @if(session('del_option'))
       <div class="alert alert-success alert-dismissible fade show" role="alert">
-          {{ session(' del_sp') }}
+          {{ session(' del_option') }}
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
   @endif
@@ -79,38 +63,36 @@
               <tr>
                 <th>Hình</th>
                 <th>Tên sản phẩm</th>
-                <th>Danh mục</th>
                 <th>Màu Sắc</th>
                 <th>Bộ Nhớ</th>
-                <th>Mô tả chi tiết</th>
                 <th>Giá</th>
+                <th>Số Lượng</th>
+                <th>Tình Trạng</th>
                 <th>Thao Tác</th>
               </tr>
               </thead>
               <tbody>
-                @foreach ($product as $item)
+                @foreach ($option_product as $item)
               <tr>
                 <td class="image-cell">
                   <div class="image">
-                    <img src="{{asset($item->image)}}" class="rounded-full">
+                    <img src="{{asset($item->image_url)}}" class="rounded-full">
                   </div>
                 </td>
                 <td>{{$item->name}}</td>
-                <td>{{$item->category_name}}</td>
                 <td>{{$item->color}}</td>
                 <td>{{$item->storage}}</td>
-                <td data-label="Created">
-                  {{ \Illuminate\Support\Str::limit($item->description, 50) }}
-                </td>
-                <td data-label="progress">{{number_format($item->price, 0, ',', '.'). 'VNĐ'}}</td>
-                <td class="actions-cell">
+                <td>{{number_format($item->price_difference, 0, ',', '.'). 'VNĐ'}}</td>
+                <td>{{$item->quantity}}</td>
+                <td>{{$item->status}}</td>
+                <td>
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                     <a  href="{{route('edit_product', ['id'=>$item->product_id])}}"> <span class="icon"><i class="mdi mdi-eye"></i></span></a>
+                     <a  href="{{route('edit_option', ['id'=>$item->option_id])}}"> <span class="icon"><i class="mdi mdi-eye"></i></span></a>
 
                     </button>
                     <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                     <a href="{{route('del_confirm', ['id'=>$item->product_id, 'type'=>"product"])}}">
+                     <a href="{{route('del_confirm', ['id'=>$item->option_id, 'type'=>"option"])}}">
                       <span class="icon"><i class="mdi mdi-trash-can"></i></span>
                      </a>
                     </button>
@@ -125,9 +107,9 @@
             <div class="table-pagination">
               <div class="flex items-center justify-between">
                 <div class="table-pagination">
-                  {{ $product->links() }}
+                  {{ $option_product->links() }}
               </div>
-              <small>Trang {{ $product->currentPage() }} trên {{ $product->lastPage() }}</small>
+              <small>Trang {{ $option_product->currentPage() }} trên {{ $option_product->lastPage() }}</small>
               </div>
             </div>
           </div>

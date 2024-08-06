@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\DB;
 class userControllers extends Controller
 {
     function register(Request $req){
+        $req->validate([
+            'email' => 'required|email|unique:users,email',
+            'fullname' => 'required|string|max:50',
+            'address' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+        ]);
+
         $email = $req -> email;
         $full_name = $req -> fullname;
         $address = $req -> address;
