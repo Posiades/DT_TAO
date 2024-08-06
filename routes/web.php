@@ -28,6 +28,7 @@ Route::get('cart/add/{id}', [homeControllers::class, 'addToCart'])->name('cart.a
 Route::get('cart/remove/{id}', [homeControllers::class, 'removeFromCart'])->name('cart.remove');
 Route::post('cart/update', [homeControllers::class, 'updatecart'])->name('cart.update');
 Route::post('/vnpay_payment', [VnpayController::class, 'vnpayPayment'])->name('vnpay.payment');
+Route::get('/vnpay-return', [VnpayController::class, 'vnpayReturn']);
 
 //  có thông số chờ chuyền vào
 Route::get('/chi-tiet/{slug}', [homeControllers::class, 'detail']);

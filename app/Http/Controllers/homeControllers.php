@@ -108,6 +108,7 @@ class homeControllers extends Controller
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
+                "product_id"=>$product->product_id,
                 "name" => $product->name,
                 "quantity" => 1,
                 "price" => $product->price,
