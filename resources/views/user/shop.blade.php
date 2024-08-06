@@ -47,7 +47,7 @@
             <div class="col-lg-4 col-md-6">
               <div class="product-card position-relative pe-3 pb-3">
                 <div class="image-holder">
-                  <img src="{{asset($product->image_url)}}" alt="{{ $product->name }}" class="img-fluid">
+                  <img src="{{asset($product->image)}}" alt="{{ $product->name }}" class="img-fluid">
                 </div>
                 <div class="cart-concern position-absolute">
                   <div class="cart-button d-flex">
@@ -64,7 +64,7 @@
                     <a href="#">{{ $product->name }} {{ $product->color }} {{ $product ->storage }}</a>
                   </h3>
                 </div>                  
-                <h5 class="item-price text-primary">{{number_format($product->price_difference, 0, ',', '.'). 'VNĐ'}}</h5>
+                <h5 class="item-price text-primary">{{number_format($product->price, 0, ',', '.'). 'VNĐ'}}</h5>
 
               </div>                  
             </div>

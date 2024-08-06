@@ -173,16 +173,16 @@ private function getCartTotal()
         if ($request->has('price_range') && $request->price_range != '') {
             switch ($request->price_range) {
                 case 'less_than_5000000':
-                    $query->where('price_difference', '<', 5000000);
+                    $query->where('price', '<', 5000000);
                     break;
                 case 'less_than_10000000':
-                    $query->where('price_difference', '<', 10000000);
+                    $query->where('price', '<', 10000000);
                     break;
                 case 'less_than_20000000':
-                    $query->where('price_difference', '<', 20000000);
+                    $query->where('price', '<', 20000000);
                     break;
                 case 'less_than_30000000':
-                    $query->where('price_difference', '<', 30000000);
+                    $query->where('price', '<', 30000000);
                     break;
             }
         }
@@ -201,10 +201,10 @@ private function getCartTotal()
                     $query->orderBy('name', 'desc');
                     break;
                 case 'price_asc':
-                    $query->orderBy('price_difference', 'asc');
+                    $query->orderBy('price', 'asc');
                     break;
                 case 'price_desc':
-                    $query->orderBy('price_difference', 'desc');
+                    $query->orderBy('price', 'desc');
                     break;
 
             }
