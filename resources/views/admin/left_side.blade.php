@@ -36,35 +36,31 @@
           </a>
         </li>
         <li class="--set-active-profile-html">
-          <a href="{{route('voucher')}}">
-            <span class="icon"><i class="mdi mdi-view-list"></i></span>
-            <span class="menu-item-label">Voucher</span>
-          </a>
-        </li>
-        <li class="--set-active-profile-html">
           <a href="{{route('admin_order')}}">
             <span class="icon"><i class="mdi mdi-view-list"></i></span>
             <span class="menu-item-label">Đơn hàng</span>
           </a>
         </li>
         <li class="--set-active-profile-html">
+          <a href="{{ route('voucher') }}">
+              <span class="icon"><i class="mdi mdi-ticket"></i></span>
+              <span class="menu-item-label">Voucher</span>
+          </a>
+        </li> 
+    
+        {{-- <li class="--set-active-profile-html">
+          <a href="binhluan.html">
+            <span class="icon"><i class="mdi mdi-comment"></i></span>
+            <span class="menu-item-label">Bình luận</span>
+          </a>
+        </li> --}}
+
+        {{-- <li class="--set-active-profile-html">
           <a href="tintuc.html">
             <span class="icon"><i class="mdi mdi-view-list"></i></span>
             <span class="menu-item-label">Tin tức</span>
           </a>
-        </li>
-        <li class="--set-active-profile-html">
-          <a href="binhluan.html">
-            <span class="icon"><i class="mdi mdi-view-list"></i></span>
-            <span class="menu-item-label">Bình luận</span>
-          </a>
-        </li>
-        <li class="--set-active-profile-html">
-          <a href="phanhoi.html">
-            <span class="icon"><i class="mdi mdi-view-list"></i></span>
-            <span class="menu-item-label">Phản hồi</span>
-          </a>
-        </li>
+        </li> --}}
       </li>
       </ul>
     </div>

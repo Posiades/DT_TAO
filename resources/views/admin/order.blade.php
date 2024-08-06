@@ -32,6 +32,26 @@
           </p>
         </header>
         <div class="card-content">
+
+          @if(session('edit_order'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('edit_order') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        @endif
+        @if(session('add_order'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('add_order') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
+      @if(session('del_order'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ session('del_order') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        @endif
+
           <table>
             <thead>
             <tr>

@@ -43,7 +43,7 @@
                   Danh Thu
                 </h3>
                 <h1>
-                  138,700,000đ
+                  {{number_format($orderdetail->sum('price'), 0, ',', '.') . ' VNĐ';}}
                 </h1>
               </div>
               <span class="icon widget-icon text-blue-500"><i class="mdi mdi-cart-outline mdi-48px"></i></span>
@@ -56,10 +56,10 @@
             <div class="flex items-center justify-between">
               <div class="widget-label">
                 <h3>
-                  Lượt mua 
+                  Đơn Hàng 
                 </h3>
                 <h1>
-                  6
+                  {{$order->count()}}
                 </h1>
               </div>
               <span class="icon widget-icon text-red-500"><i class="mdi mdi-finance mdi-48px"></i></span>
@@ -80,7 +80,7 @@
         </header>
         <div class="card-content">
 
-          {{-- <table>
+          <table>
             <thead>
             <tr>
               <th>Tên</th>
@@ -105,16 +105,6 @@
                     <span>Khách Hàng</span>
                 @endif
               </td>
-              <td class="actions-cell">
-                <div class="buttons right nowrap">
-                  <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                    <a href="{{ route('edit_user', ['id'=>$item->user_id]) }}"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
-                  </button>
-                  <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                    <a href="{{ route('del_confirm', ['id'=>$item->user_id, 'type'=>"user"]) }}"><span class="icon"><i class="mdi mdi-trash-can"></i></span></a>
-                  </button>
-                </div>
-              </td>
             </tr>
                                 
             @endforeach
@@ -128,12 +118,14 @@
             </div>
             <small>Trang {{ $user->currentPage() }} trên {{ $user->lastPage() }}</small>
             </div>
-          </div> --}}
+          </div>
+      
+      
       {{-- <div class="card has-table">
         <header class="card-header">
           <p class="card-header-title">
             <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
-            Sản Phẩm
+            Đơn Hàng
           </p>
           <a href="#" class="card-header-icon">
             <span class="icon"><i class="mdi mdi-reload"></i></span>
@@ -196,8 +188,9 @@
           </div>
           
         </div>
-      </div>
-      <div class="card has-table">
+      </div> --}}
+      
+     {{--  <div class="card has-table">
         <header class="card-header">
           <p class="card-header-title">
             <span class="icon"><i class="mdi mdi-account-multiple"></i></span>

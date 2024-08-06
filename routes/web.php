@@ -77,6 +77,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/edit_order/{id}', [adminController::class, 'edit_order'])->name('edit_order');
         Route::post('/post_edit_order', [adminController::class, 'post_edit_order'])->name('post_edit_order');
 
+        Route::get('/add_category', [adminController::class, 'add_category'])->name('add_category');
+        Route::post('/post_add_category', [adminController::class, 'post_add_category'])->name('post_add_category');
+        Route::get('/edit_category/{id}', [adminController::class, 'edit_category'])->name('edit_category');
+        Route::post('/post_edit_category', [adminController::class, 'post_edit_category'])->name('post_edit_category');
+
 });
 
 

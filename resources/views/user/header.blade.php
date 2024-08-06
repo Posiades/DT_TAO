@@ -83,10 +83,11 @@
               <ul class="dropdown-menu">
                   <li>
                       @if (Session::get('user')->role != 1)
-                      <a href="{{ route('client.index') }}" class="dropdown-item">Thông Tin Tài Khoản</a>
+                        <a href="{{ route('client.index') }}" class="dropdown-item">Thông Tin Tài Khoản</a>
+                      @else
+                        <a href="{{ route('admin_index') }}" class="dropdown-item">Trang Quản TRị</a>
                       @endif
-                      <a href="{{ route('admin_index') }}" class="dropdown-item">Trang Quản TRị</a>
-                  </li>
+                    </li>
                   <li>
                       <a href="{{ url('/dang-xuat') }}" class="dropdown-item">Đăng Xuất</a>
                   </li>

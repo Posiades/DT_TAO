@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\orders;
+use App\Models\orderdetail;
 
 
 class clientController extends Controller
@@ -42,33 +42,28 @@ class clientController extends Controller
         return redirect()->route('client.index');
     }
 
-    // function order(){
-    //     $id_user = Session::get('user')->user_id;
+    function order(){
+        $user_id = Session::get('user')->user_id;
+        $order = DB::table('orders')
+            ->where('orders.user_id', $user_id) 
+            ->join('order_detail', 'orders.order_id', '=', 'order_detail.order_id')
+            ->join('product', 'order_detail.product_id', '=', 'product.product_id')
+            ->join('users', 'orders.user_id', '=', 'users.user_id')
+            ->select([
+                'orders.*',
+                'order_detail.product_id',
+                'order_detail.price',
+                'users.full_name',
+                'users.phone',
+                'users.address',
+                'product.name',
+                'product.color',
+                'product.storage'
+            ])
+            ->paginate(10);
 
-    //     $order = DB::table('orders')
-    //         ->join('order_detail', 'orders.order_id', '=', 'order_detail.order_id')
-    //         // Kết nối với bảng product
-    //         ->join('product', 'order_detail.product_id', '=', 'product.product_id')
-    //         // Kết nối với bảng option
-    //         ->join('option', 'order_detail.option_id', '=', 'option.option_id')
-    //         ->select(
-    //             'orders.*',
-    //             'order_detail.order_detail_id',
-    //             'order_detail.order_id',
-    //             'order_detail.product_id',
-    //             'order_detail.option_id',
-    //             'order_detail.quantity',
-    //             'order_detail.price',
-    //             'product.product_name', // Giả sử bạn muốn lấy cột product_name từ bảng product
-    //             'option.option_name'   // Giả sử bạn muốn lấy cột option_name từ bảng option
-    //         )
-    //         ->where('orders.user_id', $id_user)
-    //         ->get();
-
-    //         dd($order->product_name);
-        
-    //     return view('client.order', compact('order'));
-    // }
+        return view('client.order', compact('order'));
+    }
     
 
 

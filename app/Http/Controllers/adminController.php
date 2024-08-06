@@ -16,15 +16,14 @@ use Illuminate\Support\Facades\Session;
 class adminController extends Controller
 {
     function index(){
-        $quantity_show = 5;
-        $categories = categories::paginate($quantity_show);
         $product = DB::table('product')
         ->join('categories', 'product.category_id', '=', 'categories.category_id')
         ->select('product.*', 'categories.name as category_name')
-        ->paginate($quantity_show);
-        $user = user::paginate($quantity_show);
-        $voucher = voucher::paginate($quantity_show);
-        return view('admin/index', compact('categories', 'product', 'user', 'voucher'));
+        ->get();
+        $user = user::paginate(5);
+        $order = orders::paginate(5);
+        $orderdetail = orderdetail::all();
+        return view('admin/index', compact('user', 'order', 'orderdetail'));
     }
 
     function category(){
@@ -184,6 +183,10 @@ return view('admin/order', compact('order'));
             $result = orders::findOrFail($id);
             $type = "order";
             return view('admin.del_confirm', compact('result', 'type'));
+        }else if($type == "category"){
+            $result = categories::where('category_id', $id)->firstOrFail();
+            $type = "category";
+            return view('admin.del_confirm', compact('result', 'type'));
         }else
             $result = voucher::findOrFail($id);
             $type = "voucher";
@@ -211,14 +214,20 @@ return view('admin/order', compact('order'));
             Session::flash('del_voucher', "Đã xóa voucher thành công");
             return redirect()->route('voucher');
         }else if($type == "order"){
-            DB::table('orders')
-            ->where('order_id', $id)
-            ->delete();
             DB::table('order_detail')
             ->where('order_id', $id)
             ->delete();
-            Session::flash('del_order', "Đã xóa đơn hàng thành cônh");
+            DB::table('orders')
+            ->where('order_id', $id)
+            ->delete();
+            Session::flash('del_order', "Đã xóa đơn hàng thành công");
             return redirect()->route('admin_order');
+        }else if($type == "category"){
+            DB::table('categories')
+            ->where('category_id', $id)
+            ->delete();
+            Session::flash('del_category', 'Đã xóa danh mục thành công');
+            return redirect()->route('category');
         }
     }
 
@@ -408,6 +417,36 @@ return view('admin/order', compact('order'));
         ]);
         Session::flash('edit_order', "Đã cập nhật đơn hàng thành cônh");
         return redirect()->route('admin_order');
+    }
+
+    function add_category(){
+        return view('admin.add_category');
+    }
+
+    function post_add_category(Request $req){
+        $category = new categories;
+        $category -> name = $req -> name;
+        $category -> save();
+
+        Session::flash('add_category', "Đã thêm Danh Mục $req->name thành công");
+        return redirect()->route('category');
+    }
+
+    function edit_category($id){
+        $category = categories::where('category_id', $id)->firstOrFail();
+        return view('admin.edit_category', compact('category'));
+    }
+
+    function post_edit_category(Request $req){
+        $id = $req -> id;
+        DB::table('categories')
+        ->where('category_id', $id)
+        ->update([
+            'name' => $req -> name
+        ]);
+
+        Session::flash('edit_category', "Đã cập nhật danh mục $req->name thành công");
+        return redirect()->route('category');
     }
     
 }

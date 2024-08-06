@@ -40,7 +40,7 @@
                         </div>
 
                         <div class="form-group mt-2">
-                            <label for="order_date">Giá: /label>
+                            <label for="order_date">Giá: </label>
                             <input type="number" class="form-control" name="price">
                         </div>
 

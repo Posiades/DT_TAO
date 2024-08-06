@@ -62,7 +62,7 @@
 </div>
 </div>
 
-{{-- ================================ Option ============================= --}}
+{{-- ================================ order ============================= --}}
 @elseif($type == "order")
 <div class="card mx-auto" style="width: 1000px">
   <div class="card-body">
@@ -75,6 +75,31 @@
          <div class="col-xs-12 col-sm-12 col-md-12">
           <div class="form-group">
             <h1><strong>Bạn chắc chắn muốn xóa {{$result->order_id}}</strong></h1>
+             
+          </div>
+      </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 text-center pt-3">
+                 <button type="submit" class="btn btn-danger">Submit</button>
+         </div>
+     </div>
+ </form>
+  </div>
+</div>
+</div>
+
+{{-- ================================ Category ============================= --}}
+@elseif($type == "category")
+<div class="card mx-auto" style="width: 1000px">
+  <div class="card-body">
+    <form  method="POST" action="{{route('del_execute', ['id'=>$result->category_id, 'type'=>"category"])}}" enctype="multipart/form-data">
+      @csrf
+
+      <input type="hidden" name="id" value="{{$result->category_id}}">
+      
+      <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12">
+          <div class="form-group">
+            <h1><strong>Bạn chắc chắn muốn xóa {{$result->category_id}}</strong></h1>
              
           </div>
       </div>
