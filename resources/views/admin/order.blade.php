@@ -63,6 +63,9 @@
                   <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                    <a href="{{route('del_confirm', ['id'=>$item->order_id, 'type'=>"order"])}}"><span class="icon"><i class="mdi mdi-trash-can"></i></span></a>
                   </button>
+                  @if(!empty($item->vnp_transaction_id))
+                  <a class="btn btn-primary btn-sm" href="https://sandbox.vnpayment.vn/merchantv2/Transaction/PaymentDetail/{{$item->vnp_transaction_id}}.htm" target="_blank">VNPAY</a>
+                  @endif
                 </div>
               </td>
             </tr>
