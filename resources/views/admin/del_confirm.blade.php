@@ -1,7 +1,6 @@
 @extends('admin/layout')
 @section('title', 'Xác Nhận Xóa')
 @section('content')
-
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -64,18 +63,18 @@
 </div>
 
 {{-- ================================ Option ============================= --}}
-@elseif($type == "option")
+@elseif($type == "order")
 <div class="card mx-auto" style="width: 1000px">
   <div class="card-body">
-    <form  method="POST" action="{{route('del_execute', ['id'=>$result->option_id, 'type'=>"option"])}}" enctype="multipart/form-data">
+    <form  method="POST" action="{{route('del_execute', ['id'=>$result->order_id, 'type'=>"order"])}}" enctype="multipart/form-data">
       @csrf
 
-      <input type="hidden" name="id" value="{{$result->option_id}}">
+      <input type="hidden" name="id" value="{{$result->order_id}}">
       
       <div class="row">
          <div class="col-xs-12 col-sm-12 col-md-12">
           <div class="form-group">
-            <h1><strong>Bạn chắc chắn muốn xóa {{$result->option_id}}</strong></h1>
+            <h1><strong>Bạn chắc chắn muốn xóa {{$result->order_id}}</strong></h1>
              
           </div>
       </div>
@@ -112,8 +111,6 @@
   </div>
 </div>
 </div>
-
-
    @endif
     
 

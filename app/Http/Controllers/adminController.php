@@ -180,12 +180,16 @@ return view('admin/order', compact('order'));
             $result = User::where('user_id', $id)->firstOrFail();
             $type = "user"; 
             return view('admin.del_confirm', compact('result', 'type')); 
-        }else{
+        }else if($type == "order"){
+            $result = orders::findOrFail($id);
+            $type = "order";
+            return view('admin.del_confirm', compact('result', 'type'));
+        }else
             $result = voucher::findOrFail($id);
             $type = "voucher";
             return view('admin.del_confirm', compact('result', 'type'));
-        }
     }
+    
 
     function del_execute(Request $req, $id, $type){
         if($type == "product"){
@@ -206,6 +210,15 @@ return view('admin/order', compact('order'));
             ->delete();
             Session::flash('del_voucher', "Đã xóa voucher thành công");
             return redirect()->route('voucher');
+        }else if($type == "order"){
+            DB::table('orders')
+            ->where('order_id', $id)
+            ->delete();
+            DB::table('order_detail')
+            ->where('order_id', $id)
+            ->delete();
+            Session::flash('del_order', "Đã xóa đơn hàng thành cônh");
+            return redirect()->route('admin_order');
         }
     }
 
@@ -395,8 +408,6 @@ return view('admin/order', compact('order'));
         ]);
         Session::flash('edit_order', "Đã cập nhật đơn hàng thành cônh");
         return redirect()->route('admin_order');
-        
-
     }
     
 }

@@ -37,7 +37,7 @@
                 <div class="cart-info d-flex flex-wrap align-items-center mb-4">
                   <div class="col-lg-5">
                     <div class="card-image">
-                      <img src="{{ $details['image_url'] }}" alt="{{ $details['name'] }}" class="img-fluid">
+                      <img src="{{ $details['image'] }}" alt="{{ $details['name'] }}" class="img-fluid">
                     </div>
                   </div>
                   <div class="col-lg-4">
