@@ -60,6 +60,9 @@
                 <th>Tên Voucher</th>
                 <th>Số lượng</th>
                 <th>Giá trị</th>
+                <th>sản phầm</th>
+                <th>Người dùng</th>
+                <th>Danh Mục</th>
                 <th>Thời gian bắt đầu</th>
                 <th>Thời gian kết thúc</th>
                 <th></th>
@@ -69,9 +72,23 @@
                 @foreach ($voucher as $item)
               <tr>
                 <td>{{$item->code}}</td>
-                <td>{{{$item->quantity}}}</td>
-    
-                <td>{{$item->discount_amount	}}</td>
+                <td>{{{$item->quantity}}}</td> 
+                <td>{{$item->discount_amount}}</td>
+                @if ($item->product_id != null)
+                    <td>ID: {{$item->product_id}}</td>
+                @else
+                    <td>Tất Cả Sản Phẩm</td>
+                @endif
+                @if ($item->user_id != null)
+                    <td>ID: {{$item->user_id}}</td>
+                @else
+                    <td>Tất Cả Người Dùng</td>
+                @endif
+                @if ($item->category_id != null)
+                    <td>ID: {{$item->category_id}}</td>
+                @else
+                    <td>Tất Cả Danh Mục</td>
+                @endif
                 <td>{{$item->create_date}}</td>
                 <td>{{$item->expiry_date}}</td>
                 <td>

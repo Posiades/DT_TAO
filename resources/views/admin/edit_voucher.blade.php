@@ -41,12 +41,37 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <strong>ID Sản Phẩm: </strong>
+                                    <input type="number" name="id_product" class="form-control" placeholder="Để trống sẽ áp dụng cho tất cả sản phẩm" value="{{$voucher->product_id}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>ID Người Dùng: </strong>
+                                    <input type="id" name="id_user" class="form-control" placeholder="Để trống sẽ áp dụng cho tất cả người dùng" value="{{$voucher->user_id}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <strong>Chọn Loại Sản Phẩm:</strong>
+                                    <select class="form-control" name="id_category">
+                                        <option value="1">Iphone</option>
+                                        <option value="2">MacBook</option>
+                                        <option value="3">Ipad</option>
+                                        <option value="4">Watch</option>
+                                        <option value="5">AirPods</option>
+                                        <option value="null">Tất Cả</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
                                     <strong>Số Lượng:</strong>
                                     <input type="number" class="form-control" name="quantity" placeholder="Số Lượng Voucher" value="{{$voucher->quantity}}">
                                 </div>
                             </div>
                         </div>
-
+                    </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-5">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

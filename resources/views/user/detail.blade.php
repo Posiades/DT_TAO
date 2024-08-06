@@ -7,7 +7,7 @@
     <div class="row mt-5">
       <div class="col-lg-6">
         <div class="product-preview mb-3">
-          <img src="{{asset($product->image_url)}}" alt="single-product" class="img-fluid">
+          <img src="{{asset($product->image)}}" alt="single-product" class="img-fluid">
         </div>
       </div>
       <div class="col-lg-6">
@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="product-price pt-3 pb-3">
-            <strong class="text-primary display-6 fw-bold">{{number_format($product->price_difference, 0, ',', '.'). ' VNĐ'}}</strong>
+            <strong class="text-primary display-6 fw-bold">{{number_format($product->price, 0, ',', '.'). ' VNĐ'}}</strong>
           </div>
           <p>Với sự tinh tế, đồng hồ màu hồng mang lại phong cách thanh lịch và nổi bật. Được thiết kế tỉ mỉ với chất liệu cao cấp, đồng hồ này không chỉ là phụ kiện thời trang mà còn là biểu tượng của sự sang trọng và hiện đại. Khả năng chống nước và độ bền cao, đồng hồ màu hồng là lựa chọn hoàn hảo cho những ai yêu thích sự tinh tế và cá tính.</p>
           <div class="cart-wrap padding-small">
@@ -149,7 +149,7 @@
           <div class="tab-pane fade border-top border-bottom padding-small" id="nav-information" role="tabpanel" aria-labelledby="nav-information-tab">
             <ul class="supp">
                 @php
-                       $lines = explode("\n", $product->configtion);
+                       $lines = explode(",", $product->configtion);
                 @endphp
                 @foreach($lines as $line)
                 <li><span class="bullet">&#10003; </span> {{$line}}</li>

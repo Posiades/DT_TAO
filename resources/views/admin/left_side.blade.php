@@ -28,12 +28,6 @@
             <span class="menu-item-label">Sản phẩm</span>
           </a>
         </li>
-        <li class="--set-active-forms-html">
-          <a href="{{route('option_product')}}">
-            <span class="icon"><i class="mdi mdi-cube-outline"></i></span>
-            <span class="menu-item-label">Option Sản phẩm</span>
-          </a>
-        </li>
         
         <li class="--set-active-profile-html">
           <a href="{{route('user')}}">

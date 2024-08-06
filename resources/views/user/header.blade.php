@@ -82,7 +82,10 @@
               <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ Session::get('user')->full_name }}</a>
               <ul class="dropdown-menu">
                   <li>
+                      @if (Session::get('user')->role != 1)
                       <a href="{{ route('client.index') }}" class="dropdown-item">Thông Tin Tài Khoản</a>
+                      @endif
+                      <a href="{{ route('admin_index') }}" class="dropdown-item">Trang Quản TRị</a>
                   </li>
                   <li>
                       <a href="{{ url('/dang-xuat') }}" class="dropdown-item">Đăng Xuất</a>

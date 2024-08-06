@@ -73,6 +73,9 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::post('/post_edit_voucher', [adminController::class, 'post_edit_voucher'])->name('post_edit_voucher');
       
         Route::get('/add_order', [adminController::class, 'add_order'])->name('add_order');
+        Route::post('/post_add_order', [adminController::class, 'post_add_order'])->name('post_add_order');
+        Route::get('/edit_order/{id}', [adminController::class, 'edit_order'])->name('edit_order');
+        Route::post('/post_edit_order', [adminController::class, 'post_edit_order'])->name('post_edit_order');
 
 });
 

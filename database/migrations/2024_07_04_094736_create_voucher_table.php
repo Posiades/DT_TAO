@@ -18,15 +18,14 @@ return new class extends Migration
             $table->date('create_date');                    // Ngày tạo
             $table->date('expiry_date');                    // Ngày hết hạn
             $table->integer('quantity');                    // Số lượng voucher
-            $table->integer('times_used')->default(0);      // Số lần đã sử dụng, mặc định là 0
-            $table->enum('status', ['active', 'inactive'])->default('active');  // Trạng thái của voucher, mặc định là 'active'
             $table->unsignedInteger('product_id')->nullable();  // Khóa ngoại liên kết với bảng products, có thể NULL
             $table->unsignedInteger('user_id')->nullable();     // Khóa ngoại liên kết với bảng users, có thể NULL
-            $table->timestamps();                               // Tạo cột created_at và updated_at
-
-            // Thiết lập khóa ngoại
+            $table->unsignedInteger('category_id')->nullable();
+            $table->timestamps();                             
+            
             $table->foreign('product_id')->references('product_id')->on('product');
             $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('category_id')->references('category_id')->on('categories');
             
         });
     }
