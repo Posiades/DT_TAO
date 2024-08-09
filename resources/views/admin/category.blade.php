@@ -76,7 +76,7 @@
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <a href="{{route('edit_category', ['id'=>$item->category_id])}}"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
+                      <a href="{{route('edit_category', ['id'=>$item->category_id])}}"><span class="icon"><i class="mdi mdi-pencil"></i></span></a>
                     </button>
                     <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                       <a href="{{route('del_confirm', ['id'=>$item->category_id, 'type'=>"category"])}}"><span class="icon"><i class="mdi mdi-trash-can"></i></span></a>

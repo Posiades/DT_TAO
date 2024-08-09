@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2 class="pull-left">Add New User</h2>
+                    <h2 class="pull-left">Thêm Người Dùng</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('post_add_user') }}" enctype="multipart/form-data">
@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-5">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">THêm Đơn Hàng</button>
                         </div>
                     </form>
                 </div>

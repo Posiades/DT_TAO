@@ -8,7 +8,7 @@
         <li>Admin</li>
         <li>Sản Phẩm</li>
       </ul>
-      <a href="{{route('add_product')}}">
+      <a href="{{route('add_product')}}" class="button blue">
         <span class="icon"><i class="mdi mdi-credit-card-outline"></i></span>
         <span>Thêm Sản Phẩm</span>
       </a>
@@ -106,8 +106,7 @@
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                     <a  href="{{route('edit_product', ['id'=>$item->product_id])}}"> <span class="icon"><i class="mdi mdi-eye"></i></span></a>
-
+                     <a  href="{{route('edit_product', ['id'=>$item->product_id])}}"><span class="icon"><i class="mdi mdi-pencil"></i></span></a>
                     </button>
                     <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                      <a href="{{route('del_confirm', ['id'=>$item->product_id, 'type'=>"product"])}}">

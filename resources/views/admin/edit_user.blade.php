@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-primary text-white">
                     <h2 class="pull-left">Add New User</h2>
                 </div>
                 <div class="card-body">

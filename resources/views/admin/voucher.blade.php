@@ -94,7 +94,7 @@
                 <td>
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal"  data-target="sample-modal-2" type="button">
-                      <a href="{{route('edit_voucher', ['id'=>$item->voucher_id])}}"><span class="icon"><i class="mdi mdi-eye"></i></span></a>
+                      <a href="{{route('edit_voucher', ['id'=>$item->voucher_id])}}"><span class="icon"><i class="mdi mdi-pencil"></i></span></a>
                     </button>
                     <button class="button small red --jb-modal" data-target="sample-modal" type="button">
                       <a href="{{route('del_confirm', ['id'=>$item->voucher_id, 'type'=>"voucher"])}}"><span class="icon"><i class="mdi mdi-trash-can"></i></span></a>

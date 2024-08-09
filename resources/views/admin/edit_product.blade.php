@@ -2,103 +2,83 @@
 @section('title', 'Sửa Sản Phẩm')
 @section('content')
 
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Chỉnh Sửa Sản Phẩm</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('post_edit_product', ['id' => $product->product_id]) }}" enctype="multipart/form-data">
+                        @csrf
 
- <div class="container mt-5">
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Edit Product</h2>
+                        <input type="hidden" name="type" value="{{ $product->category_id }}">
+                        <input type="hidden" name="id" value="{{ $product->product_id }}">
+
+                        <div class="form-group mb-3">
+                            <label for="name"><strong>Tên Sản Phẩm:</strong></label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Nhập Tên Sản Phẩm" value="{{ $product->name }}" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="color"><strong>Màu Sắc:</strong></label>
+                            <input type="text" id="color" name="color" class="form-control" placeholder="Nhập Màu Sắc" value="{{ $product->color }}" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="storage"><strong>Bộ Nhớ:</strong></label>
+                            <input type="text" id="storage" name="storage" class="form-control" placeholder="Nhập Dung Lượng" value="{{ $product->storage }}" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="image_url"><strong>Hình Ảnh:</strong></label>
+                            <input type="file" id="image_url" name="image_url" class="form-control">
+                            @if ($product->image_url)
+                                <img src="{{ asset('storage/' . $product->image_url) }}" alt="Product Image" class="img-fluid mt-2" style="max-height: 200px;">
+                            @endif
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="price"><strong>Giá:</strong></label>
+                            <div class="input-group">
+                                <input type="text" id="price" name="price" class="form-control" placeholder="Giá" value="{{ $product->price }}" required>
+                                <span class="input-group-text">VNĐ</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="configtion"><strong>Cấu Hình:</strong></label>
+                            <textarea id="configtion" name="configtion" class="form-control" rows="4" placeholder="Nội dung cấu hình">{{ $product->configtion }}</textarea>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="description"><strong>Nội Dung:</strong></label>
+                            <textarea id="description" name="description" class="form-control" rows="4" placeholder="Nội dung">{{ $product->description }}</textarea>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="quantity"><strong>Số Lượng:</strong></label>
+                            <input type="number" id="quantity" name="quantity" class="form-control" placeholder="Số Lượng" value="{{ $product->quantity }}" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="status"><strong>Trạng Thái:</strong></label>
+                            <select id="status" name="status" class="form-control" required>
+                                <option value="Còn Hàng" {{ $product->status == 'Còn Hàng' ? 'selected' : '' }}>Còn Hàng</option>
+                                <option value="Hết Hàng" {{ $product->status == 'Hết Hàng' ? 'selected' : '' }}>Hết Hàng</option>
+                            </select>
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+                            <a href="{{ route('product') }}" class="btn btn-secondary">Hủy</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            {{-- <div class="pull-right">
-                <a class="btn btn-primary" href=""> Back</a>
-            </div> --}}
         </div>
     </div>
-    <div class="card mx-auto" style="width: 1000px">
-        <div class="card-body">
-          <form  method="POST" action="{{route('post_edit_product', ['id'=>$product->product_id])}}" enctype="multipart/form-data">
-            @csrf
+</div>
 
-            <input type="hidden" name="type" value="{{$product->category_id}}">
-            <input type="hidden" name="id" value="{{$product->product_id}}">
-            <div class="row">
-               <div class="col-xs-12 col-sm-12 col-md-12">
-                   <div class="form-group">
-                       <strong>Tên Sản Phẩm:</strong>
-                       <input type="text" name="name" class="form-control" placeholder="Nhập Tên Sản Phẩm" value="{{$product->name}}">
-                   </div>
-               </div>
-
-               <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                <div class="form-group">
-                    <strong>Màu Sắc:</strong>
-                    <input type="text" name="color" class="form-control" placeholder="Nhập Màu Sắc" value="{{$product->color}}">
-                </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                <div class="form-group">
-                    <strong>Bộ Nhớ:</strong>
-                    <input type="text" name="storage" class="form-control" placeholder="Nhập Dung Lượng" value="{{$product->storage}}">
-                </div>
-            </div>
-       
-               <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                   <div class="form-group">
-                       <strong>Image:</strong>
-                       <input type="file" name="image_url" class="form-control" placeholder="image">
-                   </div>
-               </div>
-       
-               <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                   <div class="form-group">
-                     <strong>Gia:</strong>
-                     <div class="input-group">
-                       <input name="price" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" placeholder="gia" value="{{$product->price_difference}}">
-                       <span class="input-group-text">VNĐ</span>
-                     </div>
-                   </div>
-               </div>
-               
-               <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                <div class="form-group">
-                  <strong>Cấu Hình:</strong>
-                  <textarea name="configtion" class="form-control" style="height:150px" placeholder="Nội dung">{{$product->configtion}}</textarea>
-                </div>
-            </div>
-
-               <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                   <div class="form-group">
-                     <strong>Nội dung:</strong>
-                     <textarea name="mota" class="form-control" style="height:150px" placeholder="Nội dung">{{$product->description}}</textarea>
-                   </div>
-               </div>
-               <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                <div class="form-group">
-                  <strong>Số Lượng:</strong>
-                    <input name="quantity" type="number" class="form-control" placeholder="Số Lượng" value="{{$product->quantity}}">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2">
-                <div class="form-group">
-                  <strong>status: </strong>
-                    <select name="status" class="form-control">
-                        @if ($product->status == "Còn Hàng")
-                            <option value="Còn Hàng" selected>Còn Hàng</option>
-                            <option value="Hết Hàng">Hết Hàng</option>
-                        @else
-                        <option value="Còn Hàng">Còn Hàng</option>
-                        <option value="Hết Hàng" selected>Hết Hàng</option> 
-                        @endif
-                    </select>
-                </div>
-            </div>
-               <div class="col-xs-12 col-sm-12 col-md-12 text-center pt-3">
-                       <button type="submit" class="btn btn-primary">Submit</button>
-               </div>
-           </div>
-       </form>
-        </div>
-    </div>
- </div>
 @endsection

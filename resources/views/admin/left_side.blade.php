@@ -7,7 +7,7 @@
     <div class="menu is-menu-main">
       <p class="menu-label">TỔNG QUAN</p>
       <ul class="menu-list">
-        <li class="active">
+        <li class="{{ request()->routeIs('admin_index') ? 'active' : '' }}">
           <a href="{{route('admin_index')}}">
             <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
             <span class="menu-item-label">Thống Kê</span>
@@ -16,32 +16,32 @@
       </ul>
       <p class="menu-label">QUẢN LÝ</p>
       <ul class="menu-list">
-        <li class="--set-active-tables-html">
+        <li class="{{ request()->routeIs('category') ? 'active' : '' }}">
           <a href="{{route('category')}}">
             <span class="icon"><i class="mdi mdi-table"></i></span>
             <span class="menu-item-label">Danh mục</span>
           </a>
         </li>
-        <li class="--set-active-forms-html">
+        <li class="{{ request()->routeIs('product') ? 'active' : '' }}">
           <a href="{{route('product')}}">
             <span class="icon"><i class="mdi mdi-square-edit-outline"></i></span>
             <span class="menu-item-label">Sản phẩm</span>
           </a>
         </li>
         
-        <li class="--set-active-profile-html">
+        <li class="{{ request()->routeIs('user') ? 'active' : '' }}">
           <a href="{{route('user')}}">
             <span class="icon"><i class="mdi mdi-account-circle"></i></span>
             <span class="menu-item-label">Người dùng</span>
           </a>
         </li>
-        <li class="--set-active-profile-html">
+        <li class="{{ request()->routeIS('admin_order') ? 'active' : '' }}">
           <a href="{{route('admin_order')}}">
             <span class="icon"><i class="mdi mdi-view-list"></i></span>
             <span class="menu-item-label">Đơn hàng</span>
           </a>
         </li>
-        <li class="--set-active-profile-html">
+        <li class="{{ request()->routeIs('voucher') ? 'active' : '' }}">
           <a href="{{ route('voucher') }}">
               <span class="icon"><i class="mdi mdi-ticket"></i></span>
               <span class="menu-item-label">Voucher</span>
