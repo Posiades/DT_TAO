@@ -48,16 +48,16 @@
       <div class="mb-3">
         <div class="input-group">
           <span class="input-group-text">
-            <i class="bi bi-person-fill"></i>
+            <i class="bi bi-envelope-fill"></i>
           </span>
-          <input name="email" type="text" class="form-control custom-input" id="inputUsername" placeholder="Nhập Email">
+          <input name="email" type="email" class="form-control custom-input" id="inputUsername" placeholder="Nhập Email">
         </div>
       </div>
 
       <div class="row justify-content-center">
         <div class="col-auto">
-          <button type="submit" class="btn btn-outline-secondary">
-            <i class="bi bi-person-plus-fill"></i> Gửi Yêu Cầu
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-send-fill"></i> Gửi Yêu Cầu
           </button>
         </div>
     </form>

@@ -67,7 +67,7 @@
         <span class="input-group-text">
           <i class="bi bi-shield-lock-fill"></i>
         </span>
-        <input name="pass" class="form-control form-control-lg" type="password" placeholder="Mật khẩu" aria-label=".form-control-lg example" required>
+        <input name="pass" class="form-control form-control-lg" type="password" placeholder="Mật khẩu" aria-label=".form-control-lg example" pattern="^(?=.*[A-Z])(?=.*[\W_]).{8,}$"  title="Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm ít nhất một ký tự chữ hoa và một ký tự đặc biệt." required>
       </div>
     </div>
     
@@ -76,7 +76,7 @@
         <span class="input-group-text">
           <i class="bi bi-shield-lock-fill"></i>
         </span>
-        <input name="re_pass" class="form-control form-control-lg" type="password" placeholder="Nhập lại mật khẩu" aria-label=".form-control-lg example" required>
+        <input name="re_pass" class="form-control form-control-lg" type="password" placeholder="Nhập lại mật khẩu" aria-label=".form-control-lg example" pattern="^(?=.*[A-Z])(?=.*[\W_]).{8,}$"  title="Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm ít nhất một ký tự chữ hoa và một ký tự đặc biệt." required>
       </div>
     </div>
 
@@ -85,4 +85,6 @@
     </div>
   </form>
 </div>
+
+
 @endsection

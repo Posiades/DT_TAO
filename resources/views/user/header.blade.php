@@ -20,7 +20,7 @@
           <div class="offcanvas-body">
             <ul id="navbar" class="navbar-nav text-uppercase justify-content-end align-items-center flex-grow-1 pe-3">
               <li class="nav-item">
-                <a class="nav-link me-4 active" href="{{url('/')}}">Trang Chủ</a>
+                <a class="nav-link me-4" href="{{url('/')}}">Trang Chủ</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 1]) }}">IPHONE</a>
@@ -103,13 +103,16 @@
           </li>
         @endif
         
-
-
                     <li>
                       <a href="{{asset('/gio-hang')}}">
                         <svg class="cart">
                           <use xlink:href="#cart"></use>
-                        </svg>
+                        </svg> 
+                        @if (Session::has('cart'))
+                            {{ count(Session::get('cart')) }}
+                        @else
+                            0
+                        @endif
                       </a>
                     </li>
                   </ul>
