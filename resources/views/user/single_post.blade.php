@@ -1,5 +1,5 @@
 @extends('user/layout')
-@section('title', 'post-1')
+@section('title', '')
 @section('content')
 <div class="post-wrap padding-large overflow-hidden">
     <div class="container">

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\product;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class homeControllers extends Controller
 {
@@ -81,8 +82,25 @@ class homeControllers extends Controller
     }
 
     function detail($slug){
-        $product = product::where('slug', $slug)->get();
-        return view('user/detail', compact('product'));
+        $product = DB::table('product')
+        ->leftJoin('evaluate', 'product.product_id', '=', 'evaluate.product_id')
+        ->leftJoin('users', 'users.user_id', '=', 'evaluate.user_id')
+        ->where('slug', $slug)
+        ->select([
+            'product.*',
+            'evaluate.content',
+            'evaluate.start',
+            'users.full_name',
+        ])
+        ->get();
+
+        
+        $name_product = product::where('slug', $slug)->first();
+        $recomment = Product::where('name', 'LIKE', '%' . $name_product->name . '%')
+        ->where('product_id', '!=', $name_product->product_id)
+        ->limit(4)->get();
+
+        return view('user/detail', compact('product', 'recomment'));
     }
 
     function cart(){
