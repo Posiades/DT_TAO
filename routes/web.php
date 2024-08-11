@@ -38,6 +38,7 @@ Route::get('/thanh-toan', [homeControllers::class, 'checkout'])->name('checkout'
 
 // route bài viết
 Route::get('/tin-tuc/{slug}', [homeControllers::class, 'blog_detail'])->name('blog_detail');
+Route::get('tin-tuc-tim-kiem/', [homeControllers::class, 'find_blog'])->name('find_blog');
 
 
 

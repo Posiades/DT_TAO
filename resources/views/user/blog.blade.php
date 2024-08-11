@@ -25,46 +25,85 @@
         <aside class="col-md-3">
           <div class="sidebar">
             <div class="widget-search-bar">
-              <form role="search" method="get" class="d-flex">
-                <input class="search-field" placeholder="Search" type="search">
-                <div class="search-icon bg-primary">
-                  <a href="#">
+              <form role="search" method="get" action="{{route('find_blog')}}" class="d-flex">
+                <input class="search-field" name="keyword" placeholder="Tên Bài Viết" type="search">
+                  <button type="submit" class="btn btn-outline-dark">
                     <svg class="search content-light">
                       <use xlink:href="#search"></use>
                     </svg>
-                  </a>
-                </div>
+                  </button>
               </form>
             </div>
           </div>
         </aside>
-        <main class="col-md-9">
-          <div class="row">
-            @foreach($blog as $post)
-              <div class="col-lg-4">
-                <div class="card border-none">
-                  <div class="card-image">
-                    <img src="{{ asset($post->image_banner) }}" alt="" class="img-fluid">
-                  </div>
-                  <div class="card-body text-uppercase">
-                    <div class="card-meta text-muted">
-                      <span class="meta-date">{{ $post->created_at->format('M d, Y') }}</span>
-                      {{-- <span class="meta-category">- {{ $post->category }}</span> --}}
+
+        
+        @if ($side_show == null)
+          <main class="col-md-9">
+            <div class="row">
+              @foreach($blog as $post)
+                <div class="col-lg-4">
+                  <div class="card border-none">
+                    <div class="card-image">
+                      <img src="{{ asset($post->image_banner) }}" alt="" class="img-fluid">
                     </div>
-                    <h3 class="card-title">
-                      <a href="{{ route('blog_detail', ['slug'=>$post->slug]) }}">{{ $post->title }}</a>
-                    </h3>
+                    <div class="card-body text-uppercase">
+                      <div class="card-meta text-muted">
+                        <span class="meta-date">{{ $post->created_at->format('M d, Y') }}</span>
+                      </div>
+                      <h3 class="card-title">
+                        <a href="{{ route('blog_detail', ['slug'=>$post->slug]) }}">{{ $post->title }}</a>
+                      </h3>
+                    </div>
                   </div>
                 </div>
-              </div>
-            @endforeach
-          </div>
-          <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
-            <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
-              {{ $blog->links() }}
+              @endforeach
             </div>
-          </nav>
-        </main>
+            <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
+              <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
+                {{ $blog->links() }}
+              </div>
+            </nav>
+          </main>
+        @else
+          @if ($blog_find->total() > 0)
+          <main class="col-md-9">
+            <div class="row">
+              @foreach($blog_find as $post)
+                <div class="col-lg-4">
+                  <div class="card border-none">
+                    <div class="card-image">
+                      <img src="{{ asset($post->image_banner) }}" alt="" class="img-fluid">
+                    </div>
+                    <div class="card-body text-uppercase">
+                      <div class="card-meta text-muted">
+                        <span class="meta-date">{{ $post->created_at->format('M d, Y') }}</span>
+                      </div>
+                      <h3 class="card-title">
+                        <a href="{{ route('blog_detail', ['slug'=>$post->slug]) }}">{{ $post->title }}</a>
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+            <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
+              <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
+                {{ $blog_find->links() }}
+              </div>
+            </nav>
+          </main>
+          @else
+            <main class="col-md-9">
+              <div class="row">
+                <h1> Không tìm thấy kết quả phù hợp </h1>
+              </div>
+            </main>
+          
+          @endif
+        @endif
+
+
       </div>
     </div>
   </section>

@@ -25,13 +25,22 @@ class homeControllers extends Controller
     }
 
     function blog(){
+        $side_show = null;
         $blog = blog::paginate(10);
-        return view('user/blog', compact('blog'));
+
+        return view('user/blog', compact('blog', 'side_show'));
+    }
+
+    function find_blog(Request $req){
+        $side_show = "search";
+        $blog_find = blog::where('title', 'LIKE', '%' . $req->keyword . '%')->paginate(10);
+
+        return view('user/blog', compact('blog_find', 'side_show'));
     }
 
     function blog_detail($slug){
         $blog = blog::where('slug', $slug)->first();
-        $lastedBlog = Blog::latest('created_at')->take(3)->get(); // Hoặc sử dụng `orderBy` nếu bạn cần
+        $lastedBlog = Blog::latest('created_at')->take(3)->get(); 
 
         return view('user/detail_blog', compact('blog', 'lastedBlog'));
     }
