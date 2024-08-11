@@ -36,8 +36,9 @@ Route::get('/gio-hang', [homeControllers::class, 'cart']);
 Route::get('/thanh-toan', [homeControllers::class, 'checkout'])->name('checkout');
 
 
-// post-1 sau này thay thế thành tên bài viết
-Route::get('/post-1', [homeControllers::class, 'single_post']);
+// route bài viết
+Route::get('/tin-tuc/{slug}', [homeControllers::class, 'blog_detail'])->name('blog_detail');
+
 
 
 

@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreign('product_id')->references('product_id')->on('product'); // Đổi từ 'product' thành 'products'
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
-            $table->timestamps();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

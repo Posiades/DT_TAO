@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\product;
-use Illuminate\Support\Facades\Mail;
+use App\Models\blog;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +25,15 @@ class homeControllers extends Controller
     }
 
     function blog(){
-        return view('user/blog');
+        $blog = blog::paginate(10);
+        return view('user/blog', compact('blog'));
+    }
+
+    function blog_detail($slug){
+        $blog = blog::where('slug', $slug)->first();
+        $lastedBlog = Blog::latest('created_at')->take(3)->get(); // Hoặc sử dụng `orderBy` nếu bạn cần
+
+        return view('user/detail_blog', compact('blog', 'lastedBlog'));
     }
 
     function shop($type){

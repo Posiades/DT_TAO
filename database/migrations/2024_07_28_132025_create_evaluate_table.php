@@ -17,7 +17,8 @@ return new class extends Migration
             $table->unsignedInteger('user_id');
             $table->string('content');
             $table->integer('start');
-            $table->timestamps();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
             
             $table->foreign('product_id')->references('product_id')->on('product');
             $table->foreign('user_id')->references('user_id')->on('users');

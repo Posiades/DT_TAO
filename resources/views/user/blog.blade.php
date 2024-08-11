@@ -1,4 +1,4 @@
-@extends('user/layout')
+@extends('user.layout')
 @section('title', 'Tin Tức')
 @section('content')
 <section class="hero-section position-relative bg-light-blue padding-medium">
@@ -36,173 +36,32 @@
                 </div>
               </form>
             </div>
-            
           </div>
         </aside>
         <main class="col-md-9">
           <div class="row">
-            <div class="col-lg-4">
-              <div class="card border-none">
-                <div class="card-image">
-                  <img src="images/post-item1.jpg" alt="" class="img-fluid">
+            @foreach($blog as $post)
+              <div class="col-lg-4">
+                <div class="card border-none">
+                  <div class="card-image">
+                    <img src="{{ asset($post->image_banner) }}" alt="" class="img-fluid">
+                  </div>
+                  <div class="card-body text-uppercase">
+                    <div class="card-meta text-muted">
+                      <span class="meta-date">{{ $post->created_at->format('M d, Y') }}</span>
+                      {{-- <span class="meta-category">- {{ $post->category }}</span> --}}
+                    </div>
+                    <h3 class="card-title">
+                      <a href="{{ route('blog_detail', ['slug'=>$post->slug]) }}">{{ $post->title }}</a>
+                    </h3>
+                  </div>
                 </div>
               </div>
-              <div class="card-body text-uppercase">
-                <div class="card-meta text-muted">
-                  <span class="meta-date">feb 22, 2023</span>
-                  <span class="meta-category">- Gadgets</span>
-                </div>
-                <h3 class="card-title">
-                  <a href="#">Get some cool gadgets in 2023</a>
-                </h3>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card border-none">
-                <div class="card-image">
-                  <img src="images/post-item3.jpg" alt="" class="img-fluid">
-                </div>
-              </div>
-              <div class="card-body text-uppercase">
-                <div class="card-meta text-muted">
-                  <span class="meta-date">feb 22, 2023</span>
-                  <span class="meta-category">- camera</span>
-                </div>
-                <h3 class="card-title">
-                  <a href="#">toP 10 SMALL cAMERA IN THE WORLD</a>
-                </h3>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card border-none">
-                <div class="card-image">
-                  <img src="images/post-item2.jpg" alt="" class="img-fluid">
-                </div>
-              </div>
-              <div class="card-body text-uppercase">
-                <div class="card-meta text-muted">
-                  <span class="meta-date">feb 25, 2023</span>
-                  <span class="meta-category">- technology</span>
-                </div>
-                <h3 class="card-title">
-                  <a href="#">TECHNOLOGY HACK YOU WON’T GET</a>
-                </h3>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card border-none">
-                <div class="card-image">
-                  <img src="images/post-item4.jpg" alt="" class="img-fluid">
-                </div>
-              </div>
-              <div class="card-body text-uppercase">
-                <div class="card-meta text-muted">
-                  <span class="meta-date">feb 27, 2023</span>
-                  <span class="meta-category">- technology</span>
-                </div>
-                <h3 class="card-title">
-                  <a href="#">Get some cool gadgets in 2023</a>
-                </h3>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card border-none">
-                <div class="card-image">
-                  <img src="images/post-item5.jpg" alt="" class="img-fluid">
-                </div>
-              </div>
-              <div class="card-body text-uppercase">
-                <div class="card-meta text-muted">
-                  <span class="meta-date">March 09, 2023</span>
-                  <span class="meta-category">- technology</span>
-                </div>
-                <h3 class="card-title">
-                  <a href="#">TECHNOLOGY HACK YOU WON’T GET</a>
-                </h3>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card border-none">
-                <div class="card-image">
-                  <img src="images/post-item6.jpg" alt="" class="img-fluid">
-                </div>
-              </div>
-              <div class="card-body text-uppercase">
-                <div class="card-meta text-muted">
-                  <span class="meta-date">March 09, 2023</span>
-                  <span class="meta-category">- Gadget</span>
-                </div>
-                <h3 class="card-title">
-                  <a href="#">TOP 10 Gadget IN THE WORLD</a>
-                </h3>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card border-none">
-                <div class="card-image">
-                  <img src="images/post-item7.jpg" alt="" class="img-fluid">
-                </div>
-              </div>
-              <div class="card-body text-uppercase">
-                <div class="card-meta text-muted">
-                  <span class="meta-date">March 14, 2023</span>
-                  <span class="meta-category">- Gadget</span>
-                </div>
-                <h3 class="card-title">
-                  <a href="#">Get some cool gadgets in 2023</a>
-                </h3>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card border-none">
-                <div class="card-image">
-                  <img src="images/post-item8.jpg" alt="" class="img-fluid">
-                </div>
-              </div>
-              <div class="card-body text-uppercase">
-                <div class="card-meta text-muted">
-                  <span class="meta-date">March 18, 2023</span>
-                  <span class="meta-category">- Gadget</span>
-                </div>
-                <h3 class="card-title">
-                  <a href="#">TECHNOLOGY HACK YOU WON’T GET</a>
-                </h3>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="card border-none">
-                <div class="card-image">
-                  <img src="images/post-item9.jpg" alt="" class="img-fluid">
-                </div>
-              </div>
-              <div class="card-body text-uppercase">
-                <div class="card-meta text-muted">
-                  <span class="meta-date">March 22, 2023</span>
-                  <span class="meta-category">- Gadget</span>
-                </div>
-                <h3 class="card-title">
-                  <a href="#">TECHNOLOGY HACK YOU WON’T GET</a>
-                </h3>
-              </div>
-            </div>
+            @endforeach
           </div>
           <nav class="navigation paging-navigation text-center padding-medium" role="navigation">
             <div class="pagination loop-pagination d-flex justify-content-center align-items-center">
-              <a href="#">
-                <svg class="chevron-left pe-3">
-                  <use xlink:href="#chevron-left"></use>
-                </svg>
-              </a>
-              <span aria-current="page" class="page-numbers current pe-3">1</span>
-              <a class="page-numbers pe-3" href="#">2</a>
-              <a class="page-numbers pe-3" href="#">3</a>
-              <a class="page-numbers pe-3" href="#">4</a>
-              <a class="page-numbers" href="#">5</a>
-              <a href="#">
-                <svg class="chevron-right ps-3">
-                  <use xlink:href="#chevron-right"></use>
-                </svg>
-              </a>
+              {{ $blog->links() }}
             </div>
           </nav>
         </main>

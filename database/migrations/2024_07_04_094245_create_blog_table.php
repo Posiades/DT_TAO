@@ -12,15 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('blog', function (Blueprint $table) {
-            $table->increments('blog_id');
-            $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('guest_id')->nullable();
-            $table->string('title', 255);
-            $table->text('content');
-            $table->timestamp('post_date')->useCurrent();
-            
-            $table->foreign('user_id')->references('user_id')->on('users');
-            $table->foreign('guest_id')->references('guest_id')->on('guest'); // Corrected table name to 'guest'
+           $table->increments('blog_id');
+           $table->binary('image_banner');
+           $table->string('title', 255);
+           $table->string('image_main', 255);
+           $table->text('content_1');
+           $table->text('content_2');
+           $table->string('image_sub1', 255);
+           $table->string('image_sub2', 255);
+           $table->string('slug', 255);
+           $table->timestamp('updated_at')->useCurrent();
+           $table->timestamp('created_at')->useCurrent();
+           
         });
     }
 

@@ -22,7 +22,8 @@ return new class extends Migration
             $table->enum('status', ['Chưa Thanh Toán', 'Đã Thanh Toán',])->default('Chưa Thanh Toán');
             $table->string('vnp_transaction_id')->nullable();
             $table->string('total_price');
-            $table->timestamps();
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

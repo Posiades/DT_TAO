@@ -21,7 +21,8 @@ return new class extends Migration
             $table->unsignedInteger('product_id')->nullable();  // Khóa ngoại liên kết với bảng products, có thể NULL
             $table->unsignedInteger('user_id')->nullable();     // Khóa ngoại liên kết với bảng users, có thể NULL
             $table->unsignedInteger('category_id')->nullable();
-            $table->timestamps();                             
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();                          
             
             $table->foreign('product_id')->references('product_id')->on('product');
             $table->foreign('user_id')->references('user_id')->on('users');
