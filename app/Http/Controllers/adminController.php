@@ -9,6 +9,7 @@ use App\Models\orders;
 use App\Models\product;
 use App\Models\User;
 use App\Models\voucher;
+use App\Models\blog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -72,61 +73,80 @@ class adminController extends Controller
         ])
         ->paginate(10);
 
-return view('admin/order', compact('order'));       
+    return view('admin/order', compact('order'));       
     }
 
     function add_product(){
         return view('admin/add_product');   
     }
 
-    function post_add_product(Request $req){
-            function remove_accent($string){
-                $string = str_replace(' ', '-', $string);
-                return iconv('UTF-8', 'ASCII//TRANSLIT', $string);
-            }
-        $type_sp = $req -> option;
-        $name = $req -> name;
-        $configtion = $req -> configtion;
-        $color = $req -> color;
-        $status = $req -> status;
-        $storage = $req -> storage;
-        $slug = str_replace(' ', '-', $name).'-'.remove_accent($color).'-'.$storage;
-        $price = $req -> price;
-        $mota = $req -> mota;
-        $img = $req -> image;
-        if ($req->hasFile('image')) {
-            $image = $req->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('new_file_img'), $imageName);
-            $img = '/new_file_img/' . $imageName;
-        } else {
-            $img = '/default_image.jpg'; 
-        }
-        $quantity = $req -> quantity;
+    public function updateProduct(Request $req){
+        $id = $req->id;
+        $type = $req->type;
+        $name = $req->name;
+        $slug = str_replace(' ', '-', $name);
+        $price = $req->price;
+        $mota = $req->mota;
+        $color = $req->color;
+        $storage = $req->storage;
+        $configtion = $req->configtion;
+        $status = $req->status;
+        $quantity = $req->quantity;
     
-        $product = new product;
-        $product -> category_id = $type_sp;
-        $product -> name = $name;
-        $product -> configtion = $configtion;
-        $product -> description = $mota;
-        $product -> image = $img;
-        $product -> storage = $storage;
-        $product -> color = $color;
-        $product -> price = $price;
-        $product -> slug = $slug;
-        $product -> quantity = $quantity;
-        $product -> status = $status;
-        $product->save();
-
-        Session::flash('add_product', "Thêm sản phẩm $name thành công");
-        return redirect()->route('product');   
+        // Lấy thông tin sản phẩm hiện tại
+        $product = DB::table('product')->where('product_id', $id)->first();
+    
+        if ($product) {
+            // Đường dẫn của ảnh cũ
+            $oldImagePath = public_path($product->image);
+    
+            if ($req->hasFile('image')) {
+                // Nếu có ảnh mới, tạo tên ảnh và di chuyển ảnh mới
+                $image = $req->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+    
+                // Đường dẫn thư mục ảnh cũ
+                $oldImageDirectory = dirname($oldImagePath);
+    
+                // Di chuyển ảnh mới vào cùng thư mục với ảnh cũ
+                $image->move($oldImageDirectory, $imageName);
+    
+                // Đường dẫn của ảnh mới
+                $img = '/'.str_replace(public_path(), '', $oldImageDirectory) . '/' . $imageName;
+    
+                // Xóa ảnh cũ nếu tồn tại
+                if (file_exists($oldImagePath) && $oldImagePath !== public_path('/default_image.jpg')) {
+                    unlink($oldImagePath);
+                }
+            } else {
+                // Nếu không có ảnh mới, giữ ảnh cũ
+                $img = $product->image;
+            }
+    
+            // Cập nhật sản phẩm trong cơ sở dữ liệu
+            DB::table('product')
+                ->where('product_id', $id)
+                ->update([
+                    'category_id' => $type,
+                    'name' => $name,
+                    'configtion' => $configtion,
+                    'description' => $mota,
+                    'image' => $img,
+                    'storage' => $storage,
+                    'color' => $color,
+                    'price' => $price,
+                    'slug' => $slug,
+                    'quantity' => $quantity,
+                    'status' => $status
+                ]);
+    
+            Session::flash('update_success', "Đã cập nhật sản phẩm thành công");
+        } else {
+            Session::flash('update_error', "Sản phẩm không tồn tại");
+        }
+    
+        return redirect()->route('product');
     }
-
-    function edit_product($id){
-        $product = product::findOrFail($id);
-        return view('admin/edit_product', compact('product'));
-    }
-
 
     function post_edit_product(Request $req){
         $id = $req -> id;
@@ -187,18 +207,25 @@ return view('admin/order', compact('order'));
             $result = categories::where('category_id', $id)->firstOrFail();
             $type = "category";
             return view('admin.del_confirm', compact('result', 'type'));
-        }else
+        }else if($type == "voucher"){
             $result = voucher::findOrFail($id);
             $type = "voucher";
             return view('admin.del_confirm', compact('result', 'type'));
+        }else if ($type == "blog"){
+            $result = blog::findOrFail($id);
+            $type = "blog";
+            return view('admin.del_confirm', compact('result', 'type'));
+        }
     }
     
 
     function del_execute(Request $req, $id, $type){
         if($type == "product"){
-            DB::table('product')
-        ->where('product_id', $id)
-        ->delete();
+           $product = product::where('product_id', $id)->first();
+            $image_path = public_path("$product->image");
+            if (file_exists($image_path)){
+                unlink($image_path);}
+            $product->delete();
         Session::flash('del_sp', "Đã xóa sản phẩm thành công");
         return redirect()->route('product');
         }else if($type == "user"){
@@ -448,5 +475,44 @@ return view('admin/order', compact('order'));
         Session::flash('edit_category', "Đã cập nhật danh mục $req->name thành công");
         return redirect()->route('category');
     }
+
+    function blog(){
+        $blog = blog::paginate(10);
+        return view('admin.blog', compact('blog'));
+    }
+    
+    function add_blog(){
+        return view('admin.add_blog');
+    }
+
+    function post_add_blog(Request $req){
+        function remove_accent_blog($string){
+            $string = str_replace(' ', '-', $string);
+            return iconv('UTF-8', 'ASCII//TRANSLIT', $string);
+        }
+        $title = $req -> title;
+        $blog = new blog;
+        $blog -> image_banner = $req -> banner;
+        $blog -> title = $req -> $title;
+        $blog -> image_main = $req -> main;
+        $blog -> content_1 = $req -> content_1;
+        $blog -> content_2 = $req -> content_2;
+        $blog -> image_sub1 = $req -> sub1;
+        $blog -> image_sub2 = $req -> sub2;
+        $blog -> slug = str_replace(' ', '-', remove_accent_blog($title));
+        $blog -> save();
+
+        Session::flash('add_blog', "Đã tạo bài viết $title thành công");
+        return redirect()->route('blog');
+    }
+
+    function edit_blog($id){
+        $blog = blog::findOrFail($id);
+        return view('admin.edit_blog', compact('blog'));
+    }
+
+    
+
+    
     
 }

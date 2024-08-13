@@ -28,7 +28,7 @@
                         @csrf
                         <input type="hidden" name="id" value="{{ $result->user_id }}">
                         <div class="form-group">
-                            <h4 class="text-danger"><strong>Bạn chắc chắn muốn xóa người dùng: {{ $result->email }}?</strong></h4>
+                            <h4 class="text-danger"><strong>Bạn chắc chắn muốn xóa người dùng: {{ $result->full_name }}?</strong></h4>
                         </div>
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-danger">Xóa</button>
@@ -55,6 +55,23 @@
                 </div>
             </div>
 
+            @elseif ($type == "blog")
+            <div class="card">
+                <div class="card-body text-center">
+                    <form method="POST" action="{{ route('del_execute', ['id' => $result->blog_id, 'type' => 'order']) }}">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $result->blog_id }}">
+                        <div class="form-group">
+                            <h4 class="text-danger"><strong>Bạn chắc chắn muốn xóa bài viết: {{ $result->title }}?</strong></h4>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-danger">Xóa</button>
+                            <a href="{{ url()->previous() }}" class="btn btn-secondary">Hủy</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
             @elseif ($type == "category")
             <div class="card">
                 <div class="card-body text-center">
@@ -62,7 +79,7 @@
                         @csrf
                         <input type="hidden" name="id" value="{{ $result->category_id }}">
                         <div class="form-group">
-                            <h4 class="text-danger"><strong>Bạn chắc chắn muốn xóa danh mục: {{ $result->category_id }}?</strong></h4>
+                            <h4 class="text-danger"><strong>Bạn chắc chắn muốn xóa danh mục: {{ $result->name }}?</strong></h4>
                         </div>
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-danger">Xóa</button>

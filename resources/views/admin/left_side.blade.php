@@ -47,6 +47,13 @@
               <span class="menu-item-label">Voucher</span>
           </a>
         </li> 
+        <li class="{{ request()->routeIs('blog') ? 'active' : '' }}">
+          <a href="{{route('blog')}}">
+            <span class="icon"><i class="mdi mdi-newspaper"></i></span>
+            <span class="menu-item-label">Bài Viết</span>
+          </a>
+        </li>
+        
     
         {{-- <li class="--set-active-profile-html">
           <a href="binhluan.html">
@@ -55,12 +62,7 @@
           </a>
         </li> --}}
 
-        {{-- <li class="--set-active-profile-html">
-          <a href="tintuc.html">
-            <span class="icon"><i class="mdi mdi-view-list"></i></span>
-            <span class="menu-item-label">Tin tức</span>
-          </a>
-        </li> --}}
+        
       </li>
       </ul>
     </div>

@@ -85,6 +85,12 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/edit_category/{id}', [adminController::class, 'edit_category'])->name('edit_category');
         Route::post('/post_edit_category', [adminController::class, 'post_edit_category'])->name('post_edit_category');
 
+        Route::get('/blog', [adminController::class, 'blog'])->name('blog');
+        Route::get('/add_blog', [adminController::class, 'add_blog'])->name('add_blog');
+        Route::post('/post_add_blog', [adminController::class, 'post_add_blog'])->name('post_add_blog');
+        Route::get('/edit_blog/{id}', [adminController::class, 'edit_blog'])->name('edit_blog');
+        Route::post('/post_edit_blog', [adminController::class, 'post_edit_blog'])->name('post_edit_blog');
+
 });
 
 
