@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('blog', function (Blueprint $table) {
            $table->increments('blog_id');
-           $table->string('image_banner', 255);
+           $table->mediumText('image_banner')->chaset('binary');
            $table->string('title', 255);
-           $table->string('image_main', 255);
+           $table->mediumText('image_main')->charset('binary');
            $table->text('content_1');
            $table->text('content_2');
-           $table->string('image_sub1', 255);
-           $table->string('image_sub2', 255);
+           $table->mediumText('image_sub1')->charset('binary');
+           $table->mediumText('image_sub2')->charset('binary');
            $table->string('slug', 255);
            $table->timestamp('updated_at')->useCurrent();
            $table->timestamp('created_at')->useCurrent();

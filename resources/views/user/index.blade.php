@@ -124,7 +124,7 @@
             <div class="swiper-slide">
               <div class="product-card position-relative">
                 <div class="image-holder">
-                  <img src="{{asset($iphone->image)}}" alt="product-item" class="img-fluid">
+                  <img src="data:image/png;base64,{{ $iphone->image }}" alt="product-item" class="img-fluid">
                 </div>
                 <div class="cart-concern position-absolute">
                   <div class="cart-button d-flex">
@@ -162,7 +162,7 @@
             <div class="swiper-slide">
               <div class="product-card position-relative">
                 <div class="image-holder">
-                  <img src="{{asset($watch->image)}}" alt="product-item" class="img-fluid">
+                  <img src="data:image/png;base64,{{ $watch->image }}" alt="product-item" class="img-fluid">
                 </div>
                 <div class="cart-concern position-absolute">
                   <div class="cart-button d-flex">

@@ -13,23 +13,18 @@
                 </div>
                 <h1 class="post-title"><strong>{{$blog->title}}</strong></h1>
                 <div class="hero-image col-lg-12 mt-5">
-                  <img src="{{asset($blog->image_main)}}" alt="single-post" class="img-thumbnail">
+                  <img src="data:image/png;base64,{{ $blog->image_main }}" alt="single-post" class="img-thumbnail">
                 </div>
                 <div class="post-description review-item padding-medium">
                   <p>
                     {{$blog->content_1}}
                   </p>
                   <br>
-
-                  <img src="{{asset($blog->image_sub1)}}" alt="img-fluid" class="img-thumbnail">
-
+                  <img src="data:image/png;base64,{{ $blog->image_sub1 }}" alt="img-fluid" class="img-thumbnail">
                   <p>
                     {{$blog->content_2}}
                   </p>
-
-                  <img src="{{asset($blog->image_sub2)}}" alt="img-fluid" class="img-thumbnail">
-
-
+                  <img src="data:image/png;base64,{{ $blog->image_sub2 }}" alt="img-fluid" class="img-thumbnail">
               </div>
             </article>
             

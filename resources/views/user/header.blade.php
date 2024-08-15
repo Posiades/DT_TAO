@@ -53,10 +53,10 @@
                     <a href="{{url('/tin-tuc')}}" class="dropdown-item">Tin tức</a>
                   </li>
                   <li>
-                    <a href="{{url('/san-pham')}}" class="dropdown-item">sản phẩm</a>
+                    <a href="{{url('/san-pham')}}" class="dropdown-item">Sản phẩm</a>
                   </li>
                   <li>
-                    <a href="{{url('/gio-hang')}}" class="dropdown-item">giỏ hàng</a>
+                    <a href="{{url('/gio-hang')}}" class="dropdown-item">Giỏ hàng</a>
                   </li>
                   <li>
                     <a href="{{url('/thanh-toan')}}" class="dropdown-item">Thanh Toán</a>
@@ -64,13 +64,35 @@
                   <li>
                     <a href="{{url('/lien-he')}}" class="dropdown-item">Liên hệ</a>
                   </li>
+                  @if(Session::has('user'))
+                    <li class="nav-item dropdown">
+                      <a class="nav-link me-4 dropdown-toggle link-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">{{ Session::get('user')->full_name }}</a>
+                      <ul class="dropdown-menu">
+                        <li>
+                          @if (Session::get('user')->role != 1)
+                            <a href="{{ route('client.index') }}" class="dropdown-item">Thông Tin Tài Khoản</a>
+                          @else
+                            <a href="{{ route('admin_index') }}" class="dropdown-item">Trang Quản Trị</a>
+                          @endif
+                        </li>
+                        <li>
+                          <a href="{{ url('/dang-xuat') }}" class="dropdown-item">Đăng Xuất</a>
+                        </li>
+                      </ul>
+                    </li>
+                  @else
+                    <li>
+                      <a href="{{url('/dang-nhap')}}" class="dropdown-item">Đăng Nhập</a>
+                    </li>
+                  @endif
                 </ul>
               </li>
+              
               <li class="nav-item">
                 <div class="user-items ps-5">
                   <ul class="d-flex justify-content-end list-unstyled">
                     <li class="search-item pe-3">
-                      <a href="{{url('/tim-kiem')}}" class="search-button">
+                      <a href="#" class="search-button">
                         <svg class="search">
                           <use xlink:href="#search"></use>
                         </svg>

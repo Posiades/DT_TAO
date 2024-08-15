@@ -71,7 +71,7 @@
             <tr>
               <td class="image-cell">
                 <div class="image">
-                  <img src="{{ asset($item->image) }}" class="rounded-full">
+                  <img src="data:image/png;base64,{{ $item->image }}" class="rounded-full">
                 </div>
               </td>
               <td>{{ $item->name }}</td>

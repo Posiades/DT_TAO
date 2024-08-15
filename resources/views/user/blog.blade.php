@@ -45,7 +45,7 @@
                 <div class="col-lg-4">
                   <div class="card border-none">
                     <div class="card-image">
-                      <img src="{{ asset($post->image_banner) }}" alt="" class="img-fluid">
+                      <img src="data:image/png;base64,{{ $post->image_banner }}" alt="" class="img-fluid">
                     </div>
                     <div class="card-body text-uppercase">
                       <div class="card-meta text-muted">
@@ -73,7 +73,7 @@
                 <div class="col-lg-4">
                   <div class="card border-none">
                     <div class="card-image">
-                      <img src="{{ asset($post->image_banner) }}" alt="" class="img-fluid">
+                      <img src="data:image/png;base64,{{ $post->image_banner }}" alt="" class="img-fluid">
                     </div>
                     <div class="card-body text-uppercase">
                       <div class="card-meta text-muted">

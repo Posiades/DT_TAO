@@ -13,11 +13,17 @@ class blog extends Seeder
      */
     public function run(): void
     {
+        function endcode_Image($path){
+            $pathFile = public_path($path);
+            $imageData = file_get_contents($pathFile);
+            $base64Image = base64_encode($imageData);
+                return $base64Image;
+            }
         
         DB::table('blog')->insert([
-            'image_banner' => 'blog/blog_1/image_banner.jpg',
+            'image_banner' => endcode_Image('blog/blog_1/image_banner.jpg'),
             'title' => 'Những Dự Đoán Về iPhone 16',
-            'image_main' => 'blog/blog_1/image_main.jpg',
+            'image_main' => endcode_Image('blog/blog_1/image_main.jpg'),
             'content_1' => '
                 Kể từ khi Apple ra mắt iPhone đầu tiên vào năm 2007, mỗi phiên bản mới của dòng sản phẩm này đều mang lại những cải tiến và đổi mới đáng kể. Đã gần một năm kể từ khi iPhone 15 được giới thiệu, và dù iPhone 16 còn chưa được công bố chính thức, cộng đồng công nghệ đã bắt đầu rộ lên những suy đoán và dự đoán về những tính năng và cải tiến mà mẫu iPhone tiếp theo sẽ mang lại. Hãy cùng khám phá một số giả thuyết hấp dẫn về iPhone 16.
 
@@ -47,8 +53,8 @@ class blog extends Seeder
             
             ',
 
-            'image_sub1' => 'blog/blog_1/image_sub1.jpg',
-            'image_sub2' => 'blog/blog_1/image_sub2.jpg',
+            'image_sub1' => endcode_Image('blog/blog_1/image_sub1.jpg'),
+            'image_sub2' => endcode_Image('blog/blog_1/image_sub1.jpg'),
             'slug' => 'nhung-du-doan-ve-iphone-16'
         ]);
         

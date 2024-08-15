@@ -9,9 +9,9 @@
 
 <h2>Xác nhận đặt lại mật khẩu</h2>
 
-<p>Bạn đang nhận email này vì chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn từ DT TÁO.</p>
+<p>Bạn đã nhận email này vì chúng tôi đã nhận được yêu cầu đặt lại mật khẩu cho tài khoản của bạn từ <strong>DT TÁO</strong>.</p>
 
-<p>Nếu bạn không yêu cầu đặt lại mật khẩu, không cần thực hiện thêm hành động nào.</p>
+<p style="color: red"><strong>Nếu bạn không yêu cầu đặt lại mật khẩu, không cần thực hiện thêm hành động nào.</strong></p>
 
 <p>
     Để đặt lại mật khẩu của bạn, hãy nhấp vào liên kết sau:
@@ -19,7 +19,7 @@
 </p>
 
 <p>
-    Liên kết đặt lại mật khẩu này sẽ hết hạn trong 5 phút.
+    Liên kết đặt lại mật khẩu này sẽ hết hạn trong <strong>5 phút</strong>.
 </p>
 
 
@@ -27,7 +27,7 @@
 <p>
     Trân trọng,
     <br>
-    DT TAO
+   <strong> DT TAO</strong>
     <br>
 </p>
 

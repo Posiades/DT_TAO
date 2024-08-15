@@ -147,13 +147,17 @@ class homeControllers extends Controller
                 "name" => $product->name,
                 "quantity" => 1,
                 "price" => $product->price,
-                "image" => $product->image // Đảm bảo bạn có thuộc tính 'image_url' trong model Product của bạn
+                "image" => $product->image 
             ];
         }
+
+       
     
         Session::put('cart', $cart);
     
-        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng thành công!');
+        // return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng thành công!');
+
+        return view('user.cart', compact('product'));
     }
     
     public function removeFromCart($id)

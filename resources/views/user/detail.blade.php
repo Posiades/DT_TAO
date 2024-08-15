@@ -9,7 +9,7 @@
                 <div class="row mt-5">
                     <div class="col-lg-6">
                         <div class="product-preview mb-3">
-                            <img src="{{ asset($productItem->image) }}" alt="single-product" class="img-fluid">
+                            <img src="data:image/png;base64,{{ $productItem->image }}" alt="single-product" class="img-fluid">
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -114,7 +114,7 @@
                                         <div class="col-md-2">
                                             <div class="image-holder">
                                                 @if ($productItem->full_name != null)
-                                                <img src="{{asset('images/avata.jpg')}}" alt="review" class="img-fluid"> 
+                                                <img src="data:image/png;base64,{{ $productItem->image }}" alt="review" class="img-fluid"> 
                                                 @else
                                                     <span>Chưa có đánh giá cho sản phẩm này</span>
                                                 @endif
@@ -170,7 +170,7 @@
                                 <div class="swiper-slide">
                                     <div class="product-card position-relative">
                                         <div class="image-holder">
-                                            <img src="{{ asset($recommendedProduct->image) }}" alt="product-item" class="img-fluid">
+                                            <img src="data:image/png;base64,{{ $recommendedProduct->image }}" alt="product-item" class="img-fluid">
                                         </div>
                                         <div class="cart-concern position-absolute">
                                             <div class="cart-button d-flex">

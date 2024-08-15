@@ -30,6 +30,7 @@
               <h3 class="cart-title col-lg-4 pb-3">Giá</h3>
             </div>
           </div>
+
           @foreach(session('cart') as $id => $details)
           <div class="cart-item border-top border-bottom padding-small">
             <div class="row align-items-center"> 
@@ -37,7 +38,7 @@
                 <div class="cart-info d-flex flex-wrap align-items-center mb-4">
                   <div class="col-lg-5">
                     <div class="card-image">
-                      <img src="{{ $details['image'] }}" alt="{{ $details['name'] }}" class="img-fluid">
+                      <img src="data:image/png;base64,{{ $details['image'] }}" alt="{{ $details['name'] }}" class="img-fluid">
                     </div>
                   </div>
                   <div class="col-lg-4">
@@ -118,7 +119,7 @@
           <div class="button-wrap">
             <button class="btn btn-black btn-medium text-uppercase me-2 mb-3 btn-rounded-none">Cập Nhập Giỏ Hàng</button>
             <button class="btn btn-black btn-medium text-uppercase me-2 mb-3 btn-rounded-none">Tiếp Tục Mua Sắm</button>
-            <button  class="btn btn-black btn-medium text-uppercase mb-3 btn-rounded-none"><a href="{{route('checkout')}}">Thanh Toán</a></button>
+            <a class="btn btn-black btn-medium text-uppercase me-2 mb-3 btn-rounded-none" href="{{route('checkout')}}">Thanh Toán</a>
           </div>
         </div>
         @else

@@ -45,7 +45,7 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="product-card position-relative pe-3 pb-3">
                     <div class="image-holder">
-                        <img src="{{ asset($product->image) }}" alt="{{ $product->name }}" class="img-fluid">
+                        <img src="data:image/png;base64,{{ $product->image }}" alt="{{ $product->name }}" class="img-fluid">
                     </div>
                     <div class="cart-concern position-absolute">
                         <div class="cart-button d-flex">

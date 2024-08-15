@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name', 255);
             $table->text('configtion');
             $table->text('description');
-            $table->string('image', 255);
+            $table->mediumText('image')->charset('binary');
             $table->string('storage')->nullable();
             $table->string('color', 225)->nullable();
             $table->decimal('price', 12, 2);
