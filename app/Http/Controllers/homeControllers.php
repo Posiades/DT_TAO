@@ -13,7 +13,8 @@ class homeControllers extends Controller
     function index(){
         $product_iphone = product::where('category_id', 1)->limit(4)->get();
         $product_watch = product::where('category_id', 4)->limit(4)->get();
-        return view('user/index', compact('product_iphone', 'product_watch'));
+        $blog = blog::orderBy('created_at', 'desc')->limit(4)->get();
+        return view('user/index', compact('product_iphone', 'product_watch', 'blog'));
     }
 
     function about(){
@@ -113,9 +114,12 @@ class homeControllers extends Controller
 
         
         $name_product = product::where('slug', $slug)->first();
-        $recomment = Product::where('name', 'LIKE', '%' . $name_product->name . '%')
-        ->where('product_id', '!=', $name_product->product_id)
-        ->limit(4)->get();
+        $recomment = Product::where('name', $name_product->name)
+        ->where('color', $name_product->color)
+        ->where('storage', '!=', $name_product->storage) 
+        ->where('product_id', '!=', $name_product->product_id)      
+        ->limit(4)
+        ->get();
 
         return view('user/detail', compact('product', 'recomment'));
     }

@@ -80,7 +80,7 @@
                       <a href="{{ route('edit_blog', ['id' => $item->blog_id]) }}"><span class="icon"><i class="mdi mdi-pencil"></i></span></a>
                     </button>
                     <button class="button small red --jb-modal" data-target="sample-modal" type="button">
-                      <a href="{{ route('del_confirm', ['id' => $item->blog_id, 'type' => 'blog']) }}"><span class="icon"><i class="mdi mdi-trash-can"></i></span></a>
+                      <a href="{{ route('del_confirm', ['id' => $item->blog_id, 'type' => "blog"]) }}"><span class="icon"><i class="mdi mdi-trash-can"></i></span></a>
                     </button>
                   </div>
                 </td>

@@ -55,7 +55,7 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-5">
-                            <button type="submit" class="btn btn-primary">THêm Đơn Hàng</button>
+                            <button type="submit" class="btn btn-primary">THêm Người Dùng</button>
                         </div>
                     </form>
                 </div>

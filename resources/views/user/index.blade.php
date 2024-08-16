@@ -218,66 +218,36 @@
   </section>
   <section id="latest-blog" class="padding-large">
     <div class="container">
-      <div class="row">
-        <div class="display-header d-flex justify-content-between pb-3">
-          <h2 class="display-7 text-dark text-uppercase">Tin tức mới nhất</h2>
-          <div class="btn-right">
-            <a href="blog.html" class="btn btn-medium btn-normal text-uppercase">Tới tin tức</a>
-          </div>
+        <div class="row">
+            <div class="display-header d-flex justify-content-between pb-3">
+                <h2 class="display-7 text-dark text-uppercase">Tin tức mới nhất</h2>
+                <div class="btn-right">
+                    <a href="{{ url('/tin-tuc') }}" class="btn btn-medium btn-normal text-uppercase">Tới tin tức</a>
+                </div>
+            </div>
+            <div class="post-grid d-flex flex-wrap justify-content-between">
+                @foreach($blog as $blog)
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="card border-none me-3">
+                            <div class="card-image">
+                                <img src="data:image/png;base64,{{ $blog->image_banner }}" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="card-body text-uppercase">
+                            <div class="card-meta text-muted">
+                                <span class="meta-date">{{ $blog->created_at->format('j  n Y') }}</span>
+                            </div>
+                            <h3 class="card-title">
+                                <a href="{{ route('blog_detail', ['slug'=>$blog->slug]) }}">{{ $blog->title }}</a>
+                            </h3>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
-        <div class="post-grid d-flex flex-wrap justify-content-between">
-          <div class="col-lg-4 col-sm-12">
-            <div class="card border-none me-3">
-              <div class="card-image">
-                <img src="images/post-item1.jpg" alt="" class="img-fluid">
-              </div>
-            </div>
-            <div class="card-body text-uppercase">
-              <div class="card-meta text-muted">
-                <span class="meta-date">22 tháng 6 2024</span>
-                <span class="meta-category">- Ảnh</span>
-              </div>
-              <h3 class="card-title">
-                <a href="#">Apple The Exchange TRX hiện đã khai trương tại Kuala Lumpur</a>
-              </h3>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-12">
-            <div class="card border-none me-3">
-              <div class="card-image">
-                <img src="images/post-item2.jpg" alt="" class="img-fluid">
-              </div>
-            </div>
-            <div class="card-body text-uppercase">
-              <div class="card-meta text-muted">
-                <span class="meta-date">20 tháng 6 2024</span>
-                <span class="meta-category">- Đọc Nhanh</span>
-              </div>
-              <h3 class="card-title">
-                <a href="#">Các phiên bản mới của Final Cut Pro dành cho iPad và Mac ra mắt hôm nay</a>
-              </h3>
-            </div>
-          </div>
-          <div class="col-lg-4 col-sm-12">
-            <div class="card border-none me-3">
-              <div class="card-image">
-                <img src="images/post-item3.jpg" alt="" class="img-fluid">
-              </div>
-            </div>
-            <div class="card-body text-uppercase">
-              <div class="card-meta text-muted">
-                <span class="meta-date">19 tháng 6 2024</span>
-                <span class="meta-category">- Thông báo bảo chì</span>
-              </div>
-              <h3 class="card-title">
-                <a href="#">Apple The Exchange TRX sẽ chào đón những khách hàng đầu tiên vào Thứ Bảy, ngày 22 tháng 6, tại Kuala Lumpur</a>
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
+
   
   
 @endsection

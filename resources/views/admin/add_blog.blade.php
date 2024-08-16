@@ -22,13 +22,13 @@
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Ảnh Banner:</strong>
-                                    <input type="file" name="banner" class="form-control" placeholder="Ảnh Đại Diện Bài Viết">
+                                    <input type="file" name="banner" class="form-control" placeholder="Ảnh Đại Diện Bài Viết" >
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Ảnh Chính của bài viết:</strong>
-                                    <input type="file" name="main" class="form-control" placeholder="Ảnh Chính Bài Viết">
+                                    <input type="file" name="main" class="form-control" placeholder="Ảnh Chính Bài Viết" >
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="col-xs-12 col-sm-12 col-md-12 text-center mt-5">
-                            <button type="submit" class="btn btn-primary">THêm Bài Viết</button>
+                            <button type="submit" class="btn btn-primary">Thêm Bài Viết</button>
                         </div>
                     </form>
                 </div>

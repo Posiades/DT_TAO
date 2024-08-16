@@ -23,12 +23,12 @@
 
                         <div class="form-group mb-3">
                             <label for="color"><strong>Màu Sắc:</strong></label>
-                            <input type="text" id="color" name="color" class="form-control" placeholder="Nhập Màu Sắc" value="{{ $product->color }}" required>
+                            <input type="text" id="color" name="color" class="form-control" placeholder="Nhập Màu Sắc" value="{{ $product->color }}">
                         </div>
 
                         <div class="form-group mb-3">
                             <label for="storage"><strong>Bộ Nhớ:</strong></label>
-                            <input type="text" id="storage" name="storage" class="form-control" placeholder="Nhập Dung Lượng" value="{{ $product->storage }}" required>
+                            <input type="text" id="storage" name="storage" class="form-control" placeholder="Nhập Dung Lượng" value="{{ $product->storage }}">
                         </div>
 
                         <div class="form-group mb-3">

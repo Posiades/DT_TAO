@@ -50,28 +50,22 @@
                                 <div class="meta-item d-flex align-items-baseline">
                                     <h4 class="item-title no-margin pe-2">Mã Hàng:</h4>
                                     <ul class="select-list list-unstyled d-flex">
-                                        <li data-value="S" class="select-item">1223</li>
+                                        <li data-value="S" class="select-item">{{ $productItem->product_id }}</li>
                                     </ul>
                                 </div>
                                 <div class="meta-item d-flex align-items-baseline">
-                                    <h4 class="item-title no-margin pe-2">Loại:</h4>
+                                    <h4 class="item-title no-margin pe-2">Màu:</h4>
                                     <ul class="select-list list-unstyled d-flex">
                                         <li data-value="S" class="select-item">
-                                            <a href="#">Watch</a>,
-                                        </li>
-                                        <li data-value="S" class="select-item">
-                                            <a href="#"> Màn hình cảm ứng</a>,
+                                           {{ $productItem->color }}
                                         </li>
                                     </ul>
                                 </div>
                                 <div class="meta-item d-flex align-items-baseline">
-                                    <h4 class="item-title no-margin pe-2">Thẻ:</h4>
+                                    <h4 class="item-title no-margin pe-2">Bộ Nhớ:</h4>
                                     <ul class="select-list list-unstyled d-flex">
                                         <li data-value="S" class="select-item">
-                                            <a href="#">Cổ điển</a>,
-                                        </li>
-                                        <li data-value="S" class="select-item">
-                                            <a href="#"> Hiện đại</a>
+                                            {{ $productItem->storage }}
                                         </li>
                                     </ul>
                                 </div>
@@ -143,7 +137,7 @@
                                                 <div class="review-header">
                                                     <span class="author-name">{{$productItem->full_name}}</span>
                                                     <span class="review-date">
-                                                      {{ $productItem->created_at ? $productItem->created_at->format('d/m/Y H:i') : '' }}
+                                                      {{ $productItem->created_at ? $productItem->created_at : '' }}
                                                   </span>                                                  
                                                 </div>
                                                 <p>{{$productItem->content}}</p>

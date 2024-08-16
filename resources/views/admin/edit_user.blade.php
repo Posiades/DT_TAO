@@ -6,7 +6,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header bg-primary text-white">
-                    <h2 class="pull-left">Add New User</h2>
+                    <h2 class="pull-left">Chỉnh Sửa Thông Tin</h2>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('post_edit_user') }}" enctype="multipart/form-data">

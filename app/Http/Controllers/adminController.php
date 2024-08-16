@@ -13,9 +13,13 @@ use App\Models\blog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
+
+
 
 class adminController extends Controller
 {
+
     function index(){
         $product = DB::table('product')
         ->join('categories', 'product.category_id', '=', 'categories.category_id')
@@ -80,50 +84,27 @@ class adminController extends Controller
         return view('admin/add_product');   
     }
 
-    public function updateProduct(Request $req){
+   function edit_product($id){
+    $product = product::findOrFail($id);
+    return view('admin.edit_product', compact('product'));
+   }
+
+    function post_edit_product(Request $req){
         $id = $req->id;
         $type = $req->type;
         $name = $req->name;
         $slug = str_replace(' ', '-', $name);
         $price = $req->price;
-        $mota = $req->mota;
+        $mota = $req->description;
         $color = $req->color;
         $storage = $req->storage;
         $configtion = $req->configtion;
         $status = $req->status;
         $quantity = $req->quantity;
-    
-        // Lấy thông tin sản phẩm hiện tại
-        $product = DB::table('product')->where('product_id', $id)->first();
-    
-        if ($product) {
-            // Đường dẫn của ảnh cũ
-            $oldImagePath = public_path($product->image);
-    
-            if ($req->hasFile('image')) {
-                // Nếu có ảnh mới, tạo tên ảnh và di chuyển ảnh mới
-                $image = $req->file('image');
-                $imageName = time() . '.' . $image->getClientOriginalExtension();
-    
-                // Đường dẫn thư mục ảnh cũ
-                $oldImageDirectory = dirname($oldImagePath);
-    
-                // Di chuyển ảnh mới vào cùng thư mục với ảnh cũ
-                $image->move($oldImageDirectory, $imageName);
-    
-                // Đường dẫn của ảnh mới
-                $img = '/'.str_replace(public_path(), '', $oldImageDirectory) . '/' . $imageName;
-    
-                // Xóa ảnh cũ nếu tồn tại
-                if (file_exists($oldImagePath) && $oldImagePath !== public_path('/default_image.jpg')) {
-                    unlink($oldImagePath);
-                }
-            } else {
-                // Nếu không có ảnh mới, giữ ảnh cũ
-                $img = $product->image;
-            }
-    
-            // Cập nhật sản phẩm trong cơ sở dữ liệu
+  
+        if ($req->hasFile('image_url')) {
+            $path = $req -> image_url;
+                
             DB::table('product')
                 ->where('product_id', $id)
                 ->update([
@@ -131,7 +112,7 @@ class adminController extends Controller
                     'name' => $name,
                     'configtion' => $configtion,
                     'description' => $mota,
-                    'image' => $img,
+                    'image' => end_code_imageBase64($path),
                     'storage' => $storage,
                     'color' => $color,
                     'price' => $price,
@@ -139,52 +120,23 @@ class adminController extends Controller
                     'quantity' => $quantity,
                     'status' => $status
                 ]);
-    
-            Session::flash('update_success', "Đã cập nhật sản phẩm thành công");
         } else {
-            Session::flash('update_error', "Sản phẩm không tồn tại");
+            DB::table('product')
+                ->where('product_id', $id)
+                ->update([
+                    'category_id' => $type,
+                    'name' => $name,
+                    'configtion' => $configtion,
+                    'description' => $mota,
+                    'storage' => $storage,
+                    'color' => $color,
+                    'price' => $price,
+                    'slug' => $slug,
+                    'quantity' => $quantity,
+                    'status' => $status
+                ]);
         }
     
-        return redirect()->route('product');
-    }
-
-    function post_edit_product(Request $req){
-        $id = $req -> id;
-        $type = $req -> type;
-        $name = $req -> name;
-        $slug = str_replace(' ', '-', $name);
-        $price = $req -> price;
-        $mota = $req -> mota;
-        $img = $req -> image;
-        $color = $req -> color;
-        $storage = $req -> storage;
-        $configtion = $req -> configtion;
-        $status = $req -> status;
-        if ($req->hasFile('image')) {
-            $image = $req->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('new_file_img'), $imageName);
-            $img = '/new_file_img/' . $imageName;
-        } else {
-            $img = '/default_image.jpg'; 
-        }
-        $quantity = $req -> quantity;
-        DB::table('product')
-        ->where('product_id', $id)
-        ->update([
-            'category_id' => $type,
-            'name' => $name,
-            'configtion' => $configtion,
-            'description' => $mota,
-            'image' => $img,
-            'storage' => $storage,
-            'color' => $color,
-            'price' => $price,
-            'slug' => $slug,
-            'quantity' => $quantity,
-            'status' => $status
-        ]);
-
         Session::flash('edit_sp', "Đã cập nhật thành công sản phẩm $name thành công");
         return redirect()->route('product');
     }
@@ -221,13 +173,11 @@ class adminController extends Controller
 
     function del_execute(Request $req, $id, $type){
         if($type == "product"){
-           $product = product::where('product_id', $id)->first();
-            $image_path = public_path("$product->image");
-            if (file_exists($image_path)){
-                unlink($image_path);}
-            $product->delete();
-        Session::flash('del_sp', "Đã xóa sản phẩm thành công");
-        return redirect()->route('product');
+            DB::table('product')
+            ->where('product_id', $id)
+            ->delete();
+            Session::flash('del_sp', "Đã xóa sản phẩm thành công");
+            return redirect()->route('product');
         }else if($type == "user"){
             DB::table('users')
             -> where('user_id', $id)
@@ -255,6 +205,12 @@ class adminController extends Controller
             ->delete();
             Session::flash('del_category', 'Đã xóa danh mục thành công');
             return redirect()->route('category');
+        }else if($type == "blog"){
+            DB::table('blog')
+            ->where('blog_id')
+            ->delete();
+            Session::flash('del_blog', "Đã xóa bài viết thành công");
+            return redirect()->route('blog');
         }
     }
 
@@ -486,23 +442,18 @@ class adminController extends Controller
     }
 
     function post_add_blog(Request $req){
-        function remove_accent_blog($string){
-            $string = str_replace(' ', '-', $string);
-            return iconv('UTF-8', 'ASCII//TRANSLIT', $string);
-        }
-        $title = $req -> title;
         $blog = new blog;
-        $blog -> image_banner = $req -> banner;
-        $blog -> title = $req -> $title;
-        $blog -> image_main = $req -> main;
+        $blog -> image_banner = end_code_imageBase64($req->banner);
+        $blog -> title = $req -> title;
+        $blog -> image_main = end_code_imageBase64($req -> main);
         $blog -> content_1 = $req -> content_1;
         $blog -> content_2 = $req -> content_2;
-        $blog -> image_sub1 = $req -> sub1;
-        $blog -> image_sub2 = $req -> sub2;
-        $blog -> slug = str_replace(' ', '-', remove_accent_blog($title));
+        $blog -> image_sub1 = end_code_imageBase64($req->sub1);
+        $blog -> image_sub2 = end_code_imageBase64($req->sub2);
+        $blog -> slug = Str::slug($req->title); 
         $blog -> save();
 
-        Session::flash('add_blog', "Đã tạo bài viết $title thành công");
+        Session::flash('add_blog', "Đã tạo bài viết $req->title thành công");
         return redirect()->route('blog');
     }
 
@@ -511,7 +462,25 @@ class adminController extends Controller
         return view('admin.edit_blog', compact('blog'));
     }
 
-    
+    function post_edit_blog(Request $req){
+       
+       DB::table('blog')
+       ->where('blog_id', $req->id)
+       ->update([
+        'image_banner' => end_code_imageBase64($req->banner),
+        'title' => $req->title,
+        'image_main' => end_code_imageBase64($req->main),
+        'content_1' => $req->content_1,
+        'content_2' => $req->content_2,
+        'image_sub1' => end_code_imageBase64($req->sub1),
+        'image_sub2' => end_code_imageBase64($req->sub2)
+       ]);
+
+       Session::flash('edit_blog', "Đã cập nhật bài viết $req->title thành công");
+       return redirect()->route('blog');
+    }   
+
+
 
     
     
