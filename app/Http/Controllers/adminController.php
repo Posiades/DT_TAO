@@ -329,10 +329,13 @@ class adminController extends Controller
     }
 
     function  add_order(){
-        return view('admin.add_order');
+        $order_user = user::all();
+        $order_product = product::all();
+        return view('admin.add_order', compact('order_user', 'order_product'));
     }
 
     function post_add_order(Request $req){
+
         $id_user = $req -> user_id;
         $id_product = $req -> product_id;
         $date_create = $req -> order_date;
