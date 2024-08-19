@@ -80,10 +80,13 @@ class userControllers extends Controller
 
     function reset_pass($email, $token){
         $token_mail = Session::get($email);
-        if($token = $token_mail){
+        if($token == $token_mail && Session::has($email)){
+            $token = openssl_random_pseudo_bytes(32);
+            $token = hash('sha256', $token);
+            session::put($email, $token, 60*5);
             return view('user/reset_pass', compact('email'));
         }else{
-            Session::flash('token_wrong', 'Mã Token Xác Thực Token Không Chính Xác');
+            Session::flash('token_wrong', 'Mã Token Xác Thực Token Hết Đã Hiệu Lực');
             return view('user/forgotpass');
         }
     }

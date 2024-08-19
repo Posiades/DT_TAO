@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
-
+use function PHPSTORM_META\type;
 
 class adminController extends Controller
 {
@@ -37,25 +37,23 @@ class adminController extends Controller
     }
 
     function product(){
-        $quantity_show = 10;
+        $type = null;
         $product = DB::table('product')
         ->join('categories', 'product.category_id', '=', 'categories.category_id')
         ->select('product.*', 'categories.name as category_name')
-        ->paginate($quantity_show);
-        return view('admin/product', compact('product'));
+        ->paginate(10);
+        return view('admin/product', compact('product', 'type'));
     }
 
    
 
     function user(){
-        $quantity_show = 10;
-        $user = user::paginate($quantity_show);
+        $user = user::paginate(10);
         return view('admin/user', compact('user'));
     }
 
     function voucher(){
-        $quantity_show = 10;
-        $voucher = voucher::paginate($quantity_show);
+        $voucher = voucher::paginate(10);
         return view('admin/voucher', compact('voucher'));
     }
 
@@ -368,6 +366,8 @@ class adminController extends Controller
     }
 
     function edit_order(){
+        $user = user::all();
+        $product = product::all();
         $order = DB::table('orders')
         ->join('order_detail', 'orders.order_id', '=', 'order_detail.order_id') 
         ->join('product', 'order_detail.product_id', '=', 'product.product_id') 
@@ -381,7 +381,7 @@ class adminController extends Controller
                 'users.user_id',
         ])
         ->first();
-        return view('admin.edit_order', compact('order'));
+        return view('admin.edit_order', compact('order', 'user', 'product'));
     }
 
     function post_edit_order(Request $req){
@@ -483,6 +483,44 @@ class adminController extends Controller
        return redirect()->route('blog');
     }   
 
+    function product_filter($type){
+        if($type == "iphone"){
+            $product = DB::table('product')
+            ->where('product.category_id', 1)
+            ->join('categories', 'product.category_id', '=', 'categories.category_id')
+            ->select('product.*', 'categories.name as category_name')
+            ->paginate(10);
+            return view('admin/product', compact('product', 'type'));
+        }else if($type == "Mac"){
+            $product = DB::table('product')
+            ->where('product.category_id', 2)
+            ->join('categories', 'product.category_id', '=', 'categories.category_id')
+            ->select('product.*', 'categories.name as category_name')
+            ->paginate(10);
+            return view('admin/product', compact('product', 'type'));
+        }else if($type == "ipad"){
+            $product = DB::table('product')
+            ->where('product.category_id', 3)
+            ->join('categories', 'product.category_id', '=', 'categories.category_id')
+            ->select('product.*', 'categories.name as category_name')
+            ->paginate(10);
+            return view('admin/product', compact('product', 'type'));
+        }else if($type == "watch"){
+            $product = DB::table('product')
+            ->where('product.category_id', 4)
+            ->join('categories', 'product.category_id', '=', 'categories.category_id')
+            ->select('product.*', 'categories.name as category_name')
+            ->paginate(10);
+            return view('admin/product', compact('product', 'type'));
+        }else if($type == "airpod"){
+            $product = DB::table('product')
+            ->where('product.category_id', 5)
+            ->join('categories', 'product.category_id', '=', 'categories.category_id')
+            ->select('product.*', 'categories.name as category_name')
+            ->paginate(10);
+            return view('admin/product', compact('product', 'type'));
+        }
+    }
 
 
     

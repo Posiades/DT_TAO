@@ -19,7 +19,7 @@
 </p>
 
 <p>
-    Liên kết đặt lại mật khẩu này sẽ hết hạn trong <strong>5 phút</strong>.
+    Liên kết đặt lại mật khẩu này <strong>chỉ có hiệu lực 1 lần duy nhất cho 1 yêu cầu thay đổi mật khẩu</strong>
 </p>
 
 

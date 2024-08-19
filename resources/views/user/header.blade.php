@@ -38,9 +38,6 @@
                 <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 5]) }}">AIRPODS</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{url('/khuyen-mai')}}">Khuyến mãi</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link me-4" href="{{url('/tin-tuc')}}">tin tức</a>
               </li>
               <li class="nav-item dropdown">

@@ -91,6 +91,8 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/edit_blog/{id}', [adminController::class, 'edit_blog'])->name('edit_blog');
         Route::post('/post_edit_blog', [adminController::class, 'post_edit_blog'])->name('post_edit_blog');
 
+        Route::get('/product/filter/{type}', [adminController::class, 'product_filter'])->name('product_filter');
+
 });
 
 

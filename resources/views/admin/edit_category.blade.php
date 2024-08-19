@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('post_edit_category') }}" enctype="multipart/form-data">
                         @csrf
-                        <input type="hidden" name="id" value="{{ $category->id }}">
+                        <input type="hidden" name="id" value="{{ $category->category_id }}">
                         
                         <div class="form-group mb-3">
                             <label for="name"><strong>Tên Danh Mục:</strong></label>

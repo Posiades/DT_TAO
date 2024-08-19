@@ -16,9 +16,14 @@
                         <input type="hidden" name="id" value="{{ $order->order_id }}">
                         <input type="hidden" name="detail_id" value="{{ $order->order_detail_id }}">
 
-                        <div class="form-group mb-3">
-                            <label for="user_id"><strong>User ID (nếu có):</strong></label>
-                            <input type="text" id="user_id" class="form-control" name="user_id" placeholder="Nếu đơn ngoài thì bỏ qua ô này" value="{{ $order->user_id }}">
+                        <div class="form-group">
+                            <label>User ID (nếu có)</label>
+                            <select name="user_id" class="form-select" required>
+                                @foreach($user as $order)
+                                    <option value="{{ $order->user_id }}">  {{ $order->email }} - {{ $order->user_id }} 
+                                    </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group mb-3">
@@ -26,9 +31,15 @@
                             <input type="date" id="order_date" class="form-control" name="order_date" value="{{ $order->order_date }}">
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label for="product_id"><strong>ID Sản Phẩm:</strong></label>
-                            <input type="number" id="product_id" class="form-control" name="product_id" value="{{ $order->product_id }}">
+                        <div class="form-group">
+                            <label>ID Sản Phẩm</label>
+                            <select name="product_id" id="product" class="form-select" required>
+                                @foreach($product as $order)
+                                    <option value="{{ $order->product_id}}" data-price="{{ $order->price }}">
+                                        {{ $order->name }} {{ $order->color }} {{ "$order->storage"  }} - <strong>ID:</strong> {{ $order->product_id }}
+                                    </option>
+                                    @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group mb-3">
@@ -51,7 +62,7 @@
 
                         <div class="text-center mt-4">
                             <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
-                            <a href="{{ route('orders') }}" class="btn btn-secondary">Hủy</a>
+                            <a href="{{ route('order') }}" class="btn btn-secondary">Hủy</a>
                         </div>
                     </form>
                 </div>

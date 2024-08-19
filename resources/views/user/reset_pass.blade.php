@@ -40,7 +40,10 @@
         <span class="input-group-text">
           <i class="bi bi-shield-lock-fill"></i>
         </span>
-        <input name="pass" class="form-control form-control-lg" type="password" placeholder="Mật khẩu" aria-label=".form-control-lg example" required>
+        <input name="pass" class="form-control form-control-lg" type="password" id="password" placeholder="Mật khẩu" aria-label=".form-control-lg example" pattern="^(?=.*[A-Z])(?=.*[\W_]).{8,}$" title="Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm ít nhất một ký tự chữ hoa và một ký tự đặc biệt." required>
+        <span class="input-group-text">
+          <i id="password-icon" class="fas fa-eye password-icon"></i>
+        </span>
       </div>
     </div>
     
@@ -49,13 +52,65 @@
         <span class="input-group-text">
           <i class="bi bi-shield-lock-fill"></i>
         </span>
-        <input name="re_pass" class="form-control form-control-lg" type="password" placeholder="Nhập lại mật khẩu" aria-label=".form-control-lg example" required>
+        <input name="re_pass" class="form-control form-control-lg" type="password" id="repass" placeholder="Nhập lại mật khẩu" aria-label=".form-control-lg example" pattern="^(?=.*[A-Z])(?=.*[\W_]).{8,}$" title="Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm ít nhất một ký tự chữ hoa và một ký tự đặc biệt." required>
+       <span class="input-group-text">
+        <i id="repass-icon" class="fas fa-eye password-icon"></i>
+      </span>
       </div>
     </div>
+
+    <br><p id="error-message" style="color: red;"></p><br>
 
     <div class="text-center mb-3">
       <button type="submit" class="btn btn-primary">Xác Nhận</button>
     </div>
   </form>
 </div>
+
+<script>
+  document.getElementById('password-icon').addEventListener('click', function() {
+    var passwordField = document.getElementById('password');
+    var icon = this;
+
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    } else {
+      passwordField.type = 'password';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }
+  });
+
+  document.getElementById('repass-icon').addEventListener('click', function() {
+    var repassField = document.getElementById('repass');
+    var icon = this;
+
+    if (repassField.type === 'password') {
+      repassField.type = 'text';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    } else {
+      repassField.type = 'password';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }
+  });
+
+  document.getElementById('myForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    var password = document.getElementById('password').value;
+    var repass = document.getElementById('repass').value;
+    var errorMessage = document.getElementById('error-message');
+
+    if (password === repass) {
+      errorMessage.textContent = '';
+      this.submit(); // Allow form submission if passwords match
+    } else {
+      errorMessage.textContent = 'Mật khẩu không khớp. Vui lòng thử lại.';
+    }
+  });
+</script>
 @endsection

@@ -16,8 +16,7 @@ return new class extends Migration
             $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned();
             $table->foreign('order_id')->references('order_id')->on('orders');
-            $table->foreign('product_id')->references('product_id')->on('product'); // Đổi từ 'product' thành 'products'
-            $table->integer('quantity');
+            $table->foreign('product_id')->references('product_id')->on('product'); 
             $table->decimal('price', 10, 2);
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
