@@ -29,14 +29,17 @@
             </div>
             <div class="sort-by">
               <select id="input-sort" class="form-control" onchange="location = this.value;">
-                  <option value="{{ route('products.filter', request()->except('sort')) }}">Phân Loại</option>
-                  <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => 'name_asc'])) }}">Tên (A - Z)</option>
-                  <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => 'name_desc'])) }}">Tên (Z - A)</option>
-                  <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => 'price_asc'])) }}">Giá (Thấp-Cao)</option>
-                  <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => 'price_desc'])) }}">Giá (Cao-Thấp)</option>
-                  <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => 'sales_desc'])) }}">Bán chạy (Cao Nhất)</option>
-                  <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => 'sales_asc'])) }}">Bán chạy (Thấp Nhất)</option>
-              </select>
+                <!-- Option để không lọc -->
+                {{-- <option value="{{ route('products.filter', ['slug' => $slug] + request()->except('sort')) }}">Phân Loại</option> --}}
+                <!-- Các tùy chọn sắp xếp -->
+                {{-- <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'name_asc'])) }}">Tên (A - Z)</option>
+                <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'name_desc'])) }}">Tên (Z - A)</option>
+                <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'price_asc'])) }}">Giá (Thấp-Cao)</option>
+                <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'price_desc'])) }}">Giá (Cao-Thấp)</option>
+                <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'sales_desc'])) }}">Bán chạy (Cao Nhất)</option>
+                <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'sales_asc'])) }}">Bán chạy (Thấp Nhất)</option> --}}
+            </select>
+            
           </div>
           </div>
           
@@ -99,7 +102,7 @@
 
             <div class="widget-menu">
               <div class="widget-search-bar">
-                  <form role="search" method="get" action="{{ route('products.filter') }}" class="d-flex">
+                  <form role="search" method="get" action="{{ route('products.filter', ['slug' => '..']) }}" class="d-flex">
                       <input class="search-field" placeholder="Search" type="search" name="keyword" value="{{ request('keyword') }}">
                       <div class="search-icon bg-dark">
                           <button type="submit" class="btn btn-dark">
@@ -116,42 +119,44 @@
               <h5 class="widget-title text-decoration-underline text-uppercase">Lọc Theo Sản Phẩm</h5>
               <ul class="product-categories sidebar-list list-unstyled">
                 <li class="cat-item">
-                  <a href="{{ route('products.filter', ['category_id' => '']) }}">Tất cả</a>
+                    <a href="{{ route('products.filter', ['slug' => '..']) }}">Tất cả</a>
                 </li>
                 <li class="cat-item">
-                  <a href="{{ route('products.filter', ['category_id' => 1]) }}">iPhone</a>
+                    <a href="{{ route('products.filter', ['slug' => 'iphone']) }}">iPhone</a>
                 </li>
                 <li class="cat-item">
-                  <a href="{{ route('products.filter', ['category_id' => 2]) }}">Mac</a>
+                    <a href="{{ route('products.filter', ['slug' => 'macbook']) }}">Mac</a>
                 </li>
                 <li class="cat-item">
-                  <a href="{{ route('products.filter', ['category_id' => 3]) }}">iPad</a>
+                    <a href="{{ route('products.filter', ['slug' => 'ipad']) }}">iPad</a>
                 </li>
                 <li class="cat-item">
-                  <a href="{{ route('products.filter', ['category_id' => 4]) }}">Watch</a>
+                    <a href="{{ route('products.filter', ['slug' => 'watch']) }}">Watch</a>
                 </li>
-                <li class="cat-iteM">
-                  <a href="{{ route('products.filter', ['category_id' => 5]) }}">AirPods</a>
+                <li class="cat-item">
+                    <a href="{{ route('products.filter', ['slug' => 'airpods']) }}">AirPods</a>
                 </li>
-              </ul>
+            </ul>
+            
             </div>
             <div class="widget-price-filter pt-3">
               <h5 class="widget-titlewidget-title text-decoration-underline text-uppercase">Lọc Theo Giá</h5>
               <ul class="product-tags sidebar-list list-unstyled">
-                <li class="tags-item">
-                  <a href="{{ route('products.filter', ['price_range' => 'less_than_5000000']) }}">Ít hơn 5.000.000</a>
-                </li>
-                <li class="tags-item">
-                  <a href="{{ route('products.filter', ['price_range' => 'less_than_10000000']) }}">Ít hơn 10.000.000</a>
-                </li>
-                <li class="tags-item">
-                  <a href="{{ route('products.filter', ['price_range' => 'less_than_20000000']) }}">Ít hơn 20.000.000</a>
-                </li>
-                <li class="tags-item">
-                  <a href="{{ route('products.filter', ['price_range' => 'less_than_30000000']) }}">Ít hơn 30.000.000</a>
-                </li>
+                  <li class="tags-item">
+                      <a href="{{ route('products.filter', ['price_range' => 'less_than_5000000', 'slug' => request()->slug]) }}">Ít hơn 5.000.000</a>
+                  </li>
+                  <li class="tags-item">
+                      <a href="{{ route('products.filter', ['price_range' => 'less_than_10000000', 'slug' => request()->slug]) }}">Ít hơn 10.000.000</a>
+                  </li>
+                  <li class="tags-item">
+                      <a href="{{ route('products.filter', ['price_range' => 'less_than_20000000', 'slug' => request()->slug]) }}">Ít hơn 20.000.000</a>
+                  </li>
+                  <li class="tags-item">
+                      <a href="{{ route('products.filter', ['price_range' => 'less_than_30000000', 'slug' => request()->slug]) }}">Ít hơn 30.000.000</a>
+                  </li>
               </ul>
-            </div>
+          </div>
+
           </div>
         </aside>
       </div>

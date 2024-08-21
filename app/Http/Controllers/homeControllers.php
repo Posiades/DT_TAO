@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\product;
 use App\Models\blog;
-use Illuminate\Support\Facades\Session;
+use App\Models\product;
+use App\Models\categories;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class homeControllers extends Controller
 {
@@ -203,12 +204,81 @@ private function getCartTotal()
     }
 
     //----------------------------------------LOC SP---------------------------------------------------------------
-    public function filterProducts(Request $request)
+    // public function filterProducts(Request $request)
+    // {
+    //     $query = Product::query();
+
+    //     // Lọc theo danh mục
+    //     if ($request->has('category_id') && $request->category_id != '') {
+    //         $query->where('category_id', $request->category_id);
+    //     }
+
+    //     // Lọc theo khoảng giá
+    //     if ($request->has('price_range') && $request->price_range != '') {
+    //         switch ($request->price_range) {
+    //             case 'less_than_5000000':
+    //                 $query->where('price', '<', 5000000);
+    //                 break;
+    //             case 'less_than_10000000':
+    //                 $query->where('price', '<', 10000000);
+    //                 break;
+    //             case 'less_than_20000000':
+    //                 $query->where('price', '<', 20000000);
+    //                 break;
+    //             case 'less_than_30000000':
+    //                 $query->where('price', '<', 30000000);
+    //                 break;
+    //         }
+    //     }
+
+    //     //lọc tên sp
+    //     if ($request->has('keyword') && $request->keyword != '') {
+    //         $query->where('name', 'like', '%' . $request->keyword . '%');
+    //     }
+    //     //phân loại sp
+    //     if ($request->has('sort') && $request->sort != '') {
+    //         switch ($request->sort) {
+    //             case 'name_asc':
+    //                 $query->orderBy('name', 'asc');
+    //                 break;
+    //             case 'name_desc':
+    //                 $query->orderBy('name', 'desc');
+    //                 break;
+    //             case 'price_asc':
+    //                 $query->orderBy('price', 'asc');
+    //                 break;
+    //             case 'price_desc':
+    //                 $query->orderBy('price', 'desc');
+    //                 break;
+
+    //         }
+    //     }
+    
+
+    //     $products = $query->get();
+
+    //     return view('user/shop', compact('products'));
+    // }
+    public function filterProducts(Request $request, $slug)
     {
+        $category = categories::where('slug', $slug)->firstOrFail();
+        
         $query = Product::query();
 
         // Lọc theo danh mục
-        if ($request->has('category_id') && $request->category_id != '') {
+        // $query->where('category_id', $category->category_id);
+
+         // Lọc theo danh mục sử dụng slug hoặc category_id
+        if ($slug) {
+            $category = Categories::where('slug', $slug)->first();
+            if ($category) {
+                $query->where('category_id', $category->category_id);
+            } else {
+                // Nếu không tìm thấy category với slug, có thể xử lý lỗi ở đây hoặc hiển thị tất cả sản phẩm
+                return view('user/shop', ['products' => collect([])]);
+            }
+        } elseif ($request->has('category_id') && $request->category_id != '') {
+            // Lọc theo category_id nếu không có slug
             $query->where('category_id', $request->category_id);
         }
 
@@ -230,11 +300,14 @@ private function getCartTotal()
             }
         }
 
-        //lọc tên sp
+        
+
+        // Lọc tên sản phẩm
         if ($request->has('keyword') && $request->keyword != '') {
             $query->where('name', 'like', '%' . $request->keyword . '%');
         }
-        //phân loại sp
+
+        // Phân loại sản phẩm
         if ($request->has('sort') && $request->sort != '') {
             switch ($request->sort) {
                 case 'name_asc':
@@ -249,10 +322,8 @@ private function getCartTotal()
                 case 'price_desc':
                     $query->orderBy('price', 'desc');
                     break;
-
             }
         }
-    
 
         $products = $query->get();
 

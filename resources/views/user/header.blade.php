@@ -22,7 +22,7 @@
               <li class="nav-item">
                 <a class="nav-link me-4" href="{{url('/')}}">Trang Chủ</a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 1]) }}">IPHONE</a>
               </li>
               <li class="nav-item">
@@ -36,7 +36,22 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 5]) }}">AIRPODS</a>
-              </li>
+              </li> --}}
+              <li class="nav-item">
+                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'iphone']) }}">IPHONE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'ipad']) }}">iPad</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'macbook']) }}">MACBOOK</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'watch']) }}">Watch</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'airpods']) }}">AIRPODS</a>
+            </li>
               <li class="nav-item">
                 <a class="nav-link me-4" href="{{url('/tin-tuc')}}">tin tức</a>
               </li>
