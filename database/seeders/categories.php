@@ -14,11 +14,11 @@ class categories extends Seeder
     public function run(): void
     {
         DB::table('categories')->insert([
-            ['name' => 'IPHONE'],
-            ['name' => 'MAC'],
-            ['name' => 'IPAD'],
-            ['name' => 'WATCH'],
-            ['name' => 'AIRPODS'],
+            ['name' => 'IPHONE', 'slug' => 'iphone'],
+            ['name' => 'MAC', 'slug' => 'mac'],
+            ['name' => 'IPAD', 'slug' => 'ipad'],
+            ['name' => 'WATCH', 'slug' => 'watch'],
+            ['name' => 'AIRPODS', 'slug' => 'airpods'],
         ]);
     }
 

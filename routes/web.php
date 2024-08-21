@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\apiController;
 use App\Http\Controllers\homeControllers;
 use App\Http\Controllers\userControllers;
 use App\Http\Controllers\VnpayController;
@@ -105,5 +106,17 @@ Route::prefix('client')->middleware('client')->group(function (){
     Route::post('/post_edit_info/{id}', [clientController::class, 'post_edit_info'])->name('post_edit_info');
     Route::get('/order', [clientController::class, 'order'])->name('order');
 });
+
+
+// =============== API ROUTE ====================
+
+Route::prefix('api')->group(function (){
+    Route::get('/iphone', [apiController::class, 'api_iphone']);
+    Route::get('/mac', [apiController::class, 'api_mac']);
+    Route::get('/ipad', [apiController::class, 'api_ipad']);
+    Route::get('/watch', [apiController::class, 'api_watch']);
+    Route::get('/airpods', [apiController::class, 'api_airpods']);
+});
+
 
 ?>
