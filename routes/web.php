@@ -16,7 +16,6 @@ use GuzzleHttp\Client;
 Route::get('/', [homeControllers::class, 'index'])->name('index');
 Route::get('/ve-chung-toi', [homeControllers::class, 'about']);
 Route::get('/lien-he', [homeControllers::class, 'contract']);
-Route::post('/post_contract', [homeControllers::class, 'post_contract'])->name('post_contract');
 Route::get('/tin-tuc', [homeControllers::class, 'blog']);
 Route::get('/san-pham', [homeControllers::class, 'allProducts'])->name('products.all');
 // Route::get('/san-pham/filter', [homeControllers::class, 'filterProducts'])->name('products.filter');

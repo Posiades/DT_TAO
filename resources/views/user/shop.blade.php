@@ -29,15 +29,16 @@
             </div>
             <div class="sort-by">
               <select id="input-sort" class="form-control" onchange="location = this.value;">
-                <!-- Option để không lọc -->
-                {{-- <option value="{{ route('products.filter', ['slug' => $slug] + request()->except('sort')) }}">Phân Loại</option> --}}
+                 <!-- Option để không lọc -->
+                 <option value="{{ route('products.filter', array_merge(request()->except('sort'), ['sort' => '', 'slug' => request()->slug])) }}">Phân Loại</option>
+
                 <!-- Các tùy chọn sắp xếp -->
-                {{-- <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'name_asc'])) }}">Tên (A - Z)</option>
-                <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'name_desc'])) }}">Tên (Z - A)</option>
-                <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'price_asc'])) }}">Giá (Thấp-Cao)</option>
-                <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'price_desc'])) }}">Giá (Cao-Thấp)</option>
-                <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'sales_desc'])) }}">Bán chạy (Cao Nhất)</option>
-                <option value="{{ route('products.filter', ['slug' => $slug] + array_merge(request()->except('sort'), ['sort' => 'sales_asc'])) }}">Bán chạy (Thấp Nhất)</option> --}}
+                <option value="{{ route('products.filter',  array_merge(request()->except('sort'), ['sort' => 'name_asc',  'slug' => request()->slug]))  }}">Tên (A - Z)</option>
+                <option value="{{ route('products.filter',  array_merge(request()->except('sort'), ['sort' => 'name_desc', 'slug' => request()->slug])) }}">Tên (Z - A)</option>
+                <option value="{{ route('products.filter',  array_merge(request()->except('sort'), ['sort' => 'price_asc', 'slug' => request()->slug])) }}">Giá (Thấp-Cao)</option>
+                <option value="{{ route('products.filter',  array_merge(request()->except('sort'), ['sort' => 'price_desc', 'slug' => request()->slug])) }}">Giá (Cao-Thấp)</option>
+                <option value="{{ route('products.filter',  array_merge(request()->except('sort'), ['sort' => 'sales_desc', 'slug' => request()->slug])) }}">Bán chạy (Cao Nhất)</option>
+                <option value="{{ route('products.filter',  array_merge(request()->except('sort'), ['sort' => 'sales_asc', 'slug' => request()->slug])) }}">Bán chạy (Thấp Nhất)</option>
             </select>
             
           </div>
@@ -119,7 +120,7 @@
               <h5 class="widget-title text-decoration-underline text-uppercase">Lọc Theo Sản Phẩm</h5>
               <ul class="product-categories sidebar-list list-unstyled">
                 <li class="cat-item">
-                    <a href="{{ route('products.filter', ['slug' => '..']) }}">Tất cả</a>
+                    <a href="{{ route('products.filter', ['slug' => 'all']) }}">Tất cả</a>
                 </li>
                 <li class="cat-item">
                     <a href="{{ route('products.filter', ['slug' => 'iphone']) }}">iPhone</a>
