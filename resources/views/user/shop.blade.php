@@ -102,7 +102,7 @@
 
             <div class="widget-menu">
               <div class="widget-search-bar">
-                  <form role="search" method="get" action="{{ route('products.filter', ['slug' => '..']) }}" class="d-flex">
+                  <form role="search" method="get" action="{{ route('products.filter', ['slug' => 'all']) }}" class="d-flex">
                       <input class="search-field" placeholder="Search" type="search" name="keyword" value="{{ request('keyword') }}">
                       <div class="search-icon bg-dark">
                           <button type="submit" class="btn btn-dark">
