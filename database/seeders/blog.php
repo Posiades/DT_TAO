@@ -54,7 +54,7 @@ class blog extends Seeder
             ',
 
             'image_sub1' => end_code_imageBase64('blog/blog_1/image_sub1.jpg'),
-            'image_sub2' => end_code_imageBase64('blog/blog_1/image_sub1.jpg'),
+            'image_sub2' => end_code_imageBase64('blog/blog_1/image_sub2.jpg'),
             'slug' => 'nhung-du-doan-ve-iphone-16'
         ]);
         

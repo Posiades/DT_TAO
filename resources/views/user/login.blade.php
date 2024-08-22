@@ -84,7 +84,10 @@
         <span class="input-group-text">
           <i class="bi bi-shield-lock-fill"></i>
         </span>
-        <input name="password" type="password" class="form-control custom-input" id="inputPassword" placeholder="Nhập mật khẩu">
+        <input name="password" type="password" class="form-control custom-input" id="password" placeholder="Nhập mật khẩu">
+        <span class="input-group-text">
+          <i id="password-icon" class="fas fa-eye password-icon"></i>
+        </span>
       </div>
     </div>
 

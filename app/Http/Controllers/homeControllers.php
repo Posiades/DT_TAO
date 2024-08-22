@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\conTract;
 use App\Models\blog;
 use App\Models\product;
 use App\Models\categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class homeControllers extends Controller
@@ -24,6 +26,19 @@ class homeControllers extends Controller
 
     function contract(){
         return view('user/contract');
+    }
+
+    function post_contract(Request $req){
+        $auth_mail = "thachnguyenngoc2504@gmail.com";
+        $email = $req -> email;
+        $name = $req -> name;
+        $phone = $req -> phone;
+        $title = $req -> title;
+        $content = $req -> content;
+        Mail::to($auth_mail)->send(new conTract($email, $name, $phone, $title, $content));
+
+        Session::flash('thanks', "Cảm ơn bạn đã đặt câu hỏi cho chúng tôi");
+        return redirect()->back();
     }
 
     function blog(){

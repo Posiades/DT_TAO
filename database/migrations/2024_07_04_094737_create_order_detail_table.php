@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('product_id')->unsigned();
             $table->foreign('order_id')->references('order_id')->on('orders');
             $table->foreign('product_id')->references('product_id')->on('product'); 
+            $table->integer('quantity');
             $table->decimal('price', 10, 2);
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
