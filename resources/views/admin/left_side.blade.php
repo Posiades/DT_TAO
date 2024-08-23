@@ -53,14 +53,15 @@
             <span class="menu-item-label">Bài Viết</span>
           </a>
         </li>
+        <li class="{{ request()->routeIs('ipv4') ? 'active' : '' }}">
+          <a href="{{ route('ipv4') }}">
+            <span class="icon"><i class="mdi mdi-network"></i></span>
+            <span class="menu-item-label">IPv4 ADS</span>
+          </a>
+        </li>
         
     
-        {{-- <li class="--set-active-profile-html">
-          <a href="binhluan.html">
-            <span class="icon"><i class="mdi mdi-comment"></i></span>
-            <span class="menu-item-label">Bình luận</span>
-          </a>
-        </li> --}}
+       
 
         
       </li>

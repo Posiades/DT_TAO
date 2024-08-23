@@ -14,6 +14,8 @@ use GuzzleHttp\Client;
 // ========================= Route SITE ================================
 
 Route::get('/', [homeControllers::class, 'index'])->name('index');
+Route::get('/', [homeControllers::class, 'index'])->name('index');
+    
 Route::get('/ve-chung-toi', [homeControllers::class, 'about']);
 Route::get('/lien-he', [homeControllers::class, 'contract']);
 Route::post('/post_contract', [homeControllers::class, 'post_contract'])->name('post_contract');
@@ -96,6 +98,10 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::post('/post_edit_blog', [adminController::class, 'post_edit_blog'])->name('post_edit_blog');
 
         Route::get('/product/filter/{type}', [adminController::class, 'product_filter'])->name('product_filter');
+        
+        Route::get('/ip_analytic', [adminController::class, 'ipv4_analytic'])->name('ipv4');
+        Route::get('/ip_analytic/{time}', [adminController::class, 'ipv4_analytic_time'])->name('ipv4_filter');
+
 
 });
 
@@ -117,6 +123,8 @@ Route::prefix('api')->group(function (){
     Route::get('/ipad', [apiController::class, 'api_ipad']);
     Route::get('/watch', [apiController::class, 'api_watch']);
     Route::get('/airpods', [apiController::class, 'api_airpods']);
+    Route::post('/log-visit', [apiController::class, 'logVisit'])->name('logVisit');
+
 });
 
 

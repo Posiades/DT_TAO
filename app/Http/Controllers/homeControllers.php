@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Session;
 
 class homeControllers extends Controller
 {
+    
     function index(){
         $product_iphone = product::where('category_id', 1)->limit(4)->get();
         $product_watch = product::where('category_id', 4)->limit(4)->get();

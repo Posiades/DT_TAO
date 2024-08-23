@@ -1,23 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('https://ipinfo.io/json?token=53e28173e285ff')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('info').innerHTML = `
-                <p><strong>IP Address:</strong> ${data.ip}</p>
-                <p><strong>Location:</strong> ${data.city}, ${data.region}, ${data.country}</p>
-            `;
-        })
-        
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById('info').innerHTML = '<p>Không thể lấy thông tin IP.</p>';
-        });
+  fetch('https://ipinfo.io/json?token=53e28173e285ff')
+      .then(response => response.json())
+      .then(data => {
+          const city = data.city;
+          document.getElementById('infoipv4').value = city;
+          
+          // Tạo đối tượng FormData từ form
+          const form = document.getElementById('auto-submit-form');
+          const formData = new FormData(form);
+          
+          // Gửi yêu cầu POST với Fetch API
+          fetch(form.action, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                  'X-Requested-With': 'XMLHttpRequest' // Để xác định đây là yêu cầu AJAX
+              }
+          })
+          .then(response => response.json())
+          .then(data => {
+              console.log('Success:', data);
+              // Xử lý phản hồi từ server nếu cần
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
+      })
+      .catch(error => {
+          console.error('Error fetching IP info:', error);
+      });
 });
 
 
 
 
-// ============== Kiểm soát thời gian truy cập qua ipv4 =========================
+
+// ============== Kiểm soát thời gian truy cập =========================
 const isDetailPage = window.location.pathname.includes('/chi-tiet');
 
 if (isDetailPage) {

@@ -10,12 +10,13 @@ use App\Models\product;
 use App\Models\User;
 use App\Models\voucher;
 use App\Models\blog;
+use App\Models\visitor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
-use function PHPSTORM_META\type;
 
 class adminController extends Controller
 {
@@ -522,6 +523,38 @@ class adminController extends Controller
         }
     }
 
+    private function getLocationData($startTime) {
+        return visitor::where('visited_at', '>=', $startTime)
+                ->select('location', DB::raw('COUNT(*) as count'))
+                ->groupBy('location')
+                ->orderBy('count', 'desc')
+                ->limit(10)
+                ->get();
+    }
+
+    public function ipv4_analytic() {
+        $time = 30; 
+        $total = visitor::count();
+        $thirtyDaysAgo = Carbon::now()->subDays(30);
+        $location = $this->getLocationData($thirtyDaysAgo);
+        return view('admin.ipv4_analytic', compact('location', 'time', 'total'));
+    }
+
+    public function ipv4_analytic_time($time) {
+        $total = visitor::count();
+
+        if ($time == 30) {
+            $startTime = Carbon::now()->subDays(30);
+        } elseif ($time == 24) {
+            $startTime = Carbon::now()->subDay();
+        } else {
+            $startTime = Carbon::now()->subDays(30);
+        }
+
+        $location = $this->getLocationData($startTime);
+
+        return view('admin.ipv4_analytic', compact('location', 'time', 'total'));
+    }
 
     
     
