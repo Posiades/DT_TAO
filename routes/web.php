@@ -17,7 +17,8 @@ Route::get('/', [homeControllers::class, 'index'])->name('index');
 Route::get('/', [homeControllers::class, 'index'])->name('index');
     
 Route::get('/ve-chung-toi', [homeControllers::class, 'about']);
-Route::get('/lien-he', [homeControllers::class, 'contract']);
+Route::get('/lien-he', [homeControllers::class, 'contract'])->name('contract');
+Route::post('/post-lien-he', [homeControllers::class, 'post_contract'])->name('post_contract');
 Route::get('/tin-tuc', [homeControllers::class, 'blog']);
 Route::get('/san-pham', [homeControllers::class, 'allProducts'])->name('products.all');
 // Route::get('/san-pham/filter', [homeControllers::class, 'filterProducts'])->name('products.filter');
@@ -111,6 +112,8 @@ Route::prefix('client')->middleware('client')->group(function (){
     Route::get('/edit-info', [clientController::class, 'edit_info'])->name('edit_info');
     Route::post('/post_edit_info/{id}', [clientController::class, 'post_edit_info'])->name('post_edit_info');
     Route::get('/order', [clientController::class, 'order'])->name('order');
+    Route::get('/contract', [clientController::class, 'contract'])->name('client_contract');
+    Route::post('/post-lien-he', [clientController::class, 'post_contract'])->name('client_post_contract');
 });
 
 

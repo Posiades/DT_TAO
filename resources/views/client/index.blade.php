@@ -8,17 +8,18 @@
             <div class="col-lg-4 mb-4">
                 <div class="card shadow-sm border-0 rounded-3">
                     <div class="card-body text-center">
-                        <img src="{{ asset('path/to/avatar.jpg') }}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                        <div class="d-flex justify-content-center mb-3">
+                            <img src="data:image/png;base64, {{$user->avata}}" alt="Avatar" class="img-fluid rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+                        </div>
                         <h4 class="fw-bold">{{ $user->full_name }}</h4>
                         <p class="text-muted">Thành viên từ {{ $user->created_at->format('d/m/Y') }}</p>
-                        <div class="d-grid gap-2">
-                            {{-- <a href="{{ route('edit.profile') }}" class="btn btn-primary"><i class="fas fa-edit me-2"></i>Chỉnh sửa thông tin</a>
-                            <a href="{{ route('change.password') }}" class="btn btn-outline-secondary"><i class="fas fa-key me-2"></i>Đổi mật khẩu</a> --}}
+                        <div class="d-grid gap-2 mt-2">
+                            <a href="{{ route('edit_info') }}" class="btn btn-primary"><i class="fas fa-edit me-2"></i>Chỉnh sửa thông tin</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="card shadow-sm border-0 rounded-3 mt-4">
+                {{-- <div class="card shadow-sm border-0 rounded-3 mt-4">
                     <div class="card-body">
                         <h5 class="card-title fw-bold mb-3">Hoạt động gần đây</h5>
                         <ul class="list-unstyled">
@@ -27,7 +28,7 @@
                             <li><i class="fas fa-heart text-danger me-2"></i>Đã thích sản phẩm - 3 ngày trước</li>
                         </ul>
                     </div>
-                </div>
+                </div> --}}
             </div>
             
             <div class="col-lg-8">
@@ -39,7 +40,7 @@
                 @endif
 
                 <div class="card shadow-sm border-0 rounded-3 mb-4">
-                    <div class="card-header bg-gradient-primary text-white py-3">
+                    <div class="card-header bg-gradient-primary text-black py-3">
                         <h5 class="mb-0 fw-bold"><i class="fas fa-user-circle me-2"></i>Thông Tin Cá Nhân</h5>
                     </div>
                     <div class="card-body">
@@ -58,18 +59,18 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h6 class="fw-bold">Ngày sinh</h6>
-                                <p><i class="fas fa-birthday-cake me-2 text-muted"></i>{{ $user->birthday }}</p>
+                                <p><i class="fas fa-birthday-cake me-2 text-muted"></i>{{ $user->birth }}</p>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <h6 class="fw-bold">Giới tính</h6>
-                                <p><i class="fas fa-venus-mars me-2 text-muted"></i>{{ $user->gender }}</p>
+                                <p><i class="fas fa-venus-mars me-2 text-muted"></i>{{ $user->sex }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card shadow-sm border-0 rounded-3">
-                    <div class="card-header bg-gradient-success text-white py-3">
+                {{-- <div class="card shadow-sm border-0 rounded-3">
+                    <div class="card-header bg-gradient-success text-black py-3">
                         <h5 class="mb-0 fw-bold"><i class="fas fa-shopping-bag me-2"></i>Đơn Hàng Gần Đây</h5>
                     </div>
                     <div class="card-body">
@@ -103,7 +104,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

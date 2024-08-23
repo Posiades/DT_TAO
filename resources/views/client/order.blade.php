@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="card shadow-sm border-0 rounded-3">
-                    <div class="card-header bg-gradient-primary text-white py-3">
+                    <div class="card-header bg-gradient-primary text-black py-3">
                         <h4 class="mb-0 fw-bold"><i class="fas fa-shopping-bag me-2"></i>Lịch Sử Đơn Hàng</h4>
                     </div>
                     <div class="card-body p-4">
@@ -15,7 +15,7 @@
                             <div class="text-center py-5">
                                 <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
                                 <h5 class="text-muted">Bạn chưa có đơn hàng nào.</h5>
-                                {{-- <a href="{{ route('products') }}" class="btn btn-primary mt-3"> --}}
+                                <a href="{{ route('products') }}" class="btn btn-primary mt-3">
                                     <i class="fas fa-shopping-cart me-2"></i>Mua sắm ngay
                                 </a>
                             </div>
@@ -38,7 +38,7 @@
                                                 <td>
                                                     <span class="fw-bold">#{{ $orderItem->order_id }}</span>
                                                 </td>
-                                                <td>{{ $orderItem->created_at->format('d/m/Y H:i') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($orderItem->created_at)->format('d/m/Y H:i') }}</td>
                                                 <td>
                                                     <span class="d-block">{{ $orderItem->name }}</span>
                                                     <small class="text-muted">
@@ -47,12 +47,13 @@
                                                 </td>
                                                 <td>{{ number_format($orderItem->price, 0, ',', '.') }} VND</td>
                                                 <td>
-                                                    <span class="badge bg-success">Đã giao</span>
+                                                    <span class="badge bg-success">{{ $orderItem->status }}</span>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#orderModal{{ $orderItem->order_id }}">
-                                                        <i class="fas fa-eye me-1"></i>Chi tiết
+                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal{{ $orderItem->order_id }}" data-bs-backdrop="false">
+                                                        Chi tiết
                                                     </button>
+                                                    
                                                 </td>
                                             </tr>
 
@@ -84,6 +85,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                         @endforeach
                                     </tbody>
                                 </table>

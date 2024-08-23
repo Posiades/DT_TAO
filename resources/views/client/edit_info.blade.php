@@ -39,7 +39,7 @@
                                     <label for="birthday" class="form-label fw-bold">Ngày sinh</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
-                                        <input type="date" id="birthday" name="birthday" class="form-control" value="{{ $user->birthday }}">
+                                        <input type="date" id="birthday" name="birth" class="form-control" value="{{ $user->birth }}">
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
@@ -53,12 +53,16 @@
                                     <label class="form-label fw-bold">Giới tính</label>
                                     <div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="male" value="male" {{ $user->gender == 'male' ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="radio" name="sex" id="male" value="Nam" {{ $user->sex == 'Nam' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="male">Nam</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="female" value="female" {{ $user->gender == 'female' ? 'checked' : '' }}>
+                                            <input class="form-check-input" type="radio" name="sex" id="female" value="Nữ" {{ $user->sex == 'Nữ' ? 'checked' : '' }}>
                                             <label class="form-check-label" for="female">Nữ</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="sex" id="other" value="Khác" {{ $user->sex == 'Khác' ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="other">Khác</label>
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +70,7 @@
                                     <label for="photo" class="form-label fw-bold">Ảnh đại diện</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-image"></i></span>
-                                        <input type="file" id="photo" name="photo" class="form-control">
+                                        <input type="file" id="photo" name="avata" class="form-control" value="{{$user->avata}}">
                                     </div>
                                 </div>
                             </div>
