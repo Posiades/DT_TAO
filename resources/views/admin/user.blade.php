@@ -22,6 +22,7 @@
       </h1>
     </div>
   </section>
+
   
   @if(session('add_user'))
   <div class="alert alert-success alert-dismissible fade show" role="alert">

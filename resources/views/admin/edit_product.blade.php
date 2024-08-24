@@ -63,10 +63,10 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="status"><strong>Trạng Thái:</strong></label>
-                            <select id="status" name="status" class="form-control" required>
-                                <option value="Còn Hàng" {{ $product->status == 'Còn Hàng' ? 'selected' : '' }}>Còn Hàng</option>
-                                <option value="Hết Hàng" {{ $product->status == 'Hết Hàng' ? 'selected' : '' }}>Hết Hàng</option>
+                            <label for="status"><strong>Sản Phẩm HOT:</strong></label>
+                            <select id="hot" name="status" class="form-control" required>
+                                <option value="0" {{ $product->hot == '0' ? 'selected' : '' }}>Sản Phẩm Bình Thường</option>
+                                <option value="1" {{ $product->hot == '1' ? 'selected' : '' }}>Sản Phẩm HOT</option>
                             </select>
                         </div>
 

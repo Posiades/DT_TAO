@@ -47,14 +47,26 @@
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="id_product"><strong>ID Sản Phẩm:</strong></label>
-                                    <input type="number" id="id_product" name="id_product" class="form-control" placeholder="Để trống sẽ áp dụng cho tất cả sản phẩm" value="{{ $voucher->product_id }}">
+                                    <select name="id_product" class="form-select" required>
+                                        @foreach($product as $item)
+                                            <option value="{{ $item->product_id }}">  {{ $item->name }} - {{ $item->color }} - {{ $item->storage }} - {{$item->product_id}}
+                                            </option>
+                                            <option value="{{null}}">Tất cả sản phẩm</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <div class="form-group">
                                     <label for="id_user"><strong>ID Người Dùng:</strong></label>
-                                    <input type="number" id="id_user" name="id_user" class="form-control" placeholder="Để trống sẽ áp dụng cho tất cả người dùng" value="{{ $voucher->user_id }}">
+                                    <select name="id_user" class="form-select" required>
+                                        @foreach($user as $user)
+                                            <option value="{{ $user->user_id }}">  {{ $user->email }} - {{ $user->user_id }} 
+                                            </option>
+                                            <option value="{{null}}">Tất cả người dùng</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -67,7 +79,7 @@
                                         <option value="3" {{ $voucher->category_id == 3 ? 'selected' : '' }}>Ipad</option>
                                         <option value="4" {{ $voucher->category_id == 4 ? 'selected' : '' }}>Watch</option>
                                         <option value="5" {{ $voucher->category_id == 5 ? 'selected' : '' }}>AirPods</option>
-                                        <option value="null" {{ $voucher->category_id == null ? 'selected' : '' }}>Tất Cả</option>
+                                        <option value="0" {{ $voucher->category_id == 0 ? 'selected' : '' }}>Tất Cả</option>
                                     </select>
                                 </div>
                             </div>

@@ -83,7 +83,37 @@ class adminController extends Controller
     function add_product(){
         return view('admin/add_product');   
     }
+    
+    function post_add_product(Request $req){
+        $category_id = $req -> option;
+        $name = $req -> name;
+        $configtion = $req -> configtion;
+        $color = $req -> color;
+        $image = $req -> image;
+        $storage = $req -> storage;
+        $price = $req -> price;
+        $content = $req -> mota;
+        $quantity = $req -> quantity;
+        $slug = Str::slug($name. " ".$color." ". $storage);
+        $hot = $req -> hot;
 
+        $product = new product;
+        $product -> category_id = $category_id;
+        $product -> name = $name;
+        $product -> configtion = $configtion;
+        $product -> description = $content;
+        $product -> image = end_code_form_imageBase64($image);
+        $product -> storage = $storage;
+        $product -> color = $color;
+        $product -> price = $price;
+        $product -> slug = $slug;
+        $product -> quantity = $quantity;
+        $product -> hot = $hot;
+        $product->save();
+
+        Session::flash('add_product', "Đã thêm sản phẩm $name thành công");
+        return redirect()->route('product');
+    }
     
    function edit_product($id){
     $product = product::findOrFail($id);
@@ -220,8 +250,14 @@ class adminController extends Controller
     }
 
     function post_add_user(Request $req){
-        $name = $req -> name;
         $email = $req -> email;
+        $user = User::where('email', $email)->first();
+
+        if ($user) {
+            Session::flash('email', "Email $email đã tồn tại trên hệ thống");
+            return redirect()->back();
+        }
+        $name = $req -> name;
         $phone = $req -> phone;
         $pass = $req -> password;
         $role = $req -> role;
@@ -265,7 +301,9 @@ class adminController extends Controller
     }
 
     function add_voucher(){
-       return view('admin/add_voucher');
+        $product = product::all();
+        $user = user::all();
+       return view('admin/add_voucher', compact('product', 'user'));
     }
 
     function post_add_voucher(Request $req){
@@ -298,8 +336,10 @@ class adminController extends Controller
     }
 
     function edit_voucher($id){
+        $product = product::all();
+        $user = user::all();
         $voucher = voucher::where('voucher_id', $id)->firstOrFail();
-        return view('admin.edit_voucher', compact('voucher'));
+        return view('admin.edit_voucher', compact('voucher', 'product', 'user'));
     }
 
     function post_edit_voucher(Request $req){
@@ -312,7 +352,12 @@ class adminController extends Controller
         $id_user = $req -> id_user;
         $id_category = $req -> id_category;
         $quantity = $req -> quantity;
-
+    
+        // Xử lý trường hợp khi $id_category bằng 0, đặt thành NULL
+        if($id_category == 0){
+            $id_category = null;
+        }
+    
         DB::table('voucher')
         ->where('voucher_id', $id)
         ->update([
