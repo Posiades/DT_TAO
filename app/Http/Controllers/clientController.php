@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\conTract;
+
 use App\Models\orders;
 use App\Models\orderdetail;
 
@@ -27,15 +30,35 @@ class clientController extends Controller
         $email = $req -> email;
         $address = $req -> address;
         $phone = $req -> phone;
+        $birth = $req ->birth;
+        $sex = $req -> sex;
+        $avata = $req -> avata;
 
-        DB::table('users')
-        ->where('user_id', $id)
-        ->update([
-            'full_name' => $name,
-            'email' => $email,
-            'address' => $address,
-            'phone' => $phone
+        if($avata != null){
+            DB::table('users')
+            ->where('user_id', $id)
+            ->update([
+                'avata' => end_code_form_imageBase64($req->avata),
+                'full_name' => $name,
+                'email' => $email,
+                'address' => $address,
+                'phone' => $phone,
+                'sex' => $sex,
+                'birth' => $birth
         ]);
+        }else{
+            DB::table('users')
+            ->where('user_id', $id)
+            ->update([
+                'full_name' => $name,
+                'email' => $email,
+                'address' => $address,
+                'phone' => $phone,
+                'sex' => $sex,
+                'birth' => $birth
+            ]);
+        }
+        
         Session::flash('update_info', "Đã thay đổi thông tin tài khoản $name thành công");
         $user = user::where('user_id',$id)->first();
         Session::put('user', $user);
@@ -65,6 +88,22 @@ class clientController extends Controller
         return view('client.order', compact('order'));
     }
     
+    function contract(){
+        $user = Session::get('user');
+        return view('client.contract', compact('user'));
+    }
 
+    function post_contract(Request $req){
+        $auth_mail = "thachnguyenngoc2504@gmail.com";
+        $email = $req -> email;
+        $name = $req -> name;
+        $phone = $req -> phone;
+        $title = $req -> title;
+        $content = $req -> content;
+        Mail::to($auth_mail)->send(new conTract($email, $name, $phone, $title, $content));
+
+        Session::flash('thanks', "Cảm ơn bạn đã đặt câu hỏi cho chúng tôi");
+        return redirect()->back();
+    }
 
 }

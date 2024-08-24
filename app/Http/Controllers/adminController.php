@@ -10,12 +10,13 @@ use App\Models\product;
 use App\Models\User;
 use App\Models\voucher;
 use App\Models\blog;
+use App\Models\visitor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
-use function PHPSTORM_META\type;
 
 class adminController extends Controller
 {
@@ -38,11 +39,12 @@ class adminController extends Controller
 
     function product(){
         $type = null;
+        $search = null;
         $product = DB::table('product')
         ->join('categories', 'product.category_id', '=', 'categories.category_id')
         ->select('product.*', 'categories.name as category_name')
         ->paginate(10);
-        return view('admin/product', compact('product', 'type'));
+        return view('admin/product', compact('product', 'type', 'search'));
     }
 
    
@@ -82,6 +84,7 @@ class adminController extends Controller
         return view('admin/add_product');   
     }
 
+    
    function edit_product($id){
     $product = product::findOrFail($id);
     return view('admin.edit_product', compact('product'));
@@ -110,7 +113,7 @@ class adminController extends Controller
                     'name' => $name,
                     'configtion' => $configtion,
                     'description' => $mota,
-                    'image' => end_code_imageBase64($path),
+                    'image' => end_code_form_imageBase64($path),
                     'storage' => $storage,
                     'color' => $color,
                     'price' => $price,
@@ -446,13 +449,13 @@ class adminController extends Controller
 
     function post_add_blog(Request $req){
         $blog = new blog;
-        $blog -> image_banner = end_code_imageBase64($req->banner);
+        $blog -> image_banner = end_code_form_imageBase64($req->banner);
         $blog -> title = $req -> title;
-        $blog -> image_main = end_code_imageBase64($req -> main);
+        $blog -> image_main = end_code_form_imageBase64($req -> main);
         $blog -> content_1 = $req -> content_1;
         $blog -> content_2 = $req -> content_2;
-        $blog -> image_sub1 = end_code_imageBase64($req->sub1);
-        $blog -> image_sub2 = end_code_imageBase64($req->sub2);
+        $blog -> image_sub1 = end_code_form_imageBase64($req->sub1);
+        $blog -> image_sub2 = end_code_form_imageBase64($req->sub2);
         $blog -> slug = Str::slug($req->title); 
         $blog -> save();
 
@@ -491,7 +494,7 @@ class adminController extends Controller
             ->select('product.*', 'categories.name as category_name')
             ->paginate(10);
             return view('admin/product', compact('product', 'type'));
-        }else if($type == "Mac"){
+        }else if($type == "mac"){
             $product = DB::table('product')
             ->where('product.category_id', 2)
             ->join('categories', 'product.category_id', '=', 'categories.category_id')
@@ -522,7 +525,61 @@ class adminController extends Controller
         }
     }
 
+    private function getLocationData($startTime) {
+        return visitor::where('visited_at', '>=', $startTime)
+                ->select('location', DB::raw('COUNT(*) as count'))
+                ->groupBy('location')
+                ->orderBy('count', 'desc')
+                ->limit(10)
+                ->get();
+    }
 
+    public function ipv4_analytic() {
+        $time = 30; 
+        $total = visitor::count();
+        $thirtyDaysAgo = Carbon::now()->subDays(30);
+        $location = $this->getLocationData($thirtyDaysAgo);
+        return view('admin.ipv4_analytic', compact('location', 'time', 'total'));
+    }
+
+    public function ipv4_analytic_time($time) {
+        $total = visitor::count();
+
+        if ($time == 30) {
+            $startTime = Carbon::now()->subDays(30);
+        } elseif ($time == 24) {
+            $startTime = Carbon::now()->subDay();
+        } else {
+            $startTime = Carbon::now()->subDays(30);
+        }
+
+        $location = $this->getLocationData($startTime);
+
+        return view('admin.ipv4_analytic', compact('location', 'time', 'total'));
+    }
+
+    function search_product(Request $req){
+        $type = null;
+        $keyword = $req->keyword;
+        $keywords = explode(' ', $keyword);
+        $search = "search";
+        $product = DB::table('product')
+                ->join('categories', 'product.category_id', '=', 'categories.category_id')
+                ->select('product.*', 'categories.name as category_name')
+                ->where(function ($query) use ($keywords) {
+                    foreach ($keywords as $word) {
+                        $query->where(DB::raw("CONCAT(product.name, ' ', product.color, ' ', product.storage)"), 'LIKE', "%{$word}%");
+                    }
+                })
+                ->orWhere(function ($query) use ($keywords) {
+                    foreach ($keywords as $word) {
+                        $query->where('categories.name', 'LIKE', "%{$word}%");
+                    }
+                })
+                ->paginate(10);
+
+         return view('admin.product', compact('product', 'type', 'search'));
+    }
     
     
 }

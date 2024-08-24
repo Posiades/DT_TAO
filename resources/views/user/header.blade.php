@@ -44,7 +44,7 @@
                 <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'ipad']) }}">iPad</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'macbook']) }}">MACBOOK</a>
+                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'mac']) }}">MACBOOK</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'watch']) }}">Watch</a>

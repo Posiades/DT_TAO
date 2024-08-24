@@ -14,8 +14,11 @@ use GuzzleHttp\Client;
 // ========================= Route SITE ================================
 
 Route::get('/', [homeControllers::class, 'index'])->name('index');
+Route::get('/', [homeControllers::class, 'index'])->name('index');
+    
 Route::get('/ve-chung-toi', [homeControllers::class, 'about']);
-Route::get('/lien-he', [homeControllers::class, 'contract']);
+Route::get('/lien-he', [homeControllers::class, 'contract'])->name('contract');
+Route::post('/post-lien-he', [homeControllers::class, 'post_contract'])->name('post_contract');
 Route::get('/tin-tuc', [homeControllers::class, 'blog']);
 Route::get('/san-pham', [homeControllers::class, 'allProducts'])->name('products.all');
 // Route::get('/san-pham/filter', [homeControllers::class, 'filterProducts'])->name('products.filter');
@@ -64,7 +67,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/voucher', [adminController::class, 'voucher'])->name('voucher');
         Route::get('/order', [adminController::class, 'order'])->name('admin_order');
         Route::get('/addproduct', [adminController::class, 'add_product'])->name('add_product');
-        Route::post('/post_add_sp', [adminController::class, 'post_add_product']);
+        Route::post('/post_add_sp', [adminController::class, 'post_add_product'])->name('post_add_product');
         Route::get('/edit_sp/{id}', [adminController::class, 'edit_product'])->name('edit_product');
         Route::post('/post_edit_sp/{id}', [adminController::class, 'post_edit_product'])->name('post_edit_product');
         Route::get('/del_confirm/{id}/{type}', [adminController::class, 'del_confirm'])->name('del_confirm');
@@ -95,7 +98,11 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::post('/post_edit_blog', [adminController::class, 'post_edit_blog'])->name('post_edit_blog');
 
         Route::get('/product/filter/{type}', [adminController::class, 'product_filter'])->name('product_filter');
+        
+        Route::get('/ip_analytic', [adminController::class, 'ipv4_analytic'])->name('ipv4');
+        Route::get('/ip_analytic/{time}', [adminController::class, 'ipv4_analytic_time'])->name('ipv4_filter');
 
+        Route::get('/product/tim-kiem', [adminController::class, 'search_product'])->name('product_search');
 });
 
 
@@ -105,6 +112,8 @@ Route::prefix('client')->middleware('client')->group(function (){
     Route::get('/edit-info', [clientController::class, 'edit_info'])->name('edit_info');
     Route::post('/post_edit_info/{id}', [clientController::class, 'post_edit_info'])->name('post_edit_info');
     Route::get('/order', [clientController::class, 'order'])->name('order');
+    Route::get('/contract', [clientController::class, 'contract'])->name('client_contract');
+    Route::post('/post-lien-he', [clientController::class, 'post_contract'])->name('client_post_contract');
 });
 
 
@@ -116,6 +125,8 @@ Route::prefix('api')->group(function (){
     Route::get('/ipad', [apiController::class, 'api_ipad']);
     Route::get('/watch', [apiController::class, 'api_watch']);
     Route::get('/airpods', [apiController::class, 'api_airpods']);
+    Route::post('/log-visit', [apiController::class, 'logVisit'])->name('logVisit');
+
 });
 
 
