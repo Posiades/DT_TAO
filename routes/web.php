@@ -67,7 +67,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/voucher', [adminController::class, 'voucher'])->name('voucher');
         Route::get('/order', [adminController::class, 'order'])->name('admin_order');
         Route::get('/addproduct', [adminController::class, 'add_product'])->name('add_product');
-        Route::post('/post_add_sp', [adminController::class, 'post_add_product']);
+        Route::post('/post_add_sp', [adminController::class, 'post_add_product'])->name('post_add_product');
         Route::get('/edit_sp/{id}', [adminController::class, 'edit_product'])->name('edit_product');
         Route::post('/post_edit_sp/{id}', [adminController::class, 'post_edit_product'])->name('post_edit_product');
         Route::get('/del_confirm/{id}/{type}', [adminController::class, 'del_confirm'])->name('del_confirm');
@@ -102,7 +102,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
         Route::get('/ip_analytic', [adminController::class, 'ipv4_analytic'])->name('ipv4');
         Route::get('/ip_analytic/{time}', [adminController::class, 'ipv4_analytic_time'])->name('ipv4_filter');
 
-
+        Route::get('/product/tim-kiem', [adminController::class, 'search_product'])->name('product_search');
 });
 
 

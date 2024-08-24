@@ -9,18 +9,40 @@
   <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
   
   <link rel="stylesheet" href="{{asset('admin/css/main.css?v=1628755089081')}}">
-  {{-- <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"/> --}}
-  {{-- <link rel="mask-icon" href="safari-pinned-tab.svg" color="#00b4b6"/>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130795909-1"></script> --}}
-  {{-- <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'UA-130795909-1');
-  </script> --}}
+ <style>
+  .field.has-addons {
+  display: flex;
+}
 
+.field.has-addons .control:not(:last-child) {
+  flex: 1;
+}
+
+.field.has-addons .control:not(:last-child) .input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.field.has-addons .control:last-child .button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .field.has-addons {
+    flex-direction: column;
+  }
+  
+  .field.has-addons .control:not(:last-child) .input {
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .field.has-addons .control:last-child .button {
+    border-radius: 4px;
+  }
+}
+ </style>
 </head>
 <body>
   
