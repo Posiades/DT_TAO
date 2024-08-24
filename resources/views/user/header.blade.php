@@ -65,7 +65,7 @@
                     <a href="{{url('/tin-tuc')}}" class="dropdown-item">Tin tức</a>
                   </li>
                   <li>
-                    <a href="{{ route('products.all') }}" class="dropdown-item">Sản phẩm</a>
+                    <a href="{{url('/san-pham')}}" class="dropdown-item">Sản phẩm</a>
                   </li>
                   <li>
                     <a href="{{url('/gio-hang')}}" class="dropdown-item">Giỏ hàng</a>
