@@ -213,10 +213,75 @@ private function getCartTotal()
     return number_format($total);
 }
 //--------------------------------------------PRODUCT--------------------------------------------------------------
-    public function allProducts()
+    public function allProducts(Request $request, string $type=null,string $slug=null)
     {
-        $products = Product::all();
-        return view('user/shop', compact('products'));
+        // $products = Product::all();
+        // return view('user.shop', compact('products'));
+        $products = Product::query(); // Start with a clean query builder
+
+        if(!empty($request->get('keyword'))) {
+
+            $products = $products->where('name', 'like', '%'.$request->get('keyword').'%');
+        }
+        
+        
+        if(!empty($type)&&!empty($slug)) {
+            if($type=='loai'){
+                $category = categories::where('slug','=',$slug)->first();
+                
+                $products->where('category_id','=',$category->category_id);
+                
+            }
+
+
+            if ($type == 'fillter') {
+                
+                switch ($slug) {
+
+                    case 'name_asc':
+                        $products->orderBy('name', 'asc');
+
+                        break;
+                    case 'name_desc':
+                        $products->orderBy('name', 'desc');
+                        break;
+                    case 'price_asc':
+                        $products->orderBy('price', 'asc');
+                        break;
+                    case 'price_desc':
+                        $products->orderBy('price', 'desc');
+                        break;
+                        case 'less_than_5000000':
+                            $products->where('price', '<', 5000000);
+                            break;
+                        case 'less_than_10000000':
+                            $products->where('price', '<', 10000000);
+                            break;
+                        case 'less_than_20000000':
+                            $products->where('price', '<', 20000000);
+                            break;
+                        case 'less_than_30000000':
+                            $products->where('price', '<', 30000000);
+                            break;
+                    
+
+                }
+
+                
+                
+            }
+
+            
+            // $categories = $categories->where('name', 'like', '%'.$request->get('keyword').'%');
+        }
+
+       // Order by rank in ascending order
+        // $categories = $categories->orderBy('rank', 'asc');
+
+        // Paginate with 10 items per page
+        $products = $products->paginate(12);
+
+        return view("user.shop", compact('products'));
     }
 
     //----------------------------------------LOC SP---------------------------------------------------------------

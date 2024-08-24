@@ -38,19 +38,19 @@
                 <a class="nav-link me-4" href="{{ route('products.filter', ['category_id' => 5]) }}">AIRPODS</a>
               </li> --}}
               <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'iphone']) }}">IPHONE</a>
+                <a class="nav-link me-4" href="{{route('products.all',['loai','iphone'])}}">IPHONE</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'ipad']) }}">iPad</a>
+                <a class="nav-link me-4" href="{{route('products.all',['loai','ipad'])}}">iPad</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'mac']) }}">MACBOOK</a>
+                <a class="nav-link me-4" href="{{route('products.all',['loai','mac'])}}">MACBOOK</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'watch']) }}">Watch</a>
+                <a class="nav-link me-4" href="{{route('products.all',['loai','watch'])}}">Watch</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link me-4" href="{{ route('products.filter', ['slug' => 'airpods']) }}">AIRPODS</a>
+                <a class="nav-link me-4" href="{{route('products.all',['loai','airpods'])}}">AIRPODS</a>
             </li>
               <li class="nav-item">
                 <a class="nav-link me-4" href="{{url('/tin-tuc')}}">tin tức</a>
@@ -65,7 +65,7 @@
                     <a href="{{url('/tin-tuc')}}" class="dropdown-item">Tin tức</a>
                   </li>
                   <li>
-                    <a href="{{url('/san-pham')}}" class="dropdown-item">Sản phẩm</a>
+                    <a href="{{route('products.all')}}" class="dropdown-item">Sản phẩm</a>
                   </li>
                   <li>
                     <a href="{{url('/gio-hang')}}" class="dropdown-item">Giỏ hàng</a>
