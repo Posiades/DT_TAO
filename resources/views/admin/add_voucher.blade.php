@@ -39,16 +39,29 @@
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
-                                    <strong>ID Sản Phẩm: </strong>
-                                    <input type="number" name="id_product" class="form-control" placeholder="Để trống sẽ áp dụng cho tất cả sản phẩm">
+                                    <strong>Sản Phẩm: </strong>
+                                    <select name="id_product" class="form-select" required>
+                                        @foreach($product as $item)
+                                            <option value="{{ $item->product_id }}">  {{ $item->name }} - {{ $item->color }} - {{ $item->storage }} - {{$item->product_id}}
+                                            </option>
+                                            <option value="{{null}}">Tất cả người dùng</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>ID Người Dùng: </strong>
-                                    <input type="id" name="id_user" class="form-control" placeholder="Để trống sẽ áp dụng cho tất cả người dùng">
+                                    <select name="id_user" class="form-select" required>
+                                        @foreach($user as $user)
+                                            <option value="{{ $user->user_id }}">  {{ $user->email }} - {{ $user->user_id }} 
+                                            </option>
+                                            <option value="{{null}}">Tất cả người dùng</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
+
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Chọn Loại Sản Phẩm:</strong>
@@ -58,7 +71,7 @@
                                         <option value="3">Ipad</option>
                                         <option value="4">Watch</option>
                                         <option value="5">AirPods</option>
-                                        <option value="0">Tất Cả</option>
+                                        <option value="{{null}}">Tất Cả</option>
                                     </select>
                                 </div>
                             </div>

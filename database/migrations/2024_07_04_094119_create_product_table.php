@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('price', 12, 2);
             $table->string('slug', 255)->unique();
             $table->integer('quantity')->default(0);
-            $table->enum('status', ['Còn Hàng', 'Hết Hàng', 'Chờ Hàng Về'])->default('Còn Hàng');
+            $table->boolean('hot')->default(false);
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
             $table->foreign('category_id')->references('category_id')->on('categories');

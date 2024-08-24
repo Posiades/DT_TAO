@@ -76,7 +76,7 @@
               <td>{{ $item->name }} {{ $item->storage }}</td>
               <td>{{ $item->color }}</td>
               <td>{{ $item->price }}</td>
-              <td class="actions-cell">
+              <td>
                 <div class="buttons right nowrap">
                   <button class="button small green --jb-modal" data-target="sample-modal-2" type="button">
                     <a href="{{ route('edit_order', ['id' => $item->order_id]) }}"><span class="icon"><i class="mdi mdi-pencil"></i></span></a>

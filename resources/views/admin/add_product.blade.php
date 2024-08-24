@@ -35,7 +35,7 @@
 
                 <div class="mb-3">
                     <label for="color" class="form-label"><strong>Màu Sắc:</strong></label>
-                    <input type="text" name="color" id="color" class="form-control" placeholder="Nhập Màu Sắc (In Hoa Các Ký Tự Đầu)" required>
+                    <input type="text" name="color" id="color" class="form-control" placeholder="Nhập Màu Sắc (In Hoa Các Ký Tự Đầu) - Airpods không cần nhập" >
                 </div>
 
                 <div class="mb-3">
@@ -45,7 +45,7 @@
 
                 <div class="mb-3">
                     <label for="storage" class="form-label"><strong>Bộ Nhớ:</strong></label>
-                    <input type="text" name="storage" id="storage" class="form-control" placeholder="Dung Lượng Bộ Nhớ" required>
+                    <input type="text" name="storage" id="storage" class="form-control" placeholder="Dung Lượng Bộ Nhớ - Airpods không cần nhập" >
                 </div>
 
                 <div class="mb-3">
@@ -67,10 +67,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="status" class="form-label"><strong>Status:</strong></label>
-                    <select name="status" id="status" class="form-select">
-                        <option value="Còn Hàng" selected>Còn Hàng</option>
-                        <option value="Hết Hàng">Hết Hàng</option>
+                    <label for="status" class="form-label"><strong>Hot:</strong></label>
+                    <select name="hot" id="status" class="form-select">
+                        <option value="0" selected>Sản Phẩm Bình Thường</option>
+                        <option value="1">Sản Phẩm Bán Chạy</option>
                     </select>
                 </div>
 
