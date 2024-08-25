@@ -124,11 +124,19 @@ class adminController extends Controller
         $id = $req->id;
         $type = $req->type;
         $name = $req->name;
-        $slug = str_replace(' ', '-', $name);
         $price = $req->price;
         $mota = $req->description;
-        $color = $req->color;
-        $storage = $req->storage;
+        if($req->color == null){
+            $color = "";
+        }else{
+            $color = $req ->color;
+        }
+        if($req->storage == null){
+            $storage = "";
+        }else{
+            $storage = $req -> storage;
+        }
+        $slug = Str::slug($name. " ".$color." ". $storage);
         $configtion = $req->configtion;
         $status = $req->status;
         $quantity = $req->quantity;
@@ -149,7 +157,7 @@ class adminController extends Controller
                     'price' => $price,
                     'slug' => $slug,
                     'quantity' => $quantity,
-                    'status' => $status
+                    'hot' => $status
                 ]);
         } else {
             DB::table('product')
@@ -164,7 +172,7 @@ class adminController extends Controller
                     'price' => $price,
                     'slug' => $slug,
                     'quantity' => $quantity,
-                    'status' => $status
+                    'hot' => $status
                 ]);
         }
     

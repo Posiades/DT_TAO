@@ -68,6 +68,9 @@
                     <a href="{{route('products.all')}}" class="dropdown-item">Sản phẩm</a>
                   </li>
                   <li>
+                    <a href="{{url('/san-pham-ban-chay')}}" class="dropdown-item">Sản phẩm bán chạy</a>
+                  </li>
+                  <li>
                     <a href="{{url('/gio-hang')}}" class="dropdown-item">Giỏ hàng</a>
                   </li>
                   <li>

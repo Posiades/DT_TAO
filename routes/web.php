@@ -20,6 +20,7 @@ Route::get('/ve-chung-toi', [homeControllers::class, 'about']);
 Route::get('/lien-he', [homeControllers::class, 'contract'])->name('contract');
 Route::post('/post-lien-he', [homeControllers::class, 'post_contract'])->name('post_contract');
 Route::get('/tin-tuc', [homeControllers::class, 'blog']);
+Route::get('/san-pham-ban-chay', [homeControllers::class, 'hot']);
 Route::get('/san-pham/{type?}/{slug?}', [homeControllers::class, 'allProducts'])->name('products.all');
 
 // Route::get('/san-pham/filter', [homeControllers::class, 'filterProducts'])->name('products.filter');

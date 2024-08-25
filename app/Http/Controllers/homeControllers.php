@@ -63,6 +63,11 @@ class homeControllers extends Controller
         return view('user/detail_blog', compact('blog', 'lastedBlog'));
     }
 
+    function hot(){
+        $products = product::where('hot', 1)->paginate(9);
+        return view('user.hot_product', compact('products'));
+    }
+
     function shop($type){
         $product_iphone = product::where('category_id', 1)->get();
         $product_mac = product::where('category_id', 2)->get();
