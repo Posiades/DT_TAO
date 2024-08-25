@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 use App\Models\orders;
 use App\Models\orderdetail;
+use App\Models\voucher;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class VnpayController extends Controller
 {
     public function vnpayPayment(Request $request)
     {   
+
 
         $total = 0;
         if ($request->has('total_voucher') && !empty($request->total_voucher)) {
@@ -22,6 +25,7 @@ class VnpayController extends Controller
             }
         }
 
+        
 
         $order = new orders();
         $order->order_code = Str::random(8);
@@ -42,7 +46,14 @@ class VnpayController extends Controller
 
         $order_detail->save();
     }
-    
+
+    $voucher = voucher::where('code', $request->code_voucher)->first();
+    $quantity_update = $voucher->quantity - 1;
+    DB::table('voucher')
+    ->where('code', $voucher->code)
+    ->update([
+        'quantity' => $quantity_update
+    ]);
 
     $data=$request->all();
     $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";

@@ -22,69 +22,32 @@
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Mã Voucher:</strong>
-                                    <input type="text" name="code" class="form-control" placeholder="Nhập Mã Giảm giá">
+                                    <input type="text" name="code" class="form-control" placeholder="Nhập Mã Giảm giá" required>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Trị Giá:</strong>
-                                    <input type="number" name="money" class="form-control" placeholder="Giá trị">
+                                    <input type="number" name="money" class="form-control" placeholder="Giá trị" required>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Ngày Tạo:</strong>
-                                    <input type="date" id="createDate" name="create" class="form-control" placeholder="Ngày Tạo Voucher">
+                                    <input type="date" id="createDate" name="create" class="form-control" placeholder="Ngày Tạo Voucher" required>
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Hạn Voucher:</strong>
-                                    <input type="date" id="endDate" name="end" class="form-control" placeholder="Ngày Hết Hạn">
+                                    <input type="date" id="endDate" name="end" class="form-control" placeholder="Ngày Hết Hạn" required>
                                 </div>
                             </div>
-                            <div class="col-md-6 mt-2">
-                                <div class="form-group">
-                                    <strong>Sản Phẩm: </strong>
-                                    <select name="id_product" class="form-select" required>
-                                        @foreach($product as $item)
-                                            <option value="{{ $item->product_id }}">  {{ $item->name }} - {{ $item->color }} - {{ $item->storage }} - {{$item->product_id}}
-                                            </option>
-                                            <option value="{{null}}">Tất cả người dùng</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mt-2">
-                                <div class="form-group">
-                                    <strong>ID Người Dùng: </strong>
-                                    <select name="id_user" class="form-select" required>
-                                        @foreach($user as $user)
-                                            <option value="{{ $user->user_id }}">  {{ $user->email }} - {{ $user->user_id }} 
-                                            </option>
-                                            <option value="{{null}}">Tất cả người dùng</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 mt-2">
-                                <div class="form-group">
-                                    <strong>Chọn Loại Sản Phẩm:</strong>
-                                    <select class="form-control" name="id_category">
-                                        <option value="1">Iphone</option>
-                                        <option value="2">MacBook</option>
-                                        <option value="3">Ipad</option>
-                                        <option value="4">Watch</option>
-                                        <option value="5">AirPods</option>
-                                        <option value="{{null}}">Tất Cả</option>
-                                    </select>
-                                </div>
-                            </div>
+                            
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Số Lượng:</strong>
-                                    <input type="number" class="form-control" name="quantity" placeholder="Số Lượng Voucher">
+                                    <input type="number" class="form-control" name="quantity" placeholder="Số Lượng Voucher" required>
                                 </div>
                             </div>
                         </div>

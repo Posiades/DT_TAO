@@ -55,14 +55,8 @@ class adminController extends Controller
     }
 
     function voucher(){
-        $voucher = DB::table('voucher')
-        ->leftJoin('users', 'voucher.user_id', '=', 'users.user_id')
-        ->leftJoin('product', 'voucher.product_id', '=', 'product.product_id')
-        ->leftJoin('categories', 'voucher.category_id', '=', 'categories.category_id')
-        ->select('voucher.*', 'users.full_name as user_name', 'product.name as product_name', 'categories.name as category_name')
-        ->paginate(10);
-    
-                
+        $voucher = voucher::paginate(10);
+     
         return view('admin/voucher', compact('voucher'));
     }
 
@@ -331,13 +325,6 @@ class adminController extends Controller
         $money = $req -> money;
         $create = $req -> create;
         $end = $req -> end;
-        $id_product = $req -> id_product;
-        $id_user = $req -> id_user;
-        $id_category = $req -> id_category;
-        if($id_category == 0){
-            $id_category = null;
-        }
-
         $quantity = $req -> quantity;
 
         $voucher = new voucher;
@@ -346,9 +333,6 @@ class adminController extends Controller
         $voucher -> create_date = $create;
         $voucher -> expiry_date = $end;
         $voucher -> quantity = $quantity;
-        $voucher -> product_id = $id_product;
-        $voucher -> user_id = $id_user;
-        $voucher -> category_id = $id_category;
         $voucher->save();
 
         Session::flash('add_voucher', "Đã thêm voucher $code thành công");
@@ -356,10 +340,8 @@ class adminController extends Controller
     }
 
     function edit_voucher($id){
-        $product = product::all();
-        $user = user::all();
         $voucher = voucher::where('voucher_id', $id)->firstOrFail();
-        return view('admin.edit_voucher', compact('voucher', 'product', 'user'));
+        return view('admin.edit_voucher', compact('voucher'));
     }
 
     function post_edit_voucher(Request $req){
@@ -368,15 +350,7 @@ class adminController extends Controller
         $money = $req -> money;
         $create = $req -> create;
         $end = $req -> end;
-        $id_product = $req -> id_product;
-        $id_user = $req -> id_user;
-        $id_category = $req -> id_category;
         $quantity = $req -> quantity;
-    
-        // Xử lý trường hợp khi $id_category bằng 0, đặt thành NULL
-        if($id_category == 0){
-            $id_category = null;
-        }
     
         DB::table('voucher')
         ->where('voucher_id', $id)
@@ -385,10 +359,7 @@ class adminController extends Controller
             'discount_amount' => $money,
             'create_date' => $create,
             'expiry_date' => $end,
-            'quantity' => $quantity,
-            'product_id' => $id_product,
-            'user_id' => $id_user,
-            'category_id' => $id_category
+            'quantity' => $quantity
         ]);
         Session::flash('edit_voucher', "Đã cập nhật voucher $code thành công");
         return redirect()->route('voucher');

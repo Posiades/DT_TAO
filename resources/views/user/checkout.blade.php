@@ -76,6 +76,7 @@
                                             <span class="price-amount amount text-primary ps-5" id="order-total">
                                                 <bdi>{{ number_format($total) }} VNĐ</bdi>
                                                 <input type="hidden" name="total_voucher" class="totall">
+                                                <input type="hidden" name="code_voucher", class="code_voucher">
                                             </span>
                                         </td>
                                     </tr>
@@ -219,7 +220,8 @@
         const orderTotalElement = document.getElementById('order-total');
         var giatongInput2 = document.querySelector('.totall');
         const giatongInput = document.getElementById('giatong');
-    
+        var code_voucher = document.querySelector('.code_voucher');
+        
         voucherInput.addEventListener('input', debounce(checkVoucher, 500));
     
         function debounce(func, delay) {
@@ -280,9 +282,13 @@
             giatongInput.value = newTotal; // Cập nhật giá trị tổng mới vào hidden input
             giatongInput2.value = newTotal; // Cập nhật giá trị tổng mới vào hidden input
             
+            // Gán giá trị mã voucher vào hidden input
+            code_voucher.value = voucherInput.value;
+            
             console.log("Updated hidden input value: ", giatongInput.value); // Debugging line
         }
     });
-    </script>
+</script>
+
     
 @endsection

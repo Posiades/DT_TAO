@@ -60,9 +60,6 @@
                 <th>Tên Voucher</th>
                 <th>Số lượng</th>
                 <th>Giá trị</th>
-                <th>Sản Phẩm</th>
-                <th>Người Dùng</th>
-                <th>Danh Mục</th>
                 <th>Thời gian bắt đầu</th>
                 <th>Thời gian kết thúc</th>
                 <th></th>
@@ -73,17 +70,7 @@
               <tr>
                 <td>{{$item->code}}</td>
                 <td>{{$item->quantity}}</td> 
-                <td>{{$item->discount_amount}}</td>
-
-                <!-- Hiển thị tên sản phẩm nếu có -->
-                <td>{{ $item->product_name ?? 'Tất Cả Sản Phẩm' }}</td>
-
-                <!-- Hiển thị tên người dùng nếu có -->
-                <td>{{ $item->user_name ?? 'Tất Cả Người Dùng' }}</td>
-
-                <!-- Hiển thị tên danh mục nếu có -->
-                <td>{{ $item->category_name ?? 'Tất Cả Danh Mục' }}</td>
-
+                <td>{{ number_format($item->discount_amount, 0, ',', '.') }} VNĐ</td>
                 <td>{{$item->create_date}}</td>
                 <td>{{$item->expiry_date}}</td>
                 <td>
