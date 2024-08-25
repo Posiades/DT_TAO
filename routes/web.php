@@ -28,7 +28,7 @@ Route::get('/san-pham/{type?}/{slug?}', [homeControllers::class, 'allProducts'])
 
 Route::get('/tim-kiem', [homeControllers::class, 'search']);
 Route::get('/dang-nhap', [homeControllers::class, 'login']);
-Route::get('/dang-ky', [homeControllers::class, 'register']);
+Route::get('/dang-ky', [homeControllers::class, 'register'])->name('register');
 Route::get('/quen-mat-khau', [homeControllers::class, 'forgot']);
 
 Route::get('shop/{type}', [homeControllers::class, 'shop'])->name('shop');

@@ -27,18 +27,25 @@ class userControllers extends Controller
         $phone = $req -> phone;  
         $pass = $req -> pass;
         $re_pass = $req -> re_pass;
-        if($pass === $re_pass){
-            $pass_Final = Hash::make($pass);
-            user::create([
-                'email' => $email,
-                'password' => $pass_Final,
-                'full_name' => $full_name,
-                'address' => $address,
-                'phone' => $phone
-            ]);
+        $user = user::where('email', $email)->first();
+        if($user){
+            Session::flash('infected', "email $email đã tồn tại trên hệ thống");
+            return redirect()->back();
+        }else{
+        
+            if($pass === $re_pass){
+                $pass_Final = Hash::make($pass);
+                user::create([
+                    'email' => $email,
+                    'password' => $pass_Final,
+                    'full_name' => $full_name,
+                    'address' => $address,
+                    'phone' => $phone
+                ]);
+            }
+            Session::flash('success', 'Đăng Ký Tài Khoản Thành Công.');
+            return view('user/login');
         }
-        Session::flash('success', 'Đăng Ký Tài Khoản Thành Công.');
-        return view('user/login');
     }
 
     function login(Request $req){
