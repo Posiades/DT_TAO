@@ -32,40 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-
-
-
-// ============== Kiểm soát thời gian truy cập =========================
-const isDetailPage = window.location.pathname.includes('/chi-tiet');
-
-if (isDetailPage) {
-    let startTime;
-    let timerInterval;
-
-    window.addEventListener('load', () => {
-        // Ghi lại thời điểm người dùng vào trang
-        startTime = Date.now();
-        
-        // Khởi động đồng hồ đếm thời gian
-        timerInterval = setInterval(() => {
-            const currentTime = Date.now();
-            const timeSpent = Math.floor((currentTime - startTime) / 1000); // Thời gian ở lại trang tính bằng giây
-            console.log(`Time spent on page: ${timeSpent} seconds`);
-        }, 1000); // Cập nhật mỗi giây
-    });
-
-    window.addEventListener('beforeunload', () => {
-        // Dừng đồng hồ đếm thời gian khi người dùng rời trang
-        if (timerInterval) {
-            clearInterval(timerInterval);
-            const currentTime = Date.now();
-            const timeSpent = Math.floor((currentTime - startTime) / 1000); // Thời gian ở lại trang tính bằng giây
-            console.log(`User spent a total of ${timeSpent} seconds on the page.`);
-        }
-    });
-}
-
-  
   
   
 //=====================  Login ================= 

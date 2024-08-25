@@ -308,6 +308,11 @@ class adminController extends Controller
 
     function post_add_voucher(Request $req){
         $code = $req -> code;
+        $voucher = voucher::where('code', $code)->first();
+        if($voucher){
+            Session::flash('voucher', "Voucher $code đã tồn tại trên hệ thống");
+            return redirect()->back();
+        }
         $money = $req -> money;
         $create = $req -> create;
         $end = $req -> end;

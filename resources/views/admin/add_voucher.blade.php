@@ -2,6 +2,12 @@
 @section('title', 'ThêmMã Giảm Giá')
 @section('content')
 <div class="container mt-5">
+    @if(session('voucher'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ session('voucher') }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -28,13 +34,13 @@
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Ngày Tạo:</strong>
-                                    <input type="date" name="create" class="form-control" placeholder="Ngày Tạo Voucher">
+                                    <input type="date" id="createDate" name="create" class="form-control" placeholder="Ngày Tạo Voucher">
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Hạn Voucher:</strong>
-                                    <input type="date" name="end" class="form-control" placeholder="Ngày Hết Hạn">
+                                    <input type="date" id="endDate" name="end" class="form-control" placeholder="Ngày Hết Hạn">
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
@@ -92,4 +98,23 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const createDateInput = document.getElementById('createDate');
+        const endDateInput = document.getElementById('endDate');
+
+        function validateDates() {
+            const createDate = new Date(createDateInput.value);
+            const endDate = new Date(endDateInput.value);
+
+            if (createDate && endDate && endDate < createDate) {
+                alert('Ngày hết hạn không được bé hơn ngày tạo.');
+                endDateInput.value = '';
+            }
+        }
+
+        createDateInput.addEventListener('change', validateDates);
+        endDateInput.addEventListener('change', validateDates);
+    });
+</script>
 @endsection

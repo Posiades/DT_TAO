@@ -18,8 +18,37 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.1/font/bootstrap-icons.min.css" rel="stylesheet"> 
+  <style>
+    .cart-concern .cart-button {
+    position: absolute;
+    bottom: 50px; /* Increase this value to move the button higher */
+    left: 0;
+    right: 0;
+    z-index: 2; 
+    }
 
-    
+    .card-detail {
+        position: relative;
+        padding-top: 60px; 
+        z-index: 1;
+    }
+    .card-title {
+        padding-top: 10px; 
+    }
+
+    .card-title a {
+        display: block;
+        padding-top: 20px; 
+    }
+    .cart-concern {
+        z-index: 2;
+    }
+
+    .card-detail {
+        z-index: 1; 
+    }
+
+  </style>
   </head>
 
   <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-root-margin="0px 0px -40%" data-bs-smooth-scroll="true" tabindex="0">

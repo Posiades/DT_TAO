@@ -24,9 +24,6 @@
       <div class="row">
         <main class="col-md-9">
           <div class="filter-shop d-flex justify-content-between">
-            <div class="showing-product">
-              <p>Hiển thị 1–9 trên 55 kết quả </p>
-            </div>
             <div class="sort-by">
               <select id="input-sort" class="form-control" onchange="location = this.value;">
                  <!-- Option để không lọc -->
@@ -46,38 +43,31 @@
           </div>
           
           <div class="product-content product-store d-flex justify-content-between flex-wrap">
-            @foreach ($products as $product)
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="product-card position-relative pe-3 pb-3">
-                    <div class="image-holder">
-                        <img src="data:image/png;base64,{{ $product->image }}" alt="{{ $product->name }}" class="img-fluid">
-                    </div>
-                    <div class="cart-concern position-absolute">
-                        <div class="cart-button d-flex">
-                            <div class="btn-left">
-                                <a href="{{ route('cart.add', $product->product_id) }}" class="btn btn-medium btn-black">Thêm vào giỏ hàng</a>
-                                <svg class="cart-outline position-absolute">
-                                    <use xlink:href="#cart-outline"></use>
-                                </svg>
-                            </div>
+            @foreach($products as $product)
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card position-relative pe-3 pb-3">
+                        <div class="image-holder">
+                            <img src="data:image/png;base64,{{ $product->image}}" alt="{{ $product->name }}" class="img-fluid">
                         </div>
+                        <div class="cart-concern position-absolute">
+                          <div class="cart-button d-flex">
+                              <div class="btn-left">
+                                  <a href="{{ route('cart.add', $product->product_id) }}" class="btn btn-medium btn-black">Thêm vào giỏ hàng</a>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card-detail d-flex justify-content-between pt-3 pb-3">
+                          <h5 class="card-title text-uppercase">
+                              <a href="{{ route('detail', ['slug'=>$product->slug]) }}">{{ $product->name }} {{ $product->color }} {{ $product->storage }}</a>
+                          </h5>
+                      </div>
+                      
+                      <h5 class="item-price text-primary">{{ number_format($product->price, 0, ',', '.') . ' VNĐ' }}</h5>
                     </div>
-
-                    <div class="card-detail d-flex justify-content-between pt-3 pb-3">
-                        <h3 class="card-title text-uppercase">
-                            <a href="{{ route('detail', ['slug'=>$product->slug]) }}">{{ $product->name }} {{ $product->color }} {{ $product->storage }}</a>
-                        </h3>
-                    </div>   
-                    
-                    
-                    <h5 class="item-price text-primary">{{ number_format($product->price, 0, ',', '.') . ' VNĐ' }}</h5>
-                </div>                  
-            </div>
-            
-
+                </div>
             @endforeach
-
         </div>
+        
 
       
         
