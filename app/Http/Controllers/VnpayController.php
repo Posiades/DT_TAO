@@ -20,7 +20,6 @@ class VnpayController extends Controller
     $order = new orders();
     $order->order_code = Str::random(8);
     $order->user_id =Session::get('user')->user_id;
-    $order->status = "Đã Thanh Toán";
     $order ->save();
     
 

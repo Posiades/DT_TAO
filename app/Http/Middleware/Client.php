@@ -10,16 +10,16 @@ use Illuminate\Support\Facades\Session;
 class Client
 {
     /**
-     * Handle an incoming request.
+     * Xử lý một yêu cầu đến.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Session::has('user')){
+        if (Session::has('user')) {
             return $next($request);
-        }else{
-            return view('user.index');
+        } else {
+            return redirect()->route('index');
         }
     }
 }

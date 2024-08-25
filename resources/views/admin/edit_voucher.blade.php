@@ -10,7 +10,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('post_edit_voucher', ['id' => $voucher->voucher_id]) }}" enctype="multipart/form-data">
+                    <form id="voucherForm" method="POST" action="{{ route('post_edit_voucher', ['id' => $voucher->voucher_id]) }}" enctype="multipart/form-data">
                         @csrf
                         
                         <input type="hidden" name="id" value="{{ $voucher->voucher_id }}">
@@ -102,4 +102,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('voucherForm').addEventListener('submit', function(event) {
+        var createDate = new Date(document.getElementById('create').value);
+        var expiryDate = new Date(document.getElementById('end').value);
+
+        if (createDate > expiryDate) {
+            event.preventDefault();
+            alert('Ngày tạo không được lớn hơn ngày hết hạn.');
+        }
+    });
+</script>
+
 @endsection

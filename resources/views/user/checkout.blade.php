@@ -19,11 +19,10 @@
     </div>
 </section>
 
-
 @if (Session::has('user'))
 <section class="shopify-cart checkout-wrap padding-large">
     <div class="container">
-        <form action="{{ url('/vnpay_payment') }}" method="POST">
+        <form id="checkout-form" action="{{ url('/vnpay_payment') }}" method="POST">
             @csrf
             <div class="row d-flex flex-wrap">
                 <div class="col-lg-6">
@@ -48,6 +47,9 @@
                     <div class="billing-details">
                         <label for="note">Ghi chú đơn hàng (tùy chọn)</label>
                         <textarea id="note" class="form-control pt-3 pb-3 ps-3 mt-2" name="note" placeholder="Ghi chú về đơn đặt hàng của bạn. Giống như những ghi chú đặc biệt khi giao hàng."></textarea>
+                        <label for="voucher" class="mt-4">Mã giảm giá (nếu có)</label>
+                        <input type="text" id="voucher" name="voucher" class="form-control mt-2 mb-4" placeholder="Nhập mã giảm giá">
+                        <div id="voucher-message" class="text-success mt-2"></div>
                     </div>
                     <div class="your-order mt-5">
                         <h2 class="display-7 text-uppercase text-dark pb-4">Tổng giỏ hàng</h2>
@@ -63,7 +65,7 @@
                                     <tr class="subtotal border-top border-bottom pt-2 pb-2 text-uppercase">
                                         <th>Giá Tổng</th>
                                         <td data-title="Subtotal">
-                                            <span class="price-amount amount text-primary ps-5">
+                                            <span class="price-amount amount text-primary ps-5" id="total-price">
                                                 <bdi>{{ number_format($total) }} VNĐ</bdi>
                                             </span>
                                         </td>
@@ -71,7 +73,7 @@
                                     <tr class="order-total border-bottom pt-2 pb-2 text-uppercase">
                                         <th>Tổng Giỏ Hàng</th>
                                         <td data-title="Total">
-                                            <span class="price-amount amount text-primary ps-5">
+                                            <span class="price-amount amount text-primary ps-5" id="order-total">
                                                 <bdi>{{ number_format($total) }} VNĐ</bdi>
                                             </span>
                                         </td>
@@ -101,7 +103,7 @@
                                     </span>
                                 </label>
                             </div>
-                            <input type="hidden"  name="giatong" value="{{ number_format($total) }}">
+                            <input type="hidden" id="giatong" name="giatong" value="{{ number_format($total) }}">
                             <button type="submit" name="redirect" class="btn btn-dark btn-medium text-uppercase btn-rounded-none">Đặt hàng</button>
                         </div>
                     </div>
@@ -113,7 +115,7 @@
 @else
 <section class="shopify-cart checkout-wrap padding-large">
     <div class="container">
-        <form action="{{ url('/vnpay_payment') }}" method="POST">
+        <form id="checkout-form" action="{{ url('/vnpay_payment') }}" method="POST">
             @csrf
             <div class="row d-flex flex-wrap">
                 <div class="col-lg-6">
@@ -140,6 +142,9 @@
                     <div class="billing-details">
                         <label for="note">Ghi chú đơn hàng (tùy chọn)</label>
                         <textarea id="note" class="form-control pt-3 pb-3 ps-3 mt-2" name="note" placeholder="Ghi chú về đơn đặt hàng của bạn. Giống như những ghi chú đặc biệt khi giao hàng."></textarea>
+                        <label for="voucher" class="mt-4">Mã giảm giá (nếu có)</label>
+                        <input type="text" id="voucher" name="voucher" class="form-control mt-2 mb-4" placeholder="Nhập mã giảm giá">
+                        <div id="voucher-message" class="text-success mt-2"></div>
                     </div>
                     <div class="your-order mt-5">
                         <h2 class="display-7 text-uppercase text-dark pb-4">Tổng giỏ hàng</h2>
@@ -155,7 +160,7 @@
                                     <tr class="subtotal border-top border-bottom pt-2 pb-2 text-uppercase">
                                         <th>Giá Tổng</th>
                                         <td data-title="Subtotal">
-                                            <span class="price-amount amount text-primary ps-5">
+                                            <span class="price-amount amount text-primary ps-5" id="total-price">
                                                 <bdi>{{ number_format($total) }} VNĐ</bdi>
                                             </span>
                                         </td>
@@ -163,7 +168,7 @@
                                     <tr class="order-total border-bottom pt-2 pb-2 text-uppercase">
                                         <th>Tổng Giỏ Hàng</th>
                                         <td data-title="Total">
-                                            <span class="price-amount amount text-primary ps-5">
+                                            <span class="price-amount amount text-primary ps-5" id="order-total">
                                                 <bdi>{{ number_format($total) }} VNĐ</bdi>
                                             </span>
                                         </td>
@@ -193,7 +198,7 @@
                                     </span>
                                 </label>
                             </div>
-                            <input type="hidden"  name="giatong" value="{{ number_format($total) }}">
+                            <input type="hidden" id="giatong" name="giatong" value="{{ number_format($total) }}">
                             <button type="submit" name="redirect" class="btn btn-dark btn-medium text-uppercase btn-rounded-none">Đặt hàng</button>
                         </div>
                     </div>
@@ -204,4 +209,77 @@
 </section>
 @endif
 
+@section('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const voucherInput = document.getElementById('voucher');
+    const voucherMessage = document.getElementById('voucher-message');
+    const totalPriceElement = document.getElementById('total-price');
+    const orderTotalElement = document.getElementById('order-total');
+    const giatongInput = document.getElementById('giatong');
+
+    voucherInput.addEventListener('input', debounce(checkVoucher, 500));
+
+    function debounce(func, delay) {
+        let timer;
+        return function() {
+            clearTimeout(timer);
+            timer = setTimeout(() => func.apply(this, arguments), delay);
+        };
+    }
+
+    async function checkVoucher() {
+        const voucherCode = voucherInput.value.trim();
+        if (voucherCode.length > 0) {
+            try {
+                const response = await fetch('/check-voucher', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ voucherCode })
+                });
+                const data = await response.json();
+                if (data.valid) {
+                    applyDiscount(data.discount);
+                    voucherMessage.textContent = 'Mã giảm giá hợp lệ!';
+                    voucherMessage.className = 'text-success mt-2';
+                } else {
+                    resetDiscount();
+                    voucherMessage.textContent = 'Mã giảm giá không hợp lệ.';
+                    voucherMessage.className = 'text-danger mt-2';
+                }
+            } catch (error) {
+                console.error('Lỗi khi kiểm tra voucher:', error);
+                voucherMessage.textContent = 'Đã xảy ra lỗi. Vui lòng thử lại.';
+                voucherMessage.className = 'text-danger mt-2';
+            }
+        } else {
+            resetDiscount();
+            voucherMessage.textContent = '';
+        }
+    }
+
+    function applyDiscount(discount) {
+    const currentTotal = parseFloat(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
+    const discountedTotal = Math.max(currentTotal - discount, 0); 
+    updateTotals(discountedTotal);
+    }
+
+    function resetDiscount() {
+        const originalTotal = parseFloat(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
+        updateTotals(originalTotal);
+    }
+
+    function updateTotals(newTotal) {
+        const formattedTotal = new Intl.NumberFormat('vi-VN').format(newTotal);
+        orderTotalElement.querySelector('bdi').textContent = `${formattedTotal} VNĐ`;
+        giatongInput.value = formattedTotal;
+    }
+});
+</script>
+
 @endsection
+
+

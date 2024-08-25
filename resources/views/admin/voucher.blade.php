@@ -41,7 +41,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 @endif
-
+  
   <section class="section main-section">
       <div class="card has-table">
           <header class="card-header">
@@ -60,8 +60,8 @@
                 <th>Tên Voucher</th>
                 <th>Số lượng</th>
                 <th>Giá trị</th>
-                <th>sản phầm</th>
-                <th>Người dùng</th>
+                <th>Sản Phẩm</th>
+                <th>Người Dùng</th>
                 <th>Danh Mục</th>
                 <th>Thời gian bắt đầu</th>
                 <th>Thời gian kết thúc</th>
@@ -72,23 +72,18 @@
                 @foreach ($voucher as $item)
               <tr>
                 <td>{{$item->code}}</td>
-                <td>{{{$item->quantity}}}</td> 
+                <td>{{$item->quantity}}</td> 
                 <td>{{$item->discount_amount}}</td>
-                @if ($item->product_id != null)
-                    <td>ID: {{$item->product_id}}</td>
-                @else
-                    <td>Tất Cả Sản Phẩm</td>
-                @endif
-                @if ($item->user_id != null)
-                    <td>ID: {{$item->user_id}}</td>
-                @else
-                    <td>Tất Cả Người Dùng</td>
-                @endif
-                @if ($item->category_id != null)
-                    <td>ID: {{$item->category_id}}</td>
-                @else
-                    <td>Tất Cả Danh Mục</td>
-                @endif
+
+                <!-- Hiển thị tên sản phẩm nếu có -->
+                <td>{{ $item->product_name ?? 'Tất Cả Sản Phẩm' }}</td>
+
+                <!-- Hiển thị tên người dùng nếu có -->
+                <td>{{ $item->user_name ?? 'Tất Cả Người Dùng' }}</td>
+
+                <!-- Hiển thị tên danh mục nếu có -->
+                <td>{{ $item->category_name ?? 'Tất Cả Danh Mục' }}</td>
+
                 <td>{{$item->create_date}}</td>
                 <td>{{$item->expiry_date}}</td>
                 <td>

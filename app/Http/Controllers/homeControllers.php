@@ -6,6 +6,7 @@ use App\Mail\conTract;
 use App\Models\blog;
 use App\Models\product;
 use App\Models\categories;
+use App\Models\voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -66,6 +67,27 @@ class homeControllers extends Controller
     function hot(){
         $products = product::where('hot', 1)->paginate(9);
         return view('user.hot_product', compact('products'));
+    }
+
+    function check_voucher(Request $req){
+        $voucherCode = $req->input('voucherCode');
+    
+        $validVoucher = Voucher::where('code', $voucherCode)
+            ->where('expiry_date', '>=', now())
+            ->where('quantity', '>', 0)
+            ->first();
+        
+        if ($validVoucher) {
+            return response()->json([
+                'valid' => true,
+                'discount' => $validVoucher->discount_amount
+            ]);
+        } else {
+            return response()->json([
+                'valid' => false
+            ]);
+        }
+    
     }
 
     function shop($type){

@@ -55,7 +55,14 @@ class adminController extends Controller
     }
 
     function voucher(){
-        $voucher = voucher::paginate(10);
+        $voucher = DB::table('voucher')
+        ->leftJoin('users', 'voucher.user_id', '=', 'users.user_id')
+        ->leftJoin('product', 'voucher.product_id', '=', 'product.product_id')
+        ->leftJoin('categories', 'voucher.category_id', '=', 'categories.category_id')
+        ->select('voucher.*', 'users.full_name as user_name', 'product.name as product_name', 'categories.name as category_name')
+        ->paginate(10);
+    
+                
         return view('admin/voucher', compact('voucher'));
     }
 

@@ -43,6 +43,7 @@ Route::get('/chi-tiet/{slug}', [homeControllers::class, 'detail'])->name('detail
 Route::get('/gio-hang', [homeControllers::class, 'cart']);
 Route::get('/thanh-toan', [homeControllers::class, 'checkout'])->name('checkout');
 
+Route::post('/check-voucher', [homeControllers::class, 'check_voucher']);
 
 // route bài viết
 Route::get('/tin-tuc/{slug}', [homeControllers::class, 'blog_detail'])->name('blog_detail');

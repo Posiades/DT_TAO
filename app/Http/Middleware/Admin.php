@@ -19,11 +19,11 @@ class Admin
     public function handle(Request $request, Closure $next): Response
     {
         $user = session::get('user');
-        if($user->role === 1){
+        
+        if ($user && $user->role === 1) {
             return $next($request);
-         }else{
-            Session::flash('not_admin', "Bạn phải đăng nhập bằng tài khoản Admin mới có thể đăng nhập");
-            return redirect()->route('login');
-         } 
+        } else {
+            return redirect()->route('index');
+        }
     }
 }
