@@ -28,7 +28,7 @@
                 <div class="col-lg-6">
                     <h2 class="display-7 text-uppercase text-dark pb-4">Chi Tiết Thanh Toán</h2>
                     <div class="billing-details">
-                        <label for="fname"></label>
+                        <label for="fname">Tên*</label>
                         <input type="text" id="fname" name="firstname" class="form-control mt-2 mb-4 ps-3" value="{{Session::get('user')->full_name}}" required>
                         <label for="cname">Tên công ty (nếu có)*</label>
                         <input type="text" id="cname" name="companyname" class="form-control mt-2 mb-4">
@@ -75,6 +75,7 @@
                                         <td data-title="Total">
                                             <span class="price-amount amount text-primary ps-5" id="order-total">
                                                 <bdi>{{ number_format($total) }} VNĐ</bdi>
+                                                <input type="hidden" name="total_voucher" class="totall">
                                             </span>
                                         </td>
                                     </tr>
@@ -103,7 +104,7 @@
                                     </span>
                                 </label>
                             </div>
-                            <input type="hidden" id="giatong" name="giatong" value="{{ number_format($total) }}">
+                            <input type="hidden" id="giatong" name="giatong" value="{{ $total }}">
                             <button type="submit" name="redirect" class="btn btn-dark btn-medium text-uppercase btn-rounded-none">Đặt hàng</button>
                         </div>
                     </div>
@@ -198,7 +199,7 @@
                                     </span>
                                 </label>
                             </div>
-                            <input type="hidden" id="giatong" name="giatong" value="{{ number_format($total) }}">
+                            <input type="hidden" id="giatong" name="giatong" value="{{ $total }}">
                             <button type="submit" name="redirect" class="btn btn-dark btn-medium text-uppercase btn-rounded-none">Đặt hàng</button>
                         </div>
                     </div>
@@ -211,75 +212,77 @@
 
 @section('scripts')
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const voucherInput = document.getElementById('voucher');
-    const voucherMessage = document.getElementById('voucher-message');
-    const totalPriceElement = document.getElementById('total-price');
-    const orderTotalElement = document.getElementById('order-total');
-    const giatongInput = document.getElementById('giatong');
-
-    voucherInput.addEventListener('input', debounce(checkVoucher, 500));
-
-    function debounce(func, delay) {
-        let timer;
-        return function() {
-            clearTimeout(timer);
-            timer = setTimeout(() => func.apply(this, arguments), delay);
-        };
-    }
-
-    async function checkVoucher() {
-        const voucherCode = voucherInput.value.trim();
-        if (voucherCode.length > 0) {
-            try {
-                const response = await fetch('/check-voucher', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({ voucherCode })
-                });
-                const data = await response.json();
-                if (data.valid) {
-                    applyDiscount(data.discount);
-                    voucherMessage.textContent = 'Mã giảm giá hợp lệ!';
-                    voucherMessage.className = 'text-success mt-2';
-                } else {
-                    resetDiscount();
-                    voucherMessage.textContent = 'Mã giảm giá không hợp lệ.';
+    document.addEventListener('DOMContentLoaded', function() {
+        const voucherInput = document.getElementById('voucher');
+        const voucherMessage = document.getElementById('voucher-message');
+        const totalPriceElement = document.getElementById('total-price');
+        const orderTotalElement = document.getElementById('order-total');
+        var giatongInput2 = document.querySelector('.totall');
+        const giatongInput = document.getElementById('giatong');
+    
+        voucherInput.addEventListener('input', debounce(checkVoucher, 500));
+    
+        function debounce(func, delay) {
+            let timer;
+            return function() {
+                clearTimeout(timer);
+                timer = setTimeout(() => func.apply(this, arguments), delay);
+            };
+        }
+    
+        async function checkVoucher() {
+            const voucherCode = voucherInput.value.trim();
+            if (voucherCode.length > 0) {
+                try {
+                    const response = await fetch('/check-voucher', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({ voucherCode })
+                    });
+                    const data = await response.json();
+                    if (data.valid) {
+                        applyDiscount(data.discount);
+                        voucherMessage.textContent = 'Mã giảm giá hợp lệ!';
+                        voucherMessage.className = 'text-success mt-2';
+                    } else {
+                        resetDiscount();
+                        voucherMessage.textContent = 'Mã giảm giá không hợp lệ.';
+                        voucherMessage.className = 'text-danger mt-2';
+                    }
+                } catch (error) {
+                    console.error('Lỗi khi kiểm tra voucher:', error);
+                    voucherMessage.textContent = 'Đã xảy ra lỗi. Vui lòng thử lại.';
                     voucherMessage.className = 'text-danger mt-2';
                 }
-            } catch (error) {
-                console.error('Lỗi khi kiểm tra voucher:', error);
-                voucherMessage.textContent = 'Đã xảy ra lỗi. Vui lòng thử lại.';
-                voucherMessage.className = 'text-danger mt-2';
+            } else {
+                resetDiscount();
+                voucherMessage.textContent = '';
             }
-        } else {
-            resetDiscount();
-            voucherMessage.textContent = '';
         }
-    }
-
-    function applyDiscount(discount) {
-    const currentTotal = parseFloat(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
-    const discountedTotal = Math.max(currentTotal - discount, 0); 
-    updateTotals(discountedTotal);
-    }
-
-    function resetDiscount() {
-        const originalTotal = parseFloat(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
-        updateTotals(originalTotal);
-    }
-
-    function updateTotals(newTotal) {
-        const formattedTotal = new Intl.NumberFormat('vi-VN').format(newTotal);
-        orderTotalElement.querySelector('bdi').textContent = `${formattedTotal} VNĐ`;
-        giatongInput.value = formattedTotal;
-    }
-});
-</script>
-
+    
+        function applyDiscount(discount) {
+            const currentTotal = parseFloat(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
+            const discountedTotal = Math.max(currentTotal - discount, 0);
+            updateTotals(discountedTotal);
+        }
+    
+        function resetDiscount() {
+            const originalTotal = parseFloat(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
+            updateTotals(originalTotal);
+        }
+    
+        function updateTotals(newTotal) {
+            const formattedTotal = new Intl.NumberFormat('vi-VN').format(newTotal);
+            orderTotalElement.querySelector('bdi').textContent = `${formattedTotal} VNĐ`;
+            giatongInput.value = newTotal; // Cập nhật giá trị tổng mới vào hidden input
+            giatongInput2.value = newTotal; // Cập nhật giá trị tổng mới vào hidden input
+            
+            console.log("Updated hidden input value: ", giatongInput.value); // Debugging line
+        }
+    });
+    </script>
+    
 @endsection
-
-

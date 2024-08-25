@@ -12,15 +12,21 @@ class VnpayController extends Controller
 {
     public function vnpayPayment(Request $request)
     {   
+
         $total = 0;
-        foreach (session('cart') as $details) {
-            $total += $details['price'] * $details['quantity'];
+        if ($request->has('total_voucher') && !empty($request->total_voucher)) {
+            $total = $request->total_voucher;
+        } else {
+            foreach (session('cart') as $details) {
+                $total += $details['price'] * $details['quantity'];
+            }
         }
 
-    $order = new orders();
-    $order->order_code = Str::random(8);
-    $order->user_id =Session::get('user')->user_id;
-    $order ->save();
+
+        $order = new orders();
+        $order->order_code = Str::random(8);
+        $order->user_id =Session::get('user')->user_id;
+        $order ->save();
     
 
 
@@ -31,9 +37,8 @@ class VnpayController extends Controller
         $order_detail->order_id = $order->order_id;
         $order_detail->product_id = $details['product_id'];
         
-        
         $order_detail->quantity=$details['product_id'];;
-        $order_detail->price = $details['price'];
+        $order_detail->price = $total;
 
         $order_detail->save();
     }
@@ -52,7 +57,7 @@ class VnpayController extends Controller
     // $vnp_OrderType = $_POST['order_type'];
     $vnp_OrderType = "DT Tao";
     // $vnp_Amount = $_POST['amount'] * 100;
-    $vnp_Amount = $order->total_price *100;
+    $vnp_Amount = $total *100;
     $vnp_Locale = "VN";
     // $vnp_BankCode = $_POST['bank_code'];
     $vnp_BankCode = "NCB";
