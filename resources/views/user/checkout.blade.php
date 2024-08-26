@@ -83,15 +83,15 @@
                                 </tbody>
                             </table>
                             <div class="list-group mt-5 mb-3">
-                                <label class="list-group-item d-flex gap-2 border-0">
+                                {{-- <label class="list-group-item d-flex gap-2 border-0">
                                     <input class="form-check-input flex-shrink-0" type="radio" name="payment_method" value="cod">
                                     <span>
                                         <strong class="text-uppercase">Thanh toán khi giao hàng</strong>
                                         <small class="d-block text-body-secondary">Thanh toán bằng tiền mặt khi giao hàng.</small>
                                     </span>
-                                </label>
+                                </label> --}}
                                 <label class="list-group-item d-flex gap-2 border-0">
-                                    <input class="form-check-input flex-shrink-0" type="radio" name="payment_method" value="vnpay">
+                                    <input class="form-check-input flex-shrink-0" type="radio" name="payment_method" value="vnpay" checked>
                                     <span>
                                         <strong class="text-uppercase">VNPay</strong>
                                         <small class="d-block text-body-secondary">Thanh toán qua VNPay; bạn có thể thanh toán bằng thẻ tín dụng nếu bạn không có tài khoản VNPay.</small>
@@ -203,8 +203,6 @@
     </div>
 </section>
 @endif
-
-@section('scripts')
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

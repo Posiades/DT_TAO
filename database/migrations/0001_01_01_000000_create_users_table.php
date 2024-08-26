@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('user_id');
-            $table->mediumText('avata')->charset('binary')->nullable();
+            $table->mediumText('avatar')->charset('binary')->nullable();
             $table->string('email', 255)->unique(false);
             $table->string('password', 255)->notnull(false);
             $table->string('full_name', 255);

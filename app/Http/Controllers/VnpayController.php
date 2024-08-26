@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\checkout;
 use App\Models\product;
+
+
 class VnpayController extends Controller
 {
     public function vnpayPayment(Request $request)
@@ -293,7 +297,12 @@ class VnpayController extends Controller
                             $order->vnp_transaction_id = $vnpTranId;
                             
                             $order->save();
+
                             //Trả kết quả về cho VNPAY: Website/APP TMĐT ghi nhận yêu cầu thành công
+                            $userEmail = $order->user->email;
+                            $this->sendCheckoutEmail($userEmail);
+                            session()->forget('cart');
+
                             $returnData['RspCode'] = '00';
                             $returnData['Message'] = 'Confirm Success';
                             return redirect('/')->with('success', 'Sản phẩm đã được xóa khỏi giỏ hàng thành công!');
@@ -318,7 +327,21 @@ class VnpayController extends Controller
             $returnData['RspCode'] = '99';
             $returnData['Message'] = 'Unknow error';
         }
+
+
         //Trả lại VNPAY theo định dạng JSON
        return json_encode($returnData);
+    }
+
+    protected function sendCheckoutEmail($email){
+    $cart = session()->get('cart');
+    $total = 0;
+    foreach (session('cart') as $details) {
+        $total += $details['price'] * $details['quantity'];
+    }
+
+    if ($email) {
+        Mail::to($email)->send(new checkout($cart, $total));
+        }
     }
 }

@@ -32,13 +32,13 @@ class clientController extends Controller
         $phone = $req -> phone;
         $birth = $req ->birth;
         $sex = $req -> sex;
-        $avata = $req -> avata;
+        $avatar = $req -> avatar;
 
-        if($avata != null){
+        if($avatar != null){
             DB::table('users')
             ->where('user_id', $id)
             ->update([
-                'avata' => end_code_form_imageBase64($req->avata),
+                'avatar' => end_code_form_imageBase64($req->avatar),
                 'full_name' => $name,
                 'email' => $email,
                 'address' => $address,

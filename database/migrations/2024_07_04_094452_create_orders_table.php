@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamp('order_date')->useCurrent();
             $table->enum('status', ['Chưa Thanh Toán', 'Đã Thanh Toán',])->default('Chưa Thanh Toán');
             $table->string('vnp_transaction_id')->nullable();
-            $table->decimal('total_price', 10, 2)->nullable();
+            $table->decimal('total_price', 12, 2)->nullable();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('created_at')->useCurrent();
         });

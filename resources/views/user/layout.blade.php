@@ -64,8 +64,6 @@
     @yield('content')
 
     @include('user/footer')
-    
-    @yield('scripts')
    
     <script src="{{asset('js/jquery-1.11.0.min.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
