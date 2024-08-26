@@ -98,6 +98,7 @@
               <th>Bộ Nhớ/Kích Thước</th>
               <th>Mô tả chi tiết</th>
               <th>Giá</th>
+              <th>Số lượng</th>
               <th>Thao Tác</th>
             </tr>
           </thead>
@@ -117,6 +118,7 @@
                 {{ \Illuminate\Support\Str::limit($item->description, 50) }}
               </td>
               <td data-label="Price">{{ number_format($item->price, 0, ',', '.') . ' VNĐ' }}</td>
+              <td>{{$item->quantity}}</td>
               <td class="actions-cell">
                 <div class="buttons right nowrap">
                   <button class="button small green --jb-modal" data-target="sample-modal-2" type="button">
@@ -247,6 +249,7 @@
                 <th>Bộ Nhớ</th>
                 <th>Mô tả chi tiết</th>
                 <th>Giá</th>
+                <th>Số lượng</th>
                 <th>Thao Tác</th>
               </tr>
             </thead>
@@ -266,6 +269,7 @@
                   {{ \Illuminate\Support\Str::limit($item->description, 50) }}
                 </td>
                 <td data-label="Price">{{ number_format($item->price, 0, ',', '.') . ' VNĐ' }}</td>
+                <td>{{$item->quantity}}</td>
                 <td class="actions-cell">
                   <div class="buttons right nowrap">
                     <button class="button small green --jb-modal" data-target="sample-modal-2" type="button">
@@ -395,6 +399,7 @@
               <th>Bộ Nhớ</th>
               <th>Mô tả chi tiết</th>
               <th>Giá</th>
+              <th>Số lượng</th>
               <th>Thao Tác</th>
             </tr>
           </thead>
@@ -414,6 +419,7 @@
                 {{ \Illuminate\Support\Str::limit($item->description, 50) }}
               </td>
               <td data-label="Price">{{ number_format($item->price, 0, ',', '.') . ' VNĐ' }}</td>
+              <td>{{$item->quantity}}</td>
               <td class="actions-cell">
                 <div class="buttons right nowrap">
                   <button class="button small green --jb-modal" data-target="sample-modal-2" type="button">

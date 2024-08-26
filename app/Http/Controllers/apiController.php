@@ -46,7 +46,7 @@ class apiController extends Controller
             $visitor->visited_at = now();
             $visitor->save();
         }
-        return response()->json(['status' => 'success']);
+        // return response()->json(['status' => 'success']);
     }
 
     return redirect()->route('index');

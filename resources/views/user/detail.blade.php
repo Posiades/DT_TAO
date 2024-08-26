@@ -4,27 +4,29 @@
 
 @section('content')
     @foreach ($product as $productItem)  <!-- Changed $product to $productItem to avoid confusion -->
-        <section id="selling-product" class="single-product padding-xlarge">
-            <div class="container">
-                <div class="row mt-5">
-                    <div class="col-lg-6">
-                        <div class="product-preview mb-3">
-                            <img src="data:image/png;base64,{{ $productItem->image }}" alt="single-product" class="img-fluid">
-                        </div>
+    <section id="selling-product" class="single-product padding-xlarge">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col-lg-6">
+                    <div class="product-preview mb-3">
+                        <img src="data:image/png;base64,{{ $productItem->image }}" alt="single-product" class="img-fluid">
                     </div>
-                    <div class="col-lg-6">
-                        <div class="product-info">
-                            <div class="element-header">
-                                <h3 itemprop="name" class="display-7 text-uppercase">{{ $productItem->name }} {{ $productItem->color }} {{ $productItem->storage }}</h3>
-                            </div>
-                            <div class="product-price pt-3 pb-3">
-                                <strong class="text-primary display-6 fw-bold">{{ number_format($productItem->price, 0, ',', '.') }} VNĐ</strong>
-                            </div>
-
-                            <div class="cart-wrap padding-small">
-                                <div class="color-options product-select"></div>
-                                <div class="product-quantity">
-                                    <div class="stock-number text-dark">{{ $productItem->quantity }} trong kho</div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product-info">
+                        <div class="element-header">
+                            <h3 itemprop="name" class="display-7 text-uppercase">{{ $productItem->name }} {{ $productItem->color }} {{ $productItem->storage }}</h3>
+                        </div>
+                        <div class="product-price pt-3 pb-3">
+                            <strong class="text-primary display-6 fw-bold">{{ number_format($productItem->price, 0, ',', '.') }} VNĐ</strong>
+                        </div>
+    
+                        <div class="cart-wrap padding-small">
+                            <div class="color-options product-select"></div>
+                            <div class="product-quantity">
+                                <div class="stock-number text-dark">{{ $productItem->quantity }} trong kho</div>
+                                
+                                @if($productItem->quantity > 0)
                                     <div class="stock-button-wrap pt-3">
                                         <div class="input-group product-qty">
                                             <span class="input-group-btn">
@@ -32,7 +34,7 @@
                                                     -
                                                 </button>
                                             </span>
-                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="100">
+                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="{{ $productItem->quantity }}">
                                             <span class="input-group-btn">
                                                 <button type="button" class="quantity-right-plus btn btn-number" data-type="plus" data-field="">
                                                     +
@@ -40,41 +42,47 @@
                                             </span>
                                         </div>
                                         <div class="qty-button d-flex flex-wrap pt-3">
-                                            <a href=""><button type="submit" class="btn btn-primary btn-medium text-uppercase me-3 mt-3">Mua Ngay</button></a>
+                                            <a href="{{ route('cart.add', $productItem->product_id) }}"><button type="submit" class="btn btn-primary btn-medium text-uppercase me-3 mt-3">Mua Ngay</button></a>
                                             <a href="{{ route('cart.add', $productItem->product_id) }}"><button type="submit" name="add-to-cart" value="1269" class="btn btn-black btn-medium text-uppercase mt-3">Thêm Vào Giỏ Hàng</button></a>
                                         </div>
                                     </div>
-                                </div>
+                                @else
+                                    <div class="stock-status text-danger pt-3">
+                                        <strong>Hết hàng</strong>
+                                    </div>
+                                @endif
                             </div>
-                            <div class="meta-product py-2">
-                                <div class="meta-item d-flex align-items-baseline">
-                                    <h4 class="item-title no-margin pe-2">Mã Hàng:</h4>
-                                    <ul class="select-list list-unstyled d-flex">
-                                        <li data-value="S" class="select-item">{{ $productItem->product_id }}</li>
-                                    </ul>
-                                </div>
-                                <div class="meta-item d-flex align-items-baseline">
-                                    <h4 class="item-title no-margin pe-2">Màu:</h4>
-                                    <ul class="select-list list-unstyled d-flex">
-                                        <li data-value="S" class="select-item">
-                                           {{ $productItem->color }}
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="meta-item d-flex align-items-baseline">
-                                    <h4 class="item-title no-margin pe-2">Bộ Nhớ:</h4>
-                                    <ul class="select-list list-unstyled d-flex">
-                                        <li data-value="S" class="select-item">
-                                            {{ $productItem->storage }}
-                                        </li>
-                                    </ul>
-                                </div>
+                        </div>
+                        <div class="meta-product py-2">
+                            <div class="meta-item d-flex align-items-baseline">
+                                <h4 class="item-title no-margin pe-2">Mã Hàng:</h4>
+                                <ul class="select-list list-unstyled d-flex">
+                                    <li data-value="S" class="select-item">{{ $productItem->product_id }}</li>
+                                </ul>
+                            </div>
+                            <div class="meta-item d-flex align-items-baseline">
+                                <h4 class="item-title no-margin pe-2">Màu:</h4>
+                                <ul class="select-list list-unstyled d-flex">
+                                    <li data-value="S" class="select-item">
+                                       {{ $productItem->color }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="meta-item d-flex align-items-baseline">
+                                <h4 class="item-title no-margin pe-2">Bộ Nhớ:</h4>
+                                <ul class="select-list list-unstyled d-flex">
+                                    <li data-value="S" class="select-item">
+                                        {{ $productItem->storage }}
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
+    
 
         <section class="product-info-tabs">
             <div class="container">

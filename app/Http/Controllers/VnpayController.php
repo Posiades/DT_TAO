@@ -56,6 +56,7 @@ class VnpayController extends Controller
         'quantity' => $quantity_update
     ]);
 
+
     $data=$request->all();
     $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     $vnp_Returnurl =  url("vnpay-return");

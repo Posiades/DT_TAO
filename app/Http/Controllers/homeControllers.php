@@ -16,8 +16,16 @@ class homeControllers extends Controller
 {
     
     function index(){
-        $product_iphone = product::where('category_id', 1)->limit(4)->get();
-        $product_watch = product::where('category_id', 4)->limit(4)->get();
+        $product_iphone = product::where('category_id', 1)
+                         ->where('quantity', '>', 0)
+                         ->limit(4)
+                         ->get();
+
+        $product_watch = product::where('category_id', 4)
+                        ->where('quantity', '>', 0)
+                        ->limit(4)
+                        ->get();
+
         $blog = blog::orderBy('created_at', 'desc')->limit(4)->get();
         return view('user/index', compact('product_iphone', 'product_watch', 'blog'));
     }
@@ -91,12 +99,25 @@ class homeControllers extends Controller
     }
 
     function shop($type){
-        $product_iphone = product::where('category_id', 1)->get();
-        $product_mac = product::where('category_id', 2)->get();
-        $product_ipad = product::where('category_id', 3)->get();
-        $product_watch = product::where('category_id', 4)->get();
-        $product_airpod = product::where('category_id', 5)->get();
-        
+        $product_iphone = product::where('category_id', 1)
+                        ->where('quantity', '>', 0)
+                        ->get();
+
+        $product_mac = product::where('category_id', 2)
+                        ->where('quantity', '>', 0)
+                        ->get();
+
+        $product_ipad = product::where('category_id', 3)
+                        ->where('quantity', '>', 0)
+                        ->get();
+
+        $product_watch = product::where('category_id', 4)
+                        ->where('quantity', '>', 0)
+                        ->get();
+
+        $product_airpod = product::where('category_id', 5)
+                        ->where('quantity', '>', 0)
+                        ->get();
         $product = null;
         if($type == "iphone"){
             $product = $product_iphone;
