@@ -505,18 +505,26 @@ class adminController extends Controller
     }
 
     function post_edit_blog(Request $req){
-       
-       DB::table('blog')
-       ->where('blog_id', $req->id)
-       ->update([
-        'image_banner' => end_code_imageBase64($req->banner),
-        'title' => $req->title,
-        'image_main' => end_code_imageBase64($req->main),
-        'content_1' => $req->content_1,
-        'content_2' => $req->content_2,
-        'image_sub1' => end_code_imageBase64($req->sub1),
-        'image_sub2' => end_code_imageBase64($req->sub2)
-       ]);
+        $title = $req->title;
+        $slug = str::slug($title);
+        $data = [
+            'title' => $title,
+            'content_1' => $req->content_1,
+            'content_2' => $req->content_2,
+            'slug' => $slug,
+        ];
+        if ($req->hasFile('main')) {
+            $data['image_main'] = end_code_form_imageBase64($req->main);
+        }
+        if ($req->hasFile('sub1')) {
+            $data['image_sub1'] = end_code_form_imageBase64($req->sub1);
+        }
+        if ($req->hasFile('sub2')) {
+            $data['image_sub2'] = end_code_form_imageBase64($req->sub2);
+        }
+        DB::table('blog')
+            ->where('blog_id', $req->id)
+            ->update($data);
 
        Session::flash('edit_blog', "Đã cập nhật bài viết $req->title thành công");
        return redirect()->route('blog');
@@ -580,7 +588,6 @@ class adminController extends Controller
 
     public function ipv4_analytic_time($time) {
         $total = visitor::count();
-
         if ($time == 30) {
             $startTime = Carbon::now()->subDays(30);
         } elseif ($time == 24) {

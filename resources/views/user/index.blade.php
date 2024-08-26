@@ -206,9 +206,8 @@
     <div class="row d-flex flex-wrap align-items-center">
       <div class="col-md-6 col-sm-12">
         <div class="text-content offset-4 padding-medium">
-          <h3>Giảm 10%</h3>
-          <h2 class="display-2 pb-5 text-uppercase text-dark">Giảm giá mùa hè</h2>
-          <a href="shop.html" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Sản Phẩm Giảm Giá</a>
+          <h2 class="display-2 pb-5 text-uppercase text-dark">Sản Phẩm HOT Bán Chạy</h2>
+          <a href="{{url('/san-pham-ban-chay')}}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Sản Phẩm HOT</a>
         </div>
       </div>
       <div class="col-md-6 col-sm-12">

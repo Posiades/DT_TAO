@@ -18,12 +18,11 @@ return new class extends Migration
            $table->mediumText('image_main')->charset('binary');
            $table->text('content_1');
            $table->text('content_2');
-           $table->mediumText('image_sub1')->charset('binary');
-           $table->mediumText('image_sub2')->charset('binary');
+           $table->mediumText('image_sub1')->charset('binary')->nullable();
+           $table->mediumText('image_sub2')->charset('binary')->nullable();
            $table->string('slug', 255);
            $table->timestamp('updated_at')->useCurrent();
            $table->timestamp('created_at')->useCurrent();
-           
         });
     }
 

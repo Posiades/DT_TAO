@@ -4,23 +4,15 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(data => {
           const city = data.city;
           document.getElementById('infoipv4').value = city;
-          
-          // Tạo đối tượng FormData từ form
           const form = document.getElementById('auto-submit-form');
           const formData = new FormData(form);
-          
-          // Gửi yêu cầu POST với Fetch API
+
           fetch(form.action, {
               method: 'POST',
               body: formData,
               headers: {
                   'X-Requested-With': 'XMLHttpRequest' // Để xác định đây là yêu cầu AJAX
               }
-          })
-          .then(response => response.json())
-          .then(data => {
-              console.log('Success:', data);
-              // Xử lý phản hồi từ server nếu cần
           })
           .catch(error => {
               console.error('Error:', error);

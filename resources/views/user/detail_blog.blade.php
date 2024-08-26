@@ -20,14 +20,17 @@
                     {{$blog->content_1}}
                   </p>
                   <br>
-                  <img src="data:image/png;base64,{{ $blog->image_sub1 }}" alt="img-fluid" class="img-thumbnail">
+                  @if($blog->image_sub1)
+                    <img src="data:image/png;base64,{{ $blog->image_sub1 }}" alt="img-fluid" class="img-thumbnail">
+                  @endif
                   <p>
                     {{$blog->content_2}}
                   </p>
-                  <img src="data:image/png;base64,{{ $blog->image_sub2 }}" alt="img-fluid" class="img-thumbnail">
+                  @if($blog->image_sub2)
+                    <img src="data:image/png;base64,{{ $blog->image_sub2 }}" alt="img-fluid" class="img-thumbnail">
+                  @endif
               </div>
             </article>
-            
           </div>
         </main>
       </div>
@@ -48,7 +51,7 @@
             <div class="col-lg-4 col-sm-12 pe-3">
               <div class="card border-none">
                 <div class="card-image">
-                  <img src="{{ asset($blog->image_banner) }}" alt="" class="img-fluid">
+                  <img src="data:image/png;base64,{{ $blog->image_banner }}" alt="" class="img-fluid">
                 </div>
               </div>
               <div class="card-body text-uppercase">
@@ -56,7 +59,7 @@
                   <span class="meta-date">{{ $blog->created_at->format('d F Y') }}</span>
                 </div>
                 <h3 class="card-title">
-                  <a href="{{ route('blog_detail', ['slug'=>$blog->slug]) }}">{{ $blog->title }}</a> <!-- Thay đổi để phù hợp với route và dữ liệu của bạn -->
+                  <a href="{{ route('blog_detail', ['slug'=>$blog->slug]) }}">{{ $blog->title }}</a>
                 </h3>
               </div>
             </div>

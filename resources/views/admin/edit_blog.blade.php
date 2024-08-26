@@ -24,13 +24,13 @@
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Ảnh Banner:</strong>
-                                    <input type="file" name="banner" class="form-control" placeholder="Ảnh Đại Diện Bài Viết" value="{{$blog->image_banner}}" required>
+                                    <input type="file" name="banner" class="form-control" placeholder="Ảnh Đại Diện Bài Viết">
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
-                                    <strong>Ảnh Chính của bài viết:</strong>
-                                    <input type="file" name="main" class="form-control" placeholder="Ảnh Chính Bài Viết" value="{{$blog->image_main}}" required>
+                                    <strong>Ảnh chính của bài viết:</strong>
+                                    <input type="file" name="main" class="form-control" placeholder="Ảnh Chính Bài Viết" value="{{$blog->image_main}}">
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
@@ -48,13 +48,13 @@
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Ảnh Phụ 1:</strong>
-                                    <input type="file" name="sub1" class="form-control" placeholder="Ảnh Phụ 1 Bài Viết" value="{{$blog->image_sub1}}" required>
+                                    <input type="file" name="sub1" class="form-control" placeholder="Ảnh Phụ 1 Bài Viết">
                                 </div>
                             </div>
                             <div class="col-md-6 mt-2">
                                 <div class="form-group">
                                     <strong>Ảnh Phụ 2:</strong>
-                                    <input type="file" name="sub2" class="form-control" placeholder="Ảnh Phụ 2 Bài Viết" value="{{$blog->image_sub2}}" required>
+                                    <input type="file" name="sub2" class="form-control" placeholder="Ảnh Phụ 2 Bài Viết">
                                 </div>
                             </div>
                         

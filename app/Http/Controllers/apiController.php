@@ -33,30 +33,22 @@ class apiController extends Controller
         return response()->json(['data'=>$product]);
     }
 
-
-    //  API người dùng truy cập trang
-
-
     function logVisit(Request $request){
-    // Xác nhận yêu cầu AJAX
     if ($request->ajax()) {
         $city = $request->city;
         $ip = $request->ip();
         $find_ip = Visitor::where('ip_address', $ip)->first();
 
-        if ($find_ip === null) {
+        if ($find_ip === null){
             $visitor = new Visitor;
             $visitor->ip_address = $ip;
             $visitor->location = $city;
             $visitor->visited_at = now();
             $visitor->save();
         }
-
-        // Trả về phản hồi JSON
         return response()->json(['status' => 'success']);
     }
 
-    // Xử lý nếu không phải yêu cầu AJAX
     return redirect()->route('index');
     }
 
