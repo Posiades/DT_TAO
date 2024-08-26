@@ -14,7 +14,6 @@ use GuzzleHttp\Client;
 // ========================= Route SITE ================================
 
 Route::get('/', [homeControllers::class, 'index'])->name('index');
-Route::get('/', [homeControllers::class, 'index'])->name('index');
     
 Route::get('/ve-chung-toi', [homeControllers::class, 'about']);
 Route::get('/lien-he', [homeControllers::class, 'contract'])->name('contract');

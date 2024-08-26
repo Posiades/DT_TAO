@@ -117,8 +117,7 @@
             </table>
           </div>
           <div class="button-wrap">
-            <button class="btn btn-black btn-medium text-uppercase me-2 mb-3 btn-rounded-none">Cập Nhập Giỏ Hàng</button>
-            <button class="btn btn-black btn-medium text-uppercase me-2 mb-3 btn-rounded-none">Tiếp Tục Mua Sắm</button>
+            <a href="{{route('index')}}" class="btn btn-black btn-medium text-uppercase me-2 mb-3 btn-rounded-none">Tiếp Tục Mua Hàng</a>
             <a class="btn btn-black btn-medium text-uppercase me-2 mb-3 btn-rounded-none" href="{{route('checkout')}}">Thanh Toán</a>
           </div>
         </div>

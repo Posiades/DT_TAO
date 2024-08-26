@@ -212,82 +212,86 @@
 @endif
 
 @section('scripts')
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const voucherInput = document.getElementById('voucher');
-        const voucherMessage = document.getElementById('voucher-message');
-        const totalPriceElement = document.getElementById('total-price');
-        const orderTotalElement = document.getElementById('order-total');
-        var giatongInput2 = document.querySelector('.totall');
-        const giatongInput = document.getElementById('giatong');
-        var code_voucher = document.querySelector('.code_voucher');
-        
-        voucherInput.addEventListener('input', debounce(checkVoucher, 500));
-    
-        function debounce(func, delay) {
-            let timer;
-            return function() {
-                clearTimeout(timer);
-                timer = setTimeout(() => func.apply(this, arguments), delay);
-            };
-        }
-    
-        async function checkVoucher() {
-            const voucherCode = voucherInput.value.trim();
-            if (voucherCode.length > 0) {
-                try {
-                    const response = await fetch('/check-voucher', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify({ voucherCode })
-                    });
-                    const data = await response.json();
-                    if (data.valid) {
-                        applyDiscount(data.discount);
-                        voucherMessage.textContent = 'Mã giảm giá hợp lệ!';
-                        voucherMessage.className = 'text-success mt-2';
-                    } else {
-                        resetDiscount();
-                        voucherMessage.textContent = 'Mã giảm giá không hợp lệ.';
-                        voucherMessage.className = 'text-danger mt-2';
-                    }
-                } catch (error) {
-                    console.error('Lỗi khi kiểm tra voucher:', error);
-                    voucherMessage.textContent = 'Đã xảy ra lỗi. Vui lòng thử lại.';
+    const voucherInput = document.getElementById('voucher');
+    const voucherMessage = document.getElementById('voucher-message');
+    const totalPriceElement = document.getElementById('total-price');
+    const orderTotalElement = document.getElementById('order-total');
+    var giatongInput2 = document.querySelector('.totall');
+    const giatongInput = document.getElementById('giatong');
+    var code_voucher = document.querySelector('.code_voucher');
+
+    let originalTotal = parseFloat(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
+
+    voucherInput.addEventListener('input', debounce(checkVoucher, 500));
+
+    function debounce(func, delay) {
+        let timer;
+        return function() {
+            clearTimeout(timer);
+            timer = setTimeout(() => func.apply(this, arguments), delay);
+        };
+    }
+
+    async function checkVoucher() {
+        const voucherCode = voucherInput.value.trim();
+        if (voucherCode.length > 0) {
+            try {
+                const response = await fetch('/check-voucher', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({ voucherCode })
+                });
+                const data = await response.json();
+                if (data.valid) {
+                    applyDiscount(data.discount);
+                    voucherMessage.textContent = 'Mã giảm giá hợp lệ!';
+                    voucherMessage.className = 'text-success mt-2';
+                } else {
+                    resetDiscount();
+                    voucherMessage.textContent = 'Mã giảm giá không hợp lệ.';
                     voucherMessage.className = 'text-danger mt-2';
                 }
-            } else {
+            } catch (error) {
+                console.error('Lỗi khi kiểm tra voucher:', error);
                 resetDiscount();
-                voucherMessage.textContent = '';
+                voucherMessage.textContent = 'Đã xảy ra lỗi. Vui lòng thử lại.';
+                voucherMessage.className = 'text-danger mt-2';
             }
+        } else {
+            resetDiscount();
+            voucherMessage.textContent = '';
         }
-    
-        function applyDiscount(discount) {
-            const currentTotal = parseFloat(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
-            const discountedTotal = Math.max(currentTotal - discount, 0);
-            updateTotals(discountedTotal);
-        }
-    
-        function resetDiscount() {
-            const originalTotal = parseFloat(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
-            updateTotals(originalTotal);
-        }
-    
-        function updateTotals(newTotal) {
-            const formattedTotal = new Intl.NumberFormat('vi-VN').format(newTotal);
-            orderTotalElement.querySelector('bdi').textContent = `${formattedTotal} VNĐ`;
-            giatongInput.value = newTotal; // Cập nhật giá trị tổng mới vào hidden input
-            giatongInput2.value = newTotal; // Cập nhật giá trị tổng mới vào hidden input
-            
-            // Gán giá trị mã voucher vào hidden input
-            code_voucher.value = voucherInput.value;
-            
-            console.log("Updated hidden input value: ", giatongInput.value); // Debugging line
-        }
-    });
+    }
+
+    function applyDiscount(discount) {
+        const currentTotal = originalTotal;
+        const discountedTotal = Math.max(currentTotal - discount, 0);
+        updateTotals(discountedTotal);
+    }
+
+    function resetDiscount() {
+        updateTotals(originalTotal);
+    }
+
+    function updateTotals(newTotal) {
+        const formattedTotal = new Intl.NumberFormat('vi-VN').format(newTotal);
+        orderTotalElement.querySelector('bdi').textContent = `${formattedTotal} VNĐ`;
+        giatongInput.value = newTotal; // Cập nhật giá trị tổng mới vào hidden input
+        giatongInput2.value = newTotal; // Cập nhật giá trị tổng mới vào hidden input
+        
+        // Gán giá trị mã voucher vào hidden input
+        code_voucher.value = voucherInput.value;
+        
+        console.log("Updated hidden input value: ", giatongInput.value); // Debugging line
+    }
+});
+
 </script>
 
     

@@ -15,9 +15,7 @@ return new class extends Migration
             $table->increments('order_id');
             $table->string('order_code')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
-            $table->integer('guest_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('user_id')->on('users');
-            $table->foreign('guest_id')->references('guest_id')->on('guest');
             $table->timestamp('order_date')->useCurrent();
             $table->enum('status', ['Chưa Thanh Toán', 'Đã Thanh Toán',])->default('Chưa Thanh Toán');
             $table->string('vnp_transaction_id')->nullable();
