@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\product;
 class VnpayController extends Controller
 {
     public function vnpayPayment(Request $request)
@@ -48,13 +48,33 @@ class VnpayController extends Controller
         $order_detail->save();
     }
 
-    $voucher = voucher::where('code', $request->code_voucher)->first();
-    $quantity_update = $voucher->quantity - 1;
-    DB::table('voucher')
-    ->where('code', $voucher->code)
-    ->update([
-        'quantity' => $quantity_update
-    ]);
+    
+
+    if ($request->has('code_voucher')) {
+        $voucher = voucher::where('code', $request->code_voucher)->first();
+        
+        if ($voucher) {
+            $quantity_update = $voucher->quantity - 1;
+            DB::table('voucher')
+                ->where('code', $voucher->code)
+                ->update(['quantity' => $quantity_update]);
+        }
+    }
+    
+    foreach ($cart as $details) {
+        $product_id = $details['product_id'];
+        $quantity_purchased = $details['quantity'];
+    
+        // Lấy sản phẩm từ cơ sở dữ liệu
+        $product = product::find($product_id);
+    
+        if ($product) {
+            // Giảm số lượng sản phẩm trong kho
+            $product->quantity = $product->quantity - $quantity_purchased;
+            $product->save();
+        }
+    }
+    
 
 
     $data=$request->all();

@@ -84,13 +84,6 @@
                             </table>
                             <div class="list-group mt-5 mb-3">
                                 <label class="list-group-item d-flex gap-2 border-0">
-                                    <input class="form-check-input flex-shrink-0" type="radio" name="payment_method" value="bank_transfer" checked>
-                                    <span>
-                                        <strong class="text-uppercase">Chuyển khoản trực tiếp</strong>
-                                        <small class="d-block text-body-secondary">Thực hiện thanh toán trực tiếp vào tài khoản ngân hàng của chúng tôi. Vui lòng sử dụng ID đơn hàng của bạn. Đơn đặt hàng của bạn sẽ được chuyển đi sau khi tiền đã được xóa trong tài khoản của chúng tôi.</small>
-                                    </span>
-                                </label>
-                                <label class="list-group-item d-flex gap-2 border-0">
                                     <input class="form-check-input flex-shrink-0" type="radio" name="payment_method" value="cod">
                                     <span>
                                         <strong class="text-uppercase">Thanh toán khi giao hàng</strong>

@@ -44,7 +44,7 @@
                   <div class="col-lg-4">
                     <div class="card-detail ps-3">
                       <h3 class="card-title text-uppercase">
-                        <a href="#">{{ $details['name'] }}</a>
+                        <a href="#">{{ $details['name'] }} </a>
                       </h3>
                       <div class="card-price">
                         <span class="money text-primary">{{ number_format($details['price']) }} VNĐ</span>

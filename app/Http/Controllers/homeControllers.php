@@ -166,19 +166,12 @@ class homeControllers extends Controller
 
     function detail($slug){
         $product = DB::table('product')
-        ->leftJoin('evaluate', 'product.product_id', '=', 'evaluate.product_id')
-        ->leftJoin('users', 'users.user_id', '=', 'evaluate.user_id')
         ->where('slug', $slug)
-        ->select([
-            'product.*',
-            'evaluate.content',
-            'evaluate.start',
-            'users.full_name',
-        ])
         ->get();
 
         
         $name_product = product::where('slug', $slug)->first();
+
         $recomment = Product::where('name', $name_product->name)
         ->where('color', $name_product->color)
         ->where('storage', '!=', $name_product->storage) 
@@ -194,7 +187,11 @@ class homeControllers extends Controller
     }
 
     function checkout(){
-        return view('user/checkout');
+        if(Session::has('user')){
+            return view('user/checkout');
+        }else{
+            return view('user.login');
+        }
     }
 
     //--------------------------------------------------CART--------------------------------------------------------------

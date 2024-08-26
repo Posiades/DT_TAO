@@ -28,19 +28,6 @@
                                 
                                 @if($productItem->quantity > 0)
                                     <div class="stock-button-wrap pt-3">
-                                        <div class="input-group product-qty">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="quantity-left-minus btn btn-number" data-type="minus" data-field="">
-                                                    -
-                                                </button>
-                                            </span>
-                                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1" min="1" max="{{ $productItem->quantity }}">
-                                            <span class="input-group-btn">
-                                                <button type="button" class="quantity-right-plus btn btn-number" data-type="plus" data-field="">
-                                                    +
-                                                </button>
-                                            </span>
-                                        </div>
                                         <div class="qty-button d-flex flex-wrap pt-3">
                                             <a href="{{ route('cart.add', $productItem->product_id) }}"><button type="submit" class="btn btn-primary btn-medium text-uppercase me-3 mt-3">Mua Ngay</button></a>
                                             <a href="{{ route('cart.add', $productItem->product_id) }}"><button type="submit" name="add-to-cart" value="1269" class="btn btn-black btn-medium text-uppercase mt-3">Thêm Vào Giỏ Hàng</button></a>
@@ -109,50 +96,6 @@
                                         <li><span class="bullet">&#10003; </span> {{ $line }}</li>
                                     @endforeach
                                 </ul>
-                            </div>
-                            <div class="tab-pane fade border-top border-bottom padding-small" id="nav-review" role="tabpanel" aria-labelledby="nav-review-tab">
-                                <div class="review-box d-flex flex-wrap">
-                                    <div class="col-lg-6 d-flex flex-wrap">
-                                        <div class="col-md-2">
-                                            <div class="image-holder">
-                                                @if ($productItem->full_name != null)
-                                                <img src="data:image/png;base64,{{ $productItem->image }}" alt="review" class="img-fluid"> 
-                                                @else
-                                                    <span>Chưa có đánh giá cho sản phẩm này</span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <div class="review-content">
-                                                <div class="rating-container d-flex align-items-center">
-                                                    <div class="rating" data-rating="1" onclick="rate(1)">
-                                                        <i class="icon icon-star"></i>
-                                                    </div>
-                                                    <div class="rating" data-rating="2" onclick="rate(1)">
-                                                        <i class="icon icon-star"></i>
-                                                    </div>
-                                                    <div class="rating" data-rating="3" onclick="rate(1)">
-                                                        <i class="icon icon-star"></i>
-                                                    </div>
-                                                    <div class="rating" data-rating="4" onclick="rate(1)">
-                                                        <i class="icon icon-star-half"></i>
-                                                    </div>
-                                                    <div class="rating" data-rating="5" onclick="rate(1)">
-                                                        <i class="icon icon-star-empty"></i>
-                                                    </div>
-                                                    <span class="rating-count">{{$productItem->start}}</span>
-                                                </div>
-                                                <div class="review-header">
-                                                    <span class="author-name">{{$productItem->full_name}}</span>
-                                                    <span class="review-date">
-                                                      {{ $productItem->created_at ? $productItem->created_at : '' }}
-                                                  </span>                                                  
-                                                </div>
-                                                <p>{{$productItem->content}}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
