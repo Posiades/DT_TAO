@@ -42,7 +42,7 @@ class VnpayController extends Controller
         $order_detail->order_id = $order->order_id;
         $order_detail->product_id = $details['product_id'];
         
-        $order_detail->quantity=$details['product_id'];;
+        $order_detail->quantity=$details['quantity'];;
         $order_detail->price = $total;
 
         $order_detail->save();

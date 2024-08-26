@@ -1,3 +1,4 @@
+<hr>
 <footer id="footer" class="overflow-hidden">
     <div class="container">
       <div class="row">
@@ -105,40 +106,10 @@
         </div>
       </div>
     </div>
-    <hr>
+
 
   </footer>
-  <div id="footer-bottom">
-      <div class="container">
-        <div class="row d-flex flex-wrap justify-content-between">
-          <div class="col-md-4 col-sm-6">
-            <div class="Shipping d-flex">
-              <p>Chúng tôi gửi hàng với:</p>
-              <div class="card-wrap ps-2">
-                <img src="images/dhl.png" alt="visa">
-                <img src="images/shippingcard.png" alt="mastercard">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6">
-            <div class="payment-method d-flex">
-              <p>Các lựa chọn thanh toán:</p>
-              <div class="card-wrap ps-2">
-                <img src="images/visa.jpg" alt="visa">
-                <img src="images/mastercard.jpg" alt="mastercard">
-                <img src="images/paypal.jpg" alt="paypal">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6">
-            <div class="copyright">
-              <p>© Copyright 2024. Thiết kế bởi <a href="https://www.facebook.com/tnv.2408">Võ Thành Nhân</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  
     <script src="js/jquery-1.11.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
