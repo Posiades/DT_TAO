@@ -30,6 +30,7 @@ class VnpayController extends Controller
         $order = new orders();
         $order->order_code = Str::random(8);
         $order->user_id =Session::get('user')->user_id;
+        $order->total_price=$total;
         $order ->save();
     
 
@@ -253,6 +254,9 @@ class VnpayController extends Controller
                 $order = orders::where('order_code', $order_code)->first();
                 
                 if ($order != NULL) {
+                    // dd($vnp_Amount);
+                    // dd($order->total_price);
+                    
                     if($order->total_price == $vnp_Amount) //Kiểm tra số tiền thanh toán của giao dịch: giả sử số tiền kiểm tra là đúng. //$order["Amount"] == $vnp_Amount
                     {
                         

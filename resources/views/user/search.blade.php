@@ -95,8 +95,8 @@
     {{-- =========================== SEARCH ====================== --}}
 <div class="search-popup">
   <div class="search-popup-container">
-    <form role="search" method="get" class="search-form" action="">
-      <input type="search" id="search-form" class="search-field" placeholder="Tìm kiếm trên DT TAO" value="" name="s" />
+    <form role="search" method="get" class="search-form" action="/san-pham">
+      <input type="search" id="search-form" class="search-field" placeholder="Tìm kiếm trên DT TAO" value="" name="keyword" />
       <button type="submit" class="search-submit"><svg class="search"><use xlink:href="#search"></use></svg></button>
     </form>
 
@@ -104,18 +104,20 @@
     
     <ul class="cat-list">
       <li class="cat-list-item">
-        <a href="#" title="Mobile Phones">Iphone</a>
+        <a href="{{route('products.all',['loai','iphone'])}}" title="Mobile Phones">Iphone</a>
+      </li>
+      
+      <li class="cat-list-item">
+        <a href="{{route('products.all',['loai','mac'])}}" title="Headphones">Mac</a>
       </li>
       <li class="cat-list-item">
+        <a href="{{route('products.all',['loai','ipad'])}}" title="Accessories">iPad</a>
       </li>
       <li class="cat-list-item">
-        <a href="#" title="Headphones">Mac</a>
+        <a href="{{route('products.all',['loai','watch'])}}" title="Monitors">Watch</a>
       </li>
       <li class="cat-list-item">
-        <a href="#" title="Accessories">iPad</a>
-      </li>
-      <li class="cat-list-item">
-        <a href="#" title="Monitors">AirPods</a>
+        <a href="{{route('products.all',['loai','airpods'])}}" title="Monitors">AirPods</a>
       </li>
       <li class="cat-list-item">
         <a href="#" title="Speakers">Tin Tức</a>
