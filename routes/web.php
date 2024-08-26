@@ -39,7 +39,7 @@ Route::get('/vnpay-return', [VnpayController::class, 'vnpayReturn']);
 
 //  có thông số chờ chuyền vào
 Route::get('/chi-tiet/{slug}', [homeControllers::class, 'detail'])->name('detail');
-Route::get('/gio-hang', [homeControllers::class, 'cart']);
+Route::get('/gio-hang', [homeControllers::class, 'cart'])->name('cart');
 Route::get('/thanh-toan', [homeControllers::class, 'checkout'])->name('checkout');
 
 Route::post('/check-voucher', [homeControllers::class, 'check_voucher']);

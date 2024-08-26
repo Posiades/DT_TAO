@@ -225,7 +225,8 @@ class homeControllers extends Controller
     
         // return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào giỏ hàng thành công!');
 
-        return view('user.cart', compact('product'));
+        // return view('user.cart', compact('product'));
+        return redirect()->route('cart');
     }
     
     public function removeFromCart($id)
