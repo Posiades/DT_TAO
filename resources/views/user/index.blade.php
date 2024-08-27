@@ -9,7 +9,7 @@
             <div class="row d-flex align-items-center">
               <div class="col-md-6">
                 <div class="banner-content">
-                  <h1 class="display-2 text-uppercase text-dark pb-5">Sản phẩm sắp ra mắt</h1>
+                  <h1 class="display-2 text-uppercase text-dark pb-5">Sản phẩm sắp mới ra mắt</h1>
                   <a href="{{url('/san-pham/iphone')}}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Tới Sản Phẩm</a>
                 </div>
               </div>
@@ -26,7 +26,7 @@
             <div class="row d-flex flex-wrap align-items-center">
               <div class="col-md-6">
                 <div class="banner-content">
-                  <h1 class="display-2 text-uppercase text-dark pb-5">Sản phẩm giảm giá cao</h1>
+                  <h1 class="display-2 text-uppercase text-dark pb-5">Sản phẩm chính hãng APPlE</h1>
                   <a href="{{url('/san-pham/iphone')}}" class="btn btn-medium btn-dark text-uppercase btn-rounded-none">Tới Sản Phẩm</a>
                 </div>
               </div>
